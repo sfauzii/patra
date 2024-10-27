@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admins\BrandController;
 use App\Http\Controllers\Admins\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,11 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('brands', BrandController::class);
+});
 
 Auth::routes();
 

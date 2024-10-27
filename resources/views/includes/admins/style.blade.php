@@ -4,7 +4,18 @@
     type="image/png">
 
 
+<link rel="stylesheet" href="{{ url('backend/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
+
+
+<link rel="stylesheet" href="{{ url('backend/assets/compiled/css/table-datatable-jquery.css') }}">
 
 <link rel="stylesheet" href="{{ url('backend/assets/compiled/css/app.css') }}">
 <link rel="stylesheet" href="{{ url('backend/assets/compiled/css/app-dark.css') }}">
 <link rel="stylesheet" href="{{ url('backend/assets/compiled/css/iconly.css') }}">
+
+{{-- filepond --}}
+
+<link rel="stylesheet" href="{{ url('backend/assets/extensions/filepond/filepond.css') }}">
+<link rel="stylesheet"
+    href="{{ url('backend/assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css') }}">
+<link rel="stylesheet" href="{{ url('backend/assets/extensions/toastify-js/src/toastify.css') }}">
