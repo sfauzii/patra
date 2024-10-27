@@ -14,5 +14,6 @@ class Type extends Model
     protected $fillable = [
         'name',
         'slug',
+        'icon_images',
     ];
 }
