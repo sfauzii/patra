@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BrandController extends Controller
 {
@@ -15,7 +16,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::all(); 
+        $brands = Brand::all();
         return view('pages.admins.brands.index', compact('brands'));
     }
 
@@ -52,6 +53,8 @@ class BrandController extends Controller
 
         // Create the brand
         Brand::create($data);
+
+        toast('Your Brand as been created!', 'success');
 
         return redirect()->route('brands.index');
     }
@@ -107,6 +110,8 @@ class BrandController extends Controller
         // Update the brand
         $brand->update($data);
 
+        toast('Your Brand as been edited!', 'success');
+
         return redirect()->route('brands.index');
     }
 
@@ -118,6 +123,9 @@ class BrandController extends Controller
 
     {
         $brand->delete();
+
+
+        toast('Your Brand as been deleted!', 'success');
 
         return redirect()->route('brands.index');
     }

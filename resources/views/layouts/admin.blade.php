@@ -21,6 +21,9 @@
 
                 @yield('content')
 
+                @include('sweetalert::alert')
+
+
                 @include('includes.admins.footer')
             </div>
         </div>

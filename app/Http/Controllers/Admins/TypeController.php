@@ -51,6 +51,9 @@ class TypeController extends Controller
 
         Type::create($data);
 
+        toast('Your Type as been created!', 'success');
+
+
         return redirect()->route('types.index');
     }
 
@@ -99,6 +102,9 @@ class TypeController extends Controller
 
         $type->update($data);
 
+        toast('Your Type as been edited!', 'success');
+
+
         return redirect()->route('types.index');
     }
 
@@ -108,6 +114,8 @@ class TypeController extends Controller
     public function destroy(Type $type)
     {
         $type->delete();
+
+        toast('Your Type as been deleted!', 'success');
 
         return redirect()->route('types.index');
     }
