@@ -78,8 +78,8 @@
 
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                                <button type="reset"
-                                                    class="btn btn-light-secondary me-1 mb-1">Cancel</button>
+                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1"
+                                                    onclick="window.history.back();">Cancel</button>
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +94,8 @@
 
                             <div class="card-content">
                                 <div class="card-body">
-
+                                    <p><strong>Created At:</strong> {{ $brand->created_at->format('d-m-Y H:i:s') }}</p>
+                                    <p><strong>Updated At:</strong> {{ $brand->updated_at->format('d-m-Y H:i:s') }}</p>
                                 </div>
                             </div>
                         </div>

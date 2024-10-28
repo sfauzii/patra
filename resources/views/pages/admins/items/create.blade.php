@@ -165,8 +165,8 @@
 
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button item="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                                <button item="reset"
-                                                    class="btn btn-light-secondary me-1 mb-1">Cancel</button>
+                                                <button item="reset" class="btn btn-light-secondary me-1 mb-1"
+                                                    onclick="window.history.back();">Cancel</button>
                                             </div>
                                         </div>
                                     </div>
