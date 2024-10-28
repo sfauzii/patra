@@ -70,16 +70,20 @@
                         <li class="submenu-item  ">
                             <a href="{{ route('items.index') }}" class="submenu-link">Items</a>
                         </li>
-                        
+
                     </ul>
 
 
                 </li>
 
+                <li class="sidebar-title">Transactions</li>
 
-
-
-
+                <li class="sidebar-item  ">
+                    <a href="{{ route('bookings.index') }}" class='sidebar-link'>
+                        <i class="bi bi-basket-fill"></i>
+                        <span>Order</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

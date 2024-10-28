@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\BrandController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\ItemController;
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('brands', BrandController::class);
     Route::resource('types', TypeController::class);
     Route::resource('items', ItemController::class);
+    Route::resource('bookings', BookingController::class);
 });
 
 Auth::routes();

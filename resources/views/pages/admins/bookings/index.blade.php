@@ -1,17 +1,18 @@
 @extends('layouts.admin')
 
+
 @section('content')
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Brands</h3>
+                    <h3>Bookings</h3>
                     <p class="text-subtitle text-muted">Multiple form layouts, you can use.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Brands</a></li>
+                            <li class="breadcrumb-item"><a href="index.html">Bookings</a></li>
                             <li class="breadcrumb-item active" aria-current="page">List</li>
                         </ol>
                     </nav>
@@ -20,10 +21,9 @@
         </div>
     </div>
 
-
     <section class="section">
-        <a href="{{ route('brands.create') }}" class="btn btn-primary" style="margin-bottom: 20px; margin-left: 890px;">New
-            Brand</a>
+        {{-- <a href="{{ route('brands.create') }}" class="btn btn-primary" style="margin-bottom: 20px; margin-left: 890px;">New
+            Brand</a> --}}
         <div class="card">
             <div class="card-header">
                 {{-- <h5 class="card-title">
@@ -35,26 +35,33 @@
                     <table class="table" id="table1">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Slug</th>
-                                <th>Icon Brand</th>
+                                <th>User</th>
+                                <th>Brand</th>
+                                <th>Item</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Payment Status</th>
+                                <th>Total</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($brands as $brand)
+                            @foreach ($bookings as $booking)
                                 <tr>
-                                    <td>{{ $brand->name }}</td>
-                                    <td>{{ $brand->slug }}</td>
-                                    <td><img src="{{ asset('storage/' . $brand->icon_images) }}" alt="{{ $brand->name }}"
-                                            style="width: 100px;"></td>
+                                    <td>{{ $booking->user->name }}</td>
+                                    <td>{{ $booking->item->brand->name }}</td>
+                                    <td>{{ $booking->start_date }}</td>
+                                    <td>{{ $booking->end_date }}</td>
+                                    <td>{{ $booking->payment_status }}</td>
+                                    <td>{{ $booking->total_price }}</td>
+                                    
                                     <td>
                                         <div class="buttons">
-                                            <a href="{{ route('brands.edit', $brand->id) }}" class="btn icon btn-primary"><i
+                                            <a href="{{ route('bookings.edit', $booking->id) }}" class="btn icon btn-primary"><i
                                                     class="bi bi-pencil"></i></a>
 
-                                            <form action="{{ route('brands.destroy', $brand->id) }}" method="POST"
+                                            <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST"
                                                 style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
