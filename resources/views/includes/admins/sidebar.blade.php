@@ -67,6 +67,9 @@
                         <li class="submenu-item  ">
                             <a href="{{ route('types.index') }}" class="submenu-link">Types</a>
                         </li>
+                        <li class="submenu-item  ">
+                            <a href="{{ route('items.index') }}" class="submenu-link">Items</a>
+                        </li>
                         
                     </ul>
 

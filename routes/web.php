@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admins\BrandController;
 use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\ItemController;
 use App\Http\Controllers\Admins\TypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('brands', BrandController::class);
     Route::resource('types', TypeController::class);
+    Route::resource('items', ItemController::class);
 });
 
 Auth::routes();
