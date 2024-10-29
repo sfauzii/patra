@@ -4,7 +4,10 @@ use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\BrandController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\ItemController;
+use App\Http\Controllers\Admins\PermissionController;
+use App\Http\Controllers\Admins\RoleController;
 use App\Http\Controllers\Admins\TypeController;
+use App\Http\Controllers\Admins\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +33,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('types', TypeController::class);
     Route::resource('items', ItemController::class);
     Route::resource('bookings', BookingController::class);
+    Route::resource('roles', RoleController::class);
+    Route::get('roles/{roleId}/give-permissions', [RoleController::class, 'addPermissionsToRole'])->name('roles.give-permission');
+    Route::put('roles/{roleId}/give-permissions', [RoleController::class, 'givePermissionsToRole'])->name('roles.update-permission');
+    Route::resource('permissions', PermissionController::class);
+    Route::resource('user', UserController::class);
 });
 
 Auth::routes();

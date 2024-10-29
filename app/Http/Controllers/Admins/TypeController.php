@@ -17,7 +17,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types = Type::all();
+        $types = Type::oldest('created_at')->get();
         return view('pages.admins.types.index', compact('types'));
     }
 

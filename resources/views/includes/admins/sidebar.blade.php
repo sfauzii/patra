@@ -84,6 +84,37 @@
                         <span>Order</span>
                     </a>
                 </li>
+
+
+                <li class="sidebar-title">Role-Permission</li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Role-Permission</span>
+                    </a>
+
+                    <ul class="submenu ">
+
+                        <li class="submenu-item  ">
+                            <a href="{{ route('roles.index') }}" class="submenu-link">Role</a>
+                        </li>
+                        <li class="submenu-item  ">
+                            <a href="{{ route('permissions.index') }}" class="submenu-link">Permission</a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+                <li class="sidebar-title">Users</li>
+
+                <li class="sidebar-item  ">
+                    <a href="{{ route('user.index') }}" class='sidebar-link'>
+                        <i class="bi bi-basket-fill"></i>
+                        <span>User</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

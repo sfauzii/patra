@@ -36,6 +36,7 @@
                                     <th>Name</th>
                                     <th>Slug</th>
                                     <th>Icon Type</th>
+                                    <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -47,6 +48,8 @@
                                         <td>{{ $type->slug }}</td>
                                         <td><img src="{{ asset('storage/' . $type->icon_images) }}"
                                                 alt="{{ $type->name }}" style="width: 100px;"></td>
+                                        <td>{{ $type->created_at }}</td>
+
                                         <td>
                                             <div class="buttons">
                                                 <a href="{{ route('types.edit', $type->id) }}"
@@ -63,6 +66,7 @@
                                                 </form>
                                             </div>
                                         </td>
+
 
                                     </tr>
                                 @endforeach

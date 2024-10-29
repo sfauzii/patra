@@ -1,18 +1,17 @@
 @extends('layouts.admin')
 
-
 @section('content')
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Bookings</h3>
+                    <h3>Roles</h3>
                     <p class="text-subtitle text-muted">Multiple form layouts, you can use.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('bookings.index') }}">Bookings</a></li>
+                            <li class="breadcrumb-item"><a href="index.html">Roles</a></li>
                             <li class="breadcrumb-item active" aria-current="page">List</li>
                         </ol>
                     </nav>
@@ -21,9 +20,16 @@
         </div>
     </div>
 
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
+
     <section class="section">
-        {{-- <a href="{{ route('brands.create') }}" class="btn btn-primary" style="margin-bottom: 20px; margin-left: 890px;">New
-            Brand</a> --}}
+        <a href="{{ route('roles.create') }}" class="btn btn-primary" style="margin-bottom: 20px; margin-left: 890px;">New
+            Role</a>
         <div class="card">
             <div class="card-header">
                 {{-- <h5 class="card-title">
@@ -35,33 +41,30 @@
                     <table class="table" id="table1">
                         <thead>
                             <tr>
-                                <th>User</th>
-                                <th>Brand</th>
-                                <th>Item</th>
-                                <th>Start</th>
-                                <th>End</th>
-                                <th>Payment Status</th>
-                                <th>Total</th>
+                                <th>Name</th>
+                                <th>Guard Name</th>
+                                <th>Created At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($bookings as $booking)
+                            @foreach ($roles as $role)
                                 <tr>
-                                    <td>{{ $booking->user->name }}</td>
-                                    <td>{{ $booking->item->brand->name }}</td>
-                                    <td>{{ $booking->start_date }}</td>
-                                    <td>{{ $booking->end_date }}</td>
-                                    <td>{{ $booking->payment_status }}</td>
-                                    <td>{{ $booking->total_price }}</td>
-                                    
+                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $role->guard_name }}</td>
+                                    <td>{{ $role->created_at }}</td>
+
                                     <td>
                                         <div class="buttons">
-                                            <a href="{{ route('bookings.edit', $booking->id) }}" class="btn icon btn-primary"><i
-                                                    class="bi bi-pencil"></i></a>
+                                            {{-- <a href="{{ route('roles.show', encrypt($role->id)) }}" class="btn icon btn-primary"><i
+                                                class="bi bi-pencil"></i></a> --}}
+                                            <a href="{{ route('roles.give-permission', $role->id) }}"
+                                                class="btn icon btn-success"><i class="bi bi-shield-check"></i></a>
+                                            <a href="{{ route('roles.edit', $role->id) }}"
+                                                class="btn icon btn-primary"><i class="bi bi-pencil"></i></a>
 
-                                            <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST"
+                                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
                                                 style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
