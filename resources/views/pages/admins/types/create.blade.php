@@ -58,7 +58,7 @@
                                                             style="margin-top: -15px; margin-left: -20px">
 
                                                             <!-- File uploader with multiple files upload -->
-                                                            <input type="file" name="icon_images" class="image-preview-filepond" multiple>
+                                                            <input type="file" name="icon_images" class="image-preview-filepond">
                                                         </div>
                                                     </div>
                                                 </div>

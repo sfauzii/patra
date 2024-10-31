@@ -70,7 +70,7 @@
 
                                                             <!-- File uploader for uploading a new image -->
                                                             <input type="file" name="icon_images"
-                                                                class="image-preview-filepond" multiple>
+                                                                class="image-preview-filepond">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -78,8 +78,8 @@
 
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                                <button type="reset"
-                                                    class="btn btn-light-secondary me-1 mb-1" onclick="window.history.back();">Cancel</button>
+                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1"
+                                                    onclick="window.history.back();">Cancel</button>
                                             </div>
                                         </div>
                                     </div>

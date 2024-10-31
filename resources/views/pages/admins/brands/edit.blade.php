@@ -69,7 +69,7 @@
 
                                                         <!-- File uploader for uploading a new image -->
                                                         <input type="file" name="icon_images"
-                                                            class="image-preview-filepond" multiple>
+                                                            class="image-preview-filepond">
                                                     </div>
                                                 </div>
                                             </div>
