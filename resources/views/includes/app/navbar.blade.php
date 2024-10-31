@@ -23,7 +23,7 @@
                 </li>
             </ul>
             <div class="btn-container">
-                <button class="btn btn-primary">Login</button>
+                <button id="login-btn" class="btn btn-primary">Login</button>
             </div>
         </div>
     </div>

@@ -2972,8 +2972,8 @@ iframe:hover {
 }
 
 
-// WELL DONES
-/* Well-Dones Section Styles */
+//* START WELL DONES PAGE *//
+// /* Well-Dones Section Styles */
 .well-dones {
     background: url('../images/bg-well-done.svg') no-repeat center center;
     background-size: cover;
@@ -3327,3 +3327,304 @@ iframe:hover {
     }
 
 }
+
+//* END WELL DONES PAGE *//
+
+//* START LOGIN POP UP *//
+
+.close-button-popup {
+    position: absolute;
+    top: 80px;
+    /* Adjusts distance from top of the card */
+    right: 250px;
+    /* Adjusts distance from right side of the card */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #F4F6F8;
+    color: #333;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+    z-index: 1002;
+    /* Ensure button is above other elements */
+}
+
+/* Hover effect for close button */
+.close-button-popup:hover {
+    box-shadow: 0 0 0 .25rem #dddddd3b !important;
+    transition: all .4s;
+    /* Changes icon color on hover */
+}
+
+#login-popup {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.login-card {
+    width: 1000px;
+    border-radius: 50px !important;
+    overflow: hidden;
+    border: none;
+    margin-top: 100px;
+    height: 550px !important;
+    background-color: #fff;
+    display: grid;
+
+}
+
+.card-form-login {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    /* Adds a shadow to create depth */
+}
+
+.login-image {
+    background-image: url('../images/bg-login.svg') !important;
+    // background-color: red;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    margin-right: 60px;
+    /* Full height of the parent grid item */
+    width: 35%;
+    /* Ensure full width of the grid column */
+}
+
+.logo-img-login {
+    width: 50%;
+    height: 50%;
+    margin-bottom: 20px;
+}
+
+.title-login {
+    font-size: 20px;
+    font-weight: bold;
+    // margin-bottom: 30px;
+}
+
+.desc-login {
+    margin-bottom: 30px;
+}
+
+
+.login-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.rounded-input {
+    border-radius: 30px;
+    border: none;
+    padding: 20px;
+    background-color: #F4F6F8;
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    margin-bottom: 15px;
+    text-decoration: none !important;
+    color: #999aa4;
+}
+
+.forgot-password:hover {
+    font-weight: 500;
+    color: #999aa4;
+}
+
+
+.btn-login {
+    display: block;
+    margin: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-button,
+.register-button {
+    padding: 12px;
+    background-color: #2447f9;
+    /* Adjust button colors */
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.login-button:hover {
+    box-shadow: 0 0 0 .25rem #0d6efd40 !important;
+    transition: all .4s;
+}
+
+.register-button:hover {
+    box-shadow: 0 0 0 .25rem #dddddd3b !important;
+    transition: all .4s;
+}
+
+.btn-dark.google {
+    background-color: #34364a;
+    padding: 12px;
+    /* Adjust button colors */
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    /* To align icon and text properly */
+    align-items: center;
+    /* Center icon and text vertically */
+    justify-content: center;
+    /* Center the content inside the button */
+}
+
+.google-icon {
+    width: 20px;
+    /* Adjust size of the icon */
+    height: auto;
+    margin-right: 10px;
+    /* Spacing between the icon and text */
+}
+
+.btn-dark.google:hover {
+    box-shadow: 0 0 0 .25rem #53556b44 !important;
+    transition: all .4s;
+}
+
+.register-button {
+    background-color: #ddd;
+    /* Adjust register button color */
+    color: #666;
+}
+
+
+
+/* For tablet devices (screen width less than or equal to 768px) */
+@media (max-width: 768px) {
+    .login-card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        /* Adjust height for better responsiveness */
+        margin-top: -40px;
+    }
+
+    .login-image {
+        display: none;
+        /* Hide the image on tablets and smaller devices */
+    }
+
+    .login-content {
+        padding: 20px;
+        justify-content: flex-start;
+        /* Adjust padding and content alignment for smaller screens */
+    }
+
+    .rounded-input {
+        padding: 15px;
+        /* Adjust input padding for smaller screens */
+    }
+
+    .action-buttons .login-button,
+    .action-buttons .register-button {
+        width: 100%;
+        /* Full width buttons on mobile/tablet */
+        margin: 10px 0;
+        /* Add margin between buttons */
+    }
+
+    .close-button-popup {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .login-card {
+        width: 800px;
+        border-radius: 35px;
+        overflow: hidden;
+        border: none;
+        margin-top: 100px;
+        height: 550px;
+        background-color: white;
+        display: grid;
+        margin: 60px;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 834px) {
+    .close-button-popup {
+        display: none;
+    }
+}
+
+/* For mobile devices (screen width less than or equal to 576px) */
+@media (max-width: 576px) {
+    .login-card {
+        width: 90%;
+        /* Make the card narrower for small screens */
+        height: auto;
+        // margin-top: 50px;
+        padding: 20px;
+        /* Adjust margin for mobile */
+    }
+
+    .login-content {
+        padding: 15px;
+        /* Reduce padding on mobile */
+    }
+
+    .rounded-input {
+        padding: 12px;
+        /* Further reduce input padding for mobile */
+    }
+
+    .btn-login,
+    .btn-register {
+        padding: 10px;
+        font-size: 14px;
+        /* Adjust button font size */
+    }
+
+    .action-buttons .login-button,
+    .action-buttons .register-button {
+        margin: 8px 0;
+        /* Tighter spacing between buttons */
+    }
+}
+//* END LOGIN POP UP *//
