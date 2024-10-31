@@ -24,7 +24,7 @@ use App\Http\Controllers\Admins\PermissionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::middleware('auth')->group(function () {
+Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('brands', BrandController::class);
@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('user', UserController::class);
 });
 
-Auth::routes();
+// Auth::routes();
+Route::auth(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
