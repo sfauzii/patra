@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admins\BookingController;
-use App\Http\Controllers\Admins\BrandController;
-use App\Http\Controllers\Admins\DashboardController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admins\ItemController;
-use App\Http\Controllers\Admins\PermissionController;
 use App\Http\Controllers\Admins\RoleController;
 use App\Http\Controllers\Admins\TypeController;
 use App\Http\Controllers\Admins\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admins\BrandController;
+use App\Http\Controllers\Admins\BookingController;
+use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
