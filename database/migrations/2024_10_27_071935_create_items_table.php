@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->uuid('brand_id');
             $table->uuid('type_id');
-            $table->string('photos')->nullable();
-            $table->string('features')->nullable();
-            $table->string('price')->nullable();
-            $table->string('star')->nullable();
-            $table->string('review')->nullable();
+            $table->text('photos')->nullable();
+            $table->text('features')->nullable();
+            $table->integer('price')->nullable();
+            $table->double('star')->nullable();
+            $table->integer('review')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
