@@ -14,3 +14,24 @@
 <script src="{{ url('frontend/libraries/jquery/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ url('frontend/libraries/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ url('frontend/libraries/retina/retina.min.js') }}"></script>
+
+
+{{-- filepond --}}
+
+<script
+    src="{{ url('frontend/scripts/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js') }}">
+</script>
+<script
+    src="{{ url('frontend/scripts/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js') }}">
+</script>
+<script src="{{ url('frontend/scripts/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js') }}"></script>
+<script
+    src="{{ url('frontend/scripts/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js') }}">
+</script>
+<script src="{{ url('frontend/scripts/filepond-plugin-image-filter/filepond-plugin-image-filter.min.js') }}"></script>
+<script src="{{ url('frontend/scripts/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') }}">
+</script>
+<script src="{{ url('frontend/scripts/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js') }}"></script>
+<script src="{{ url('frontend/scripts/filepond/filepond.js') }}"></script>
+<script src="{{ url('frontend/scripts/toastify-js/src/toastify.js') }}"></script>
+<script src="{{ url('frontend/scripts/filepond.js') }}"></script>

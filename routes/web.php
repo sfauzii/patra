@@ -11,6 +11,7 @@ use App\Http\Controllers\Admins\BrandController;
 use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\PermissionController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,14 @@ use App\Http\Controllers\Admins\PermissionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/item/{slug}', [CatalogController::class, 'show'])->name('item.details');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('checkout/{slug}', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('checkout/{slug}', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::post('checkout/payment{bookingId}', [CheckoutController::class, 'payment'])->name('checkout.payment');
+
+    Route::get('/payment/success', [CheckoutController::class, 'success'])->name('payment.success');
+});
 
 Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

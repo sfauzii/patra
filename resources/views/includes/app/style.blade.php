@@ -19,3 +19,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+{{-- filepond --}}
+<link rel="stylesheet" href="{{ url('frontend/libraries/filepond/filepond.css') }}">
+<link rel="stylesheet"
+    href="{{ url('frontend/libraries/filepond-plugin-image-preview/filepond-plugin-image-preview.css') }}">
+<link rel="stylesheet" href="{{ url('frontend/libraries/toastify-js/src/toastify.css') }}">
+
+

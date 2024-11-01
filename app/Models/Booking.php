@@ -22,6 +22,10 @@ class Booking extends Model
         'payment_status',
         'payment_url',
         'total_price',
+        'ktp_booking',
+        'identity_booking',
+        'selfie_booking',
+        'phone',
     ];
 
     protected $dates = [

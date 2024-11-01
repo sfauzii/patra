@@ -73,7 +73,8 @@
                                 <p class="description-how-it">1. Step one... <br> 2. Step two... <br> 3. Step
                                     three...</p>
                                 <div class="card-alert">
-                                    <img class="alert-icon" src="{{ url('frontend/images/icon-notif.svg') }}" alt="Alert Icon">
+                                    <img class="alert-icon" src="{{ url('frontend/images/icon-notif.svg') }}"
+                                        alt="Alert Icon">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                                         tempor incididunt ut labore </p>
                                 </div>
@@ -82,7 +83,8 @@
                             <div class="tab-content" id="reviews" style="display:none;">
                                 <div class="review-card">
                                     <div class="review-content">
-                                        <img class="profile-photo" src="{{ url('frontend/images/card-tick.svg') }}" alt="Profile Photo">
+                                        <img class="profile-photo" src="{{ url('frontend/images/card-tick.svg') }}"
+                                            alt="Profile Photo">
                                         <div class="review-details">
                                             <p class="reviewer-name">John Doe</p>
                                             <div class="card-rating-navtabs">
@@ -123,7 +125,8 @@
 
                             <!-- Add more features as needed -->
                         </ul>
-                        <button class="btn-book" onclick="window.location.href='booking.html';">Proceed to
+                        <button class="btn-book"
+                            onclick="window.location.href='{{ route('checkout', $item->slug) }}';">Proceed to
                             Booking</button>
                     </div>
                 </div>
@@ -205,17 +208,17 @@
     <footer class="footer-section car_details_footer">
         <div class="footer-container details__cars">
             <div class="footer-column">
-                <img src="frontend/images/logo-white.svg" alt="Footer Logo" class="footer-logo">
+                <img src="{{ url('frontend/images/logo-white.svg') }}" alt="Footer Logo" class="footer-logo">
                 <p>Stay connected with us through social media.</p>
                 <div class="footer-social-icons">
                     <div class="social-circle">
-                        <img src="frontend/images/instagram.svg" alt="Icon 1">
+                        <img src="{{ url('frontend/images/instagram.svg') }}" alt="Icon 1">
                     </div>
                     <div class="social-circle">
-                        <img src="frontend/images/facebook.svg" alt="Icon 2">
+                        <img src="{{ url('frontend/images/facebook.svg') }}" alt="Icon 2">
                     </div>
                     <div class="social-circle">
-                        <img src="frontend/images/whatsapp.svg" alt="Icon 3">
+                        <img src="{{ url('frontend/images/whatsapp.svg') }}" alt="Icon 3">
                     </div>
                 </div>
             </div>
