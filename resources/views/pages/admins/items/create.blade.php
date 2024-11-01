@@ -98,6 +98,14 @@
                                             </div>
 
                                             <div class="col-md-4">
+                                                <label for="first-name-horizontal">Description</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+
+                                                <textarea class="form-control" name="description" type="text" placeholder="Description" id="floatingTextarea"
+                                                    value="{{ old('description') }}"></textarea>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <label for="first-name-horizontal">Features</label>
                                             </div>
                                             <div class="col-md-8 form-group">

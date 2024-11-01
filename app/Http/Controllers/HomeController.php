@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $brands = Brand::all();
+        
+        $items = Item::with(['type', 'brand'])->inRandomOrder()->get();
+
+        return view('home', [
+            'brands' => $brands,
+            'items' => $items,
+        ]);
     }
 }

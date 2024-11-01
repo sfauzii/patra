@@ -22,6 +22,7 @@ class Item extends Model
         'price',
         'star',
         'review',
+        'description',
     ];
 
     protected $casts = [

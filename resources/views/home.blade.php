@@ -67,6 +67,41 @@
         </div>
     </div>
 
+    <section class="header-content">
+        <div class="left-content">
+            <h1>Fast and Easy Way To Rent A Car</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto molestias aspernatur, delectus
+                suscipit autem ut.</p>
+
+            <div class="card-search">
+                <form>
+                    <input type="text" placeholder="Search...">
+                    <select>
+                        <option value="">Select Brand</option>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                    </select>
+                    <select>
+                        <option value="">Select Type</option>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                    </select>
+                    <button class="btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+
+            <!-- Tambahkan gambar di sini -->
+            <div class="extra-image">
+                <img src="{{ url('frontend/images/list-many-more.svg') }}" alt="Car Rental" />
+            </div>
+
+            <!-- New Image Below Card Search -->
+        </div>
+        <div class="right-content">
+            <img src="{{ url('frontend/images/hero.svg') }}" alt="Image" />
+        </div>
+    </section>
+
     <section class="category-cars-section">
 
         <div class="explore-header-category">
@@ -76,45 +111,17 @@
 
 
         <div class="cars-container">
-            <div class="car-card">
-                <img src="{{ url('frontend/images/logo-cat.svg') }}" alt="Car 1" class="car-image">
-                <div class="car-info">
-                    <h1 class="car-title">Car Title 1</h1>
-                    <p class="car-description">Car description 1 goes here.</p>
+            @foreach ($brands as $brand)
+                <div class="car-card">
+                    <img src="{{ asset('storage/' . $brand->icon_images) }}" alt="Car 1" class="car-image">
+                    <div class="car-info">
+                        <h1 class="car-title">{{ ucwords($brand->name) }}</h1>
+                        <p class="car-description">Semua dengan brand {{ ucwords($brand->name) }} bisa kamu liat disini</p>
+                    </div>
                 </div>
-            </div>
+            @endforeach
 
-            <div class="car-card">
-                <img src="{{ url('frontend/images/logo-cat-1.svg') }}" alt="Car 2" class="car-image">
-                <div class="car-info">
-                    <h1 class="car-title">Car Title 2</h1>
-                    <p class="car-description">Car description 2 goes here.</p>
-                </div>
-            </div>
 
-            <div class="car-card">
-                <img src="{{ url('frontend/images/logo-cat.svg') }}" alt="Car 3" class="car-image">
-                <div class="car-info">
-                    <h1 class="car-title">Car Title 3</h1>
-                    <p class="car-description">Car description 3 goes here.</p>
-                </div>
-            </div>
-
-            <div class="car-card">
-                <img src="{{ url('frontend/images/logo-cat-1.svg') }}" alt="Car 4" class="car-image">
-                <div class="car-info">
-                    <h1 class="car-title">Car Title 4</h1>
-                    <p class="car-description">Car description 4 goes here.</p>
-                </div>
-            </div>
-
-            <div class="car-card">
-                <img src="{{ url('frontend/images/logo-cat-1.svg') }}" alt="Car 5" class="car-image">
-                <div class="car-info">
-                    <h1 class="car-title">Car Title 5</h1>
-                    <p class="car-description">Car description 5 goes here.</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -128,177 +135,52 @@
         <div class="project-carousel">
             <!-- Card Row 1 (Scrolling Animation) -->
             <div class="card-container">
-                <div class="card">
-                    <img src="{{ url('frontend/images/pajero.webp') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                @foreach ($items as $item)
+                    <div class="card">
+                        <img src="{{ asset('storage/' . json_decode($item->photos)[0]) }}" alt="{{ $item->name }}">
+                        <div class="card-content">
+                            <h1 class="card-title">{{ $item->name }} </h1>
+                            <p class="card-description">Rp {{ number_format($item->price, 0, '') }}/day</p>
+                            <div class="card-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                            </div>
+                            <button class="view-details"
+                                onclick="window.location.href='{{ route('item.details', $item->slug) }}';">View
+                                Details</button>
                         </div>
-                        <button class="view-details" onclick="window.location.href='details.html';">View Details</button>
                     </div>
-                </div>
-                <div class="card">
-                    <img src="{{ url('frontend/images/hero.svg') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                        </div>
-                        <button class="view-details">View Details</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{{ url('frontend/images/hero.svg') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                        </div>
-                        <button class="view-details">View Details</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{{ url('frontend/images/pajero.webp') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                        </div>
-                        <button class="view-details">View Details</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{{ url('frontend/images/hero.svg') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                        </div>
-                        <button class="view-details">View Details</button>
-                    </div>
-                </div>
+                @endforeach
+
 
             </div>
         </div>
         <!-- Card Row 2 (Different Animation) -->
         <div class="project-carousel reverse">
             <div class="card-container">
-                <div class="card">
-                    <img src="{{ url('frontend/images/hero.svg') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                @foreach ($items as $item)
+                    <div class="card">
+                        <img src="{{ asset('storage/' . json_decode($item->photos)[0]) }}" alt="{{ $item->name }}">
+                        <div class="card-content">
+                            <h1 class="card-title">{{ ucwords($item->name) }} </h1>
+                            <p class="card-description">Rp {{ number_format($item->price, 0, '') }}/day</p>
+                            <div class="card-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                            </div>
+                            <button class="view-details"
+                                onclick="window.location.href='{{ route('item.details', $item->slug) }}';">View
+                                Details</button>
                         </div>
-                        <button class="view-details">View Details</button>
                     </div>
-                </div>
-                <div class="card">
-                    <img src="{{ url('frontend/images/hero.svg') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                        </div>
-                        <button class="view-details">View Details</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{{ url('frontend/images/hero.svg') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                        </div>
-                        <button class="view-details">View Details</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{{ url('frontend/images/hero.svg') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                        </div>
-                        <button class="view-details">View Details</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{{ url('frontend/images/hero.svg') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                        </div>
-                        <button class="view-details">View Details</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{{ url('frontend/images/hero.svg') }}" alt="Project 1">
-                    <div class="card-content">
-                        <h1 class="card-title">Avanza Veloz Toyota </h1>
-                        <p class="card-description">Rp 450.000/day</p>
-                        <div class="card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                        </div>
-                        <button class="view-details">View Details</button>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
     </section>

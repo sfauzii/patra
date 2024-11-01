@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <div class="logo">
-            <a href="index.html"><img src="{{ url('frontend/images/logo.svg') }}" alt="Logo" /></a>
+            <a href="/"><img src="{{ url('frontend/images/logo.svg') }}" alt="Logo" /></a>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,18 @@
                 </li>
             </ul>
             <div class="btn-container">
-                <button id="login-btn" class="btn btn-primary">Login</button>
+                <div class="btn-container">
+                    @if (Auth::check())
+                        <!-- Tampilkan tombol Logout jika pengguna sudah login -->
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
+                    @else
+                        <!-- Tampilkan tombol Login jika pengguna belum login -->
+                        <button id="login-btn" href="{{ route('login') }}" class="btn btn-primary">Login</button>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
