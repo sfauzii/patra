@@ -48,7 +48,7 @@
                             @endif
                             <div class="action-buttons">
                                 <button type="submit" class="login-button">Login</button>
-                                <button type="button" class="register-button">Register</button>
+                                <button type="button" class="register-button" onclick="window.location.href = '{{ route('register') }}';">Register</button>
                             </div>
 
                             <hr>

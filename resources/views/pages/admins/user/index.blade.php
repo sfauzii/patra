@@ -80,9 +80,10 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn icon btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete this brand?')">
+                                                    onclick="return confirm('Are you sure you want to delete this User?')">
                                                     <i class="bi bi-x"></i>
                                                 </button>
+                                            </form>
                                         </div>
                                     </td>
 
