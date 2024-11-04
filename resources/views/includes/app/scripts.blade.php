@@ -1,5 +1,5 @@
 <script src="{{ url('frontend/scripts/swiper-bundle.min.jsx') }}"></script>
-<script src="{{ url('frontend/scripts/main.js') }}"></script>
+<script src="{{ url('frontend/scripts/main.min.js') }}"></script>
 <script src="{{ url('frontend/scripts/auth.js') }}"></script>
 <!-- Bootstrap CSS -->
 
