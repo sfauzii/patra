@@ -12,19 +12,22 @@ class MidtransController extends Controller
 {
     public function callback()
     {
-
+        // Set konfigurasi midtrans
         Config::$serverKey = config('services.midtrans.serverKey');
         Config::$isProduction = config('services.midtrans.isProduction');
         Config::$isSanitized = config('services.midtrans.isSanitized');
         Config::$is3ds = config('services.midtrans.is3ds');
 
+        // Buat instance midtrans notification
         $notification = new Notification();
 
+        // Assign ke variable untuk memudahkan coding
         $status = $notification->transaction_status;
         $type = $notification->payment_type;
         $fraud = $notification->fraud_status;
         $orderId = $notification->order_id;
 
+        // Cari transaksi berdasarkan ID
         $booking = Booking::findOrFail($orderId);
 
         // Handle notification status midtrans
@@ -34,12 +37,10 @@ class MidtransController extends Controller
                     $booking->payment_status = 'pending';
                 } else {
                     $booking->payment_status = 'success';
-                    $booking->status = 'confirmed';
                 }
             }
         } elseif ($status == 'settlement') {
             $booking->payment_status = 'success';
-            $booking->status = 'confirmed';
         } elseif ($status == 'pending') {
             $booking->payment_status = 'pending';
         } elseif ($status == 'deny') {

@@ -21,7 +21,8 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function store(Request $request, $slug) {
+    public function store(Request $request, $slug)
+    {
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -57,62 +58,75 @@ class CheckoutController extends Controller
             'end_date' => Carbon::parse($end_date),
             'total_price' => $total_price,
         ]);
-
     }
 
     public function payment(Request $request, $bookingId)
     {
-        $booking = Booking::findOrFail($bookingId);
-        $booking->payment_method = $request->payment_method;
+        // Retrieve booking data from session
+        $bookingData = session('booking_data');
+        $bookingFiles = session('booking_files');
 
-        if ($request->payment_method == 'midtrans') {
+        if (!$bookingData || !$bookingFiles) {
+            return redirect()->route('checkout')->with('error', 'Please complete the booking form first');
+        }
 
-            // Get the total price from the booking
-            $totalPrice = $booking->total_price;
+        // Create booking record
+        $booking = Booking::create([
+            'item_id' => $bookingData['item_id'],
+            'user_id' => auth()->user()->id,
+            'name' => $bookingData['name'],
+            'phone' => $bookingData['phone'],
+            'address' => $bookingData['address'],
+            'start_date' => $bookingData['start_date'],
+            'end_date' => $bookingData['end_date'],
+            'total_price' => $bookingData['total_price'],
+            'ktp_booking' => $bookingFiles['ktp_booking'],
+            'identity_booking' => $bookingFiles['identity_booking'],
+            'selfie_booking' => $bookingFiles['selfie_booking'],
+            'payment_method' => 'midtrans',
+            'payment_status' => 'pending',
+            'payment_url' => '', // Initialize with empty string
+        ]);
 
+        // Set Midtrans configuration
+        \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');
+        \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
+        \Midtrans\Config::$isSanitized = config('services.midtrans.isSanitized');
+        \Midtrans\Config::$is3ds = config('services.midtrans.is3ds');
 
-            // Call Midtrans API
-            \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');
-            \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
-            \Midtrans\Config::$isSanitized = config('services.midtrans.isSanitized');
-            \Midtrans\Config::$is3ds = config('services.midtrans.is3ds');
+        // Create Midtrans parameters
+        $midtransParams = [
+            'transaction_details' => [
+                'order_id' => $booking->id,
+                'gross_amount' => (int) $bookingData['total_price'],
+            ],
+            'customer_details' => [
+                'first_name' => $bookingData['name'],
+                'email' => auth()->user()->email,
+                'phone' => $bookingData['phone'],
+            ],
+            'enabled_payments' => ['gopay', 'bank_transfer'],
+            'vtweb' => []
+        ];
 
-            // Get USD to IDR rate using guzzle
-            // $client = new \GuzzleHttp\Client();
-            // $response = $client->request('GET', 'https://api.exchangerate-api.com/v4/latest/USD');
-            // $body = $response->getBody();
-            // $rate = json_decode($body)->rates->IDR;
-
-            // // Convert to IDR
-            // $totalPrice = $booking->total_price * $rate;
-
-            // Create Midtrans Params
-            $midtransParams = [
-                'transaction_details' => [
-                    'order_id' => $booking->id,
-                    'gross_amount' => (int) $totalPrice,
-                ],
-                'customer_details' => [
-                    'first_name' => $booking->name,
-                    'email' => auth()->user()->email,
-                ],
-                'enabled_payments' => ['gopay', 'bank_transfer'],
-                'vtweb' => []
-            ];
-
+        try {
             // Get Snap Payment Page URL
             $paymentUrl = \Midtrans\Snap::createTransaction($midtransParams)->redirect_url;
 
-            // Save payment URL to booking
-            $booking->payment_url = $paymentUrl;
-            $booking->save();
+            // Update booking with payment URL
+            $booking->update(['payment_url' => $paymentUrl]);
+
+            // Clear session data after successful processing
+            session()->forget(['booking_data', 'booking_files']);
 
             // Redirect to Snap Payment Page
             return redirect($paymentUrl);
+        } catch (\Exception $e) {
+            // Handle error
+            $booking->delete(); // Remove the booking if payment URL generation fails
+            return redirect()->route('checkout')->with('error', 'Payment processing failed. Please try again.');
         }
-
-        return redirect()->route('home');
-    }   
+    }
 
     public function success(Request $request)
     {

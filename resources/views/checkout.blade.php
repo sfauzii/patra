@@ -18,9 +18,9 @@
                 <h3>Home > Car Details > Start Booking</h3>
             </div>
 
-
+            @livewire('checkout', ['item' => $item])
             <!-- Two Column Content Section -->
-            <div class="content-columns">
+            {{-- <div class="content-columns">
                 <!-- Left Column -->
                 <div class="column-left">
                     <div class="card-form-booking">
@@ -151,7 +151,7 @@
                             Payment</button>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
             <!-- Modal -->

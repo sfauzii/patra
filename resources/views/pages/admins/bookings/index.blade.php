@@ -51,6 +51,7 @@
                                 <tr>
                                     <td>{{ $booking->user->name }}</td>
                                     <td>{{ $booking->item->brand->name }}</td>
+                                    <td>{{ $booking->item->type->name }}</td>
                                     <td>{{ $booking->start_date }}</td>
                                     <td>{{ $booking->end_date }}</td>
                                     <td>{{ $booking->payment_status }}</td>
