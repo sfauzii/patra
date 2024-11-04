@@ -112,7 +112,15 @@ class Checkout extends Component
     {
         $this->item = $item;
         $this->bookingPrice = $item->price;
-        $this->uniqueCode = rand(100, 999);
+        // $this->uniqueCode = rand(100, 999);
+
+        // Check if unique code exists in session; if not, generate and store it
+        if (!session()->has('unique_code')) {
+            $this->uniqueCode = rand(100, 999);
+            session(['unique_code' => $this->uniqueCode]);
+        } else {
+            $this->uniqueCode = session('unique_code');
+        }
 
         // Load data from session if exists
         if (session()->has('booking_data')) {
@@ -210,6 +218,9 @@ class Checkout extends Component
             'payment_status' => 'pending',
             'payment_url' => ''
         ]);
+
+        // Clear the unique code session after booking is completed
+        session()->forget('unique_code');
 
         // Set Midtrans configuration
         \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');

@@ -19,7 +19,7 @@
                         <img src="{{ url('frontend/images/icon-profile-circle.svg') }}" alt="Icon"
                             class="input-icon">
                         <input type="text" wire:model="name" id="input-field" placeholder="Placeholder Text"
-                            class="form-input">
+                            class="form-input" readonly>
                         @error('name')
                             <span class="error">{{ $message }}</span>
                         @enderror
