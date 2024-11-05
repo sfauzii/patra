@@ -61,6 +61,8 @@
 
                                     <td>
                                         <div class="buttons">
+                                            <a href="{{ route('bookings.show', $booking->id) }}"
+                                                class="btn icon btn-success"><i class="bi bi-eye"></i></a>
                                             <a href="{{ route('bookings.edit', $booking->id) }}"
                                                 class="btn icon btn-primary"><i class="bi bi-pencil"></i></a>
 

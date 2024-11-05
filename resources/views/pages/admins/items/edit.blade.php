@@ -5,7 +5,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Create Items</h3>
+                    <h3>Edit Items</h3>
                     <p class="text-subtitle text-muted">Multiple form layouts, you can use.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
@@ -110,6 +110,7 @@
                                                 <textarea type="text" name="description" class="form-control" type="text" placeholder="Description"
                                                     id="floatingTextarea" value="{{ old('description') ?? $item->description }}"></textarea>
                                             </div>
+                                            
                                             <div class="col-md-4">
                                                 <label for="first-name-horizontal">Features</label>
                                             </div>
@@ -198,4 +199,5 @@
                     </div>
                 </div>
         </section>
-    @endsection
+    </div>
+@endsection

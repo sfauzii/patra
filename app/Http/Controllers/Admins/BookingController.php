@@ -46,7 +46,10 @@ class BookingController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $booking = Booking::findOrFail($id); // This will throw a 404 if the booking is not found
+
+        // Pass the booking to the view
+        return view('pages.admins.bookings.show', compact('booking'));
     }
 
     /**
