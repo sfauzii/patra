@@ -23,14 +23,15 @@
                 </div>
 
                 <!-- Title -->
-                <h2 class="title-well">Well Done! Booking
-                    Anda Berhasil 🙌</h2>
+                <h2 class="title-well">Well Done! Booking {{ ucwords($booking->item->name) }}
+                    {{ ucwords(Auth::user()->name) }} Berhasil 🙌</h2>
 
                 <!-- Input Booking Code -->
                 <div class="booking-code-input">
                     <img src="{{ url('frontend/images/icon-receipt.svg') }}" alt="Input Icon" class="input-icon-well">
                     <label for="booking-code" class="floating-placeholder">Booking Code:</label>
-                    <input type="text" placeholder=" " class="input-field well-done" readonly value="PTA9023">
+                    <input type="text" placeholder=" " class="input-field well-done" readonly
+                        value="{{ $booking->booking_code }}">
                 </div>
 
                 <!-- Description -->
@@ -39,8 +40,20 @@
                     menunggu beberapa menit 🎉</p>
 
                 <!-- Button -->
-                <button class="btn-full-width" onclick="window.location.href='check-booking.html';">Lihat
-                    Pesananku</button>
+                <!-- Payment Status Buttons -->
+                @if ($booking->payment_status === 'success')
+                    <!-- Button for successful payment -->
+                    <button class="btn-full-width" onclick="window.location.href='check-booking.html';">Lihat
+                        Pesananku</button>
+                @elseif ($booking->payment_status === 'pending')
+                    <!-- Button for pending payment -->
+                    <button class="btn-full-width" onclick="window.location.href='{{ $booking->payment_url }}';">Pay
+                        Now</button>
+                @elseif ($booking->payment_status === 'cancelled')
+                    <!-- Button for cancelled payment -->
+                    <button class="btn-full-width" onclick="window.location.href='/';">Contact Us</button>
+                @endif
+
             </div>
         </div>
     </section>

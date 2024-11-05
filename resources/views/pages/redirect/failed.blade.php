@@ -24,7 +24,7 @@
 
                 <!-- Title -->
                 <h2 class="title-well">Yahh! Booking
-                    Anda Failed 🙌</h2>
+                    {{ ucwords(Auth::user()->name) }} Failed 🙌</h2>
 
                 <!-- Input Booking Code -->
                 <div class="booking-code-input">
@@ -34,13 +34,23 @@
                 </div>
 
                 <!-- Description -->
-                <p class="description-well">Pesanan Anda berhasil dibuat. Kami sedang melakukan proses verifikasi,
-                    mohon
-                    menunggu beberapa menit 🎉</p>
+                <p class="description-well">Pesanan Anda gagal dibuat. Silakan coba lagi atau hubungi kami untuk bantuan 🤕
+                </p>
 
                 <!-- Button -->
-                <button class="btn-full-width" onclick="window.location.href='check-booking.html';">Lihat
-                    Pesananku</button>
+                <!-- Payment Status Buttons -->
+                @if ($booking->payment_status === 'success')
+                    <!-- Button for successful payment -->
+                    <button class="btn-full-width" onclick="window.location.href='check-booking.html';">Lihat
+                        Pesananku</button>
+                @elseif ($booking->payment_status === 'pending')
+                    <!-- Button for pending payment -->
+                    <button class="btn-full-width" onclick="window.location.href='{{ $booking->payment_url }}';">Pay
+                        Now</button>
+                @elseif ($booking->payment_status === 'cancelled')
+                    <!-- Button for cancelled payment -->
+                    <button class="btn-full-width" onclick="window.location.href='/';">Contact Us</button>
+                @endif
             </div>
         </div>
     </section>

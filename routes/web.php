@@ -57,4 +57,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('midtrans/callback', [MidtransController::class, 'callback']);
 Route::get('midtrans/finish', [MidtransController::class, 'finishRedirect']);
 Route::get('midtrans/unfinish', [MidtransController::class, 'unfinishRedirect']);
-Route::get('midtrans/failed', [MidtransController::class, 'errorRedirect']);
+Route::get('midtrans/failed', [MidtransController::class, 'errorRedirect'])->name('pages.redirect.failed');

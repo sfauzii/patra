@@ -24,23 +24,34 @@
 
                 <!-- Title -->
                 <h2 class="title-well">Yahh! Booking
-                    Anda Pending 🙌</h2>
+                    {{ ucwords(Auth::user()->name) }} Pending 🙌</h2>
 
                 <!-- Input Booking Code -->
                 <div class="booking-code-input">
                     <img src="{{ url('frontend/images/icon-receipt.svg') }}" alt="Input Icon" class="input-icon-well">
                     <label for="booking-code" class="floating-placeholder">Booking Code:</label>
-                    <input type="text" placeholder=" " class="input-field well-done" readonly value="PTA9023">
+                    <input type="text" placeholder=" " class="input-field well-done" readonly
+                        value="{{ $booking->booking_code }}">
                 </div>
 
                 <!-- Description -->
-                <p class="description-well">Pesanan Anda berhasil dibuat. Kami sedang melakukan proses verifikasi,
-                    mohon
-                    menunggu beberapa menit 🎉</p>
+                <p class="description-well">Pesanan Anda berhasil dibuat. Silakan menyelesaikan pembayaran untuk melanjutkan
+                    proses verifikasi 🎉</p>
 
                 <!-- Button -->
-                <button class="btn-full-width" onclick="window.location.href='check-booking.html';">Lihat
-                    Pesananku</button>
+                <!-- Payment Status Buttons -->
+                @if ($booking->payment_status === 'success')
+                    <!-- Button for successful payment -->
+                    <button class="btn-full-width" onclick="window.location.href='check-booking.html';">Lihat
+                        Pesananku</button>
+                @elseif ($booking->payment_status === 'pending')
+                    <!-- Button for pending payment -->
+                    <button class="btn-full-width" onclick="window.location.href='{{ $booking->payment_url }}';">Pay
+                        Now</button>
+                @elseif ($booking->payment_status === 'cancelled')
+                    <!-- Button for cancelled payment -->
+                    <button class="btn-full-width" onclick="window.location.href='/';">Contact Us</button>
+                @endif
             </div>
         </div>
     </section>

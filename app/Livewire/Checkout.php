@@ -123,6 +123,11 @@ class Checkout extends Component
         $identityPath = $this->identityBooking ? $this->identityBooking->store('uploads', 'public') : null;
         $selfiePath = $this->selfieBooking ? $this->selfieBooking->store('uploads', 'public') : null;
 
+        // Generate booking_code with the format PTA + datetime + 3-digit random number
+        $dateTime = now()->format('YmdHis'); // Format as YYYYMMDDHHMMSS
+        $randomNumber = rand(100, 999); // Generate a random 3-digit number
+        $bookingCode = 'PTA' . $dateTime . $randomNumber;
+
         // Create booking in database
         $booking = Booking::create([
             'item_id' => $this->item->id,
@@ -136,6 +141,7 @@ class Checkout extends Component
             'ktp_booking' => $ktpPath,
             'identity_booking' => $identityPath,
             'selfie_booking' => $selfiePath,
+            'booking_code' => $bookingCode, // Add booking_code here
             'payment_method' => 'midtrans',
             'payment_status' => 'pending',
             'payment_url' => ''

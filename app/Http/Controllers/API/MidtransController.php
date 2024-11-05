@@ -65,7 +65,7 @@ class MidtransController extends Controller
 
     public function finishRedirect(Request $request)
     {
-        $orderId = $request->input('id');
+        $orderId = $request->input('order_id');
         $statusCode = $request->input('status_code');
         $transactionStatus = $request->input('transaction_status');
 
@@ -79,15 +79,19 @@ class MidtransController extends Controller
                 'booking' => $booking,
             ]);
         } else if ($statusCode == 201 && $transactionStatus == 'pending') {
-            return view('pages.redirect.unfinish');
+            return view('pages.redirect.unfinish', [
+                'booking' => $booking,
+            ]);
         } else {
-            return view('pages.redirect.failed');
+            return view('pages.redirect.failed', [
+                'booking' => $booking,
+            ]);
         }
     }
 
     public function unfinishRedirect(Request $request)
     {
-        $orderId = $request->input('id');
+        $orderId = $request->input('order_id');
         $statusCode = $request->input('status_code');
         $transactionStatus = $request->input('transaction_status');
 
