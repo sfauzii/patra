@@ -41,3 +41,7 @@
 <script src="{{ url('backend/assets/extensions/filepond/filepond.js') }}"></script>
 <script src="{{ url('backend/assets/extensions/toastify-js/src/toastify.js') }}"></script>
 <script src="{{ url('backend/assets/static/js/pages/filepond.js') }}"></script>
+
+
+<script src="{{ url('backend/assets/extensions/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ url('backend/assets/static/js/pages/tinymce.js') }}"></script>

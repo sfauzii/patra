@@ -89,7 +89,6 @@
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <div class="input-group mb-3">
-                                                    {{-- <label class="input-group-text" for="inputGroupSelect01">Options</label> --}}
                                                     <select name="type_id" class="form-select" id="inputGroupSelect01">
                                                         <option value="{{ $item->type->id }}">Tidak Diubah
                                                             ({{ $item->type->name }})</option>
@@ -104,20 +103,21 @@
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="first-name-horizontal">Description</label>
-                                            </div>
-                                            <div class="col-md-8 form-group">
-                                                <textarea type="text" name="description" class="form-control" type="text" placeholder="Description"
-                                                    id="floatingTextarea" value="{{ old('description') ?? $item->description }}"></textarea>
-                                            </div>
-                                            
-                                            <div class="col-md-4">
                                                 <label for="first-name-horizontal">Features</label>
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="first-name-horizontal" class="form-control"
                                                     name="features" placeholder="Feature"
                                                     value="{{ old('features') ?? $item->features }}">
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label for="first-name-horizontal">Description</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+
+                                                <textarea name="description" id="default" cols="30" rows="10">{{ $item->description }}</textarea>
+
                                             </div>
 
                                             <div class="col-md-4">
@@ -175,7 +175,7 @@
 
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button item="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                                <button item="reset" class="btn btn-light-secondary me-1 mb-1"
+                                                <button class="btn btn-light-secondary me-1 mb-1"
                                                     onclick="window.history.back();">Cancel</button>
                                             </div>
                                         </div>

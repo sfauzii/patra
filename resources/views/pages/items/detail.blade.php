@@ -55,7 +55,7 @@
                         </div>
                         <h4>Description</h4>
                         <p class="description">
-                            {{ ucfirst($item->description) }}
+                            {!! ucfirst($item->description) !!}
                         </p>
                     </div>
                     <div class="column-left">

@@ -25,6 +25,8 @@ class Item extends Model
         'description',
     ];
 
+    protected $hidden = [];
+
     protected $casts = [
         'photos' => 'array'
     ];
