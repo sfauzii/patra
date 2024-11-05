@@ -14,7 +14,9 @@
     <body>
 
         <!-- Navbar -->
-        @include('includes.app.navbar')
+        @if (!isset($showNavbar) || $showNavbar)
+            @include('includes.app.navbar')
+        @endif
 
         <!-- Content Section -->
 

@@ -62,4 +62,43 @@ class MidtransController extends Controller
             ],
         ]);
     }
+
+    public function finishRedirect(Request $request)
+    {
+        $orderId = $request->input('id');
+        $statusCode = $request->input('status_code');
+        $transactionStatus = $request->input('transaction_status');
+
+        // Ambil transaksi berdasarkan ID order
+         $booking = Booking::where('id', $orderId)->first();
+        //  $transaction = Transaction::where('id', $orderId)->first();
+
+        // Jika pembayaran berhasil (status "settlement"), arahkan pengguna ke halaman success
+        if ($statusCode == 200 && $transactionStatus == 'settlement') {
+            return view('pages.redirect.success', [
+                'booking' => $booking,
+            ]);
+        } else if ($statusCode == 201 && $transactionStatus == 'pending') {
+            return view('pages.redirect.unfinish');
+        } else {
+            return view('pages.redirect.failed');
+        }
+    }
+
+    public function unfinishRedirect(Request $request)
+    {
+        $orderId = $request->input('id');
+        $statusCode = $request->input('status_code');
+        $transactionStatus = $request->input('transaction_status');
+
+        // Jika pembayaran berhasil (status "settlement"), arahkan pengguna ke halaman success
+        if ($statusCode == 201 && $transactionStatus == 'pending') {
+            return view('pages.redirect.unfinish');
+        }
+    }
+
+    public function errorRedirect(Request $request)
+    {
+        return view('pages.redirect.failed');
+    }
 }

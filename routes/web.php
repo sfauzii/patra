@@ -30,13 +30,7 @@ Route::get('/item/{slug}', [CatalogController::class, 'show'])->name('item.detai
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('checkout/{slug}', [CheckoutController::class, 'index'])->name('checkout');
-    Route::post('checkout/{slug}', [CheckoutController::class, 'store'])->name('checkout.store');
-    // Route::post('checkout/payment/{bookingId}', [CheckoutController::class, 'payment'])->name('checkout.payment');
-
-    Route::get('checkout/payment', [CheckoutController::class, 'payment'])
-        ->name('checkout.payment');
-
-    Route::get('/payment/success', [CheckoutController::class, 'success'])->name('payment.success');
+    
 });
 
 Route::group(['middleware' => ['auth', 'isAdmin']], function () {
@@ -61,3 +55,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::post('midtrans/callback', [MidtransController::class, 'callback']);
+Route::get('midtrans/finish', [MidtransController::class, 'finishRedirect']);
+Route::get('midtrans/unfinish', [MidtransController::class, 'unfinishRedirect']);
+Route::get('midtrans/failed', [MidtransController::class, 'errorRedirect']);
