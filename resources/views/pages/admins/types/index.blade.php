@@ -44,7 +44,7 @@
 
                                 @foreach ($types as $type)
                                     <tr>
-                                        <td>{{ $type->name }}</td>
+                                        <td>{{ ucwords($type->name) }}</td>
                                         <td>{{ $type->slug }}</td>
                                         <td><img src="{{ asset('storage/' . $type->icon_images) }}"
                                                 alt="{{ $type->name }}" style="width: 100px;"></td>

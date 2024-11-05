@@ -45,7 +45,7 @@
 
                             @foreach ($brands as $brand)
                                 <tr>
-                                    <td>{{ $brand->name }}</td>
+                                    <td>{{ ucwords($brand->name) }}</td>
                                     <td>{{ $brand->slug }}</td>
                                     <td><img src="{{ asset('storage/' . $brand->icon_images) }}" alt="{{ $brand->name }}"
                                             style="width: 100px;"></td>

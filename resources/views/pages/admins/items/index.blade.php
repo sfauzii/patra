@@ -45,16 +45,17 @@
 
                                 @foreach ($items as $item)
                                     <tr>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->brand->name }}</td>
-                                        <td>{{ $item->type->name }}</td>
-                                        <td>{{ $item->price }}</td>
+                                        <td>{{ ucwords($item->name) }}</td>
+                                        <td>{{ ucwords($item->brand->name) }}</td>
+                                        <td>{{ ucwords($item->type->name) }}</td>
+                                        <td>Rp {{ number_format($item->price, 0, ' ') }}</td>
                                         <td>
                                             @if ($item->photos)
                                                 @foreach (json_decode($item->photos) as $photo)
                                                     <div class="relative group">
                                                         <img src="{{ asset('storage/' . $photo) }}" alt="Product Photo"
-                                                           style="width: 100px; margin-right: 5px; margin-bottom: 5px" class="img-thumbnail" >
+                                                            style="width: 100px; margin-right: 5px; margin-bottom: 5px"
+                                                            class="img-thumbnail">
                                                         <div
                                                             class="absolute inset-0 rounded-full bg-black bg-opacity-0 group-hover:bg-opacity-20 transition duration-300">
                                                         </div>

@@ -139,7 +139,7 @@
                     <div class="card">
                         <img src="{{ asset('storage/' . json_decode($item->photos)[0]) }}" alt="{{ $item->name }}">
                         <div class="card-content">
-                            <h1 class="card-title">{{ $item->name }} </h1>
+                            <h1 class="card-title">{{ ucwords($item->name) }} </h1>
                             <p class="card-description">Rp {{ number_format($item->price, 0, '') }}/day</p>
                             <div class="card-rating">
                                 <i class="fas fa-star"></i>

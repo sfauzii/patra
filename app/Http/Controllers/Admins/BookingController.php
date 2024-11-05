@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admins;
 
-use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
 
 class BookingController extends Controller
 {
@@ -13,7 +14,13 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::all();
+        $bookings = Booking::all()->map(function ($booking) {
+            $start = Carbon::parse($booking->start_date);
+            $end = Carbon::parse($booking->end_date);
+            $booking->duration = $start->diffInDays($end);
+
+            return $booking;
+        });
 
         return view('pages.admins.bookings.index', compact('bookings'));
     }

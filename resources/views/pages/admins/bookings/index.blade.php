@@ -35,11 +35,12 @@
                     <table class="table" id="table1">
                         <thead>
                             <tr>
-                                <th>User</th>
+                                <th>Car</th>
                                 <th>Brand</th>
-                                <th>Item</th>
+                                <th>User</th>
                                 <th>Start</th>
                                 <th>End</th>
+                                <th>Duration</th>
                                 <th>Payment Status</th>
                                 <th>Total</th>
                                 <th>Action</th>
@@ -49,18 +50,19 @@
 
                             @foreach ($bookings as $booking)
                                 <tr>
+                                    <td>{{ ucwords($booking->item->name) }}</td>
+                                    <td>{{ ucwords($booking->item->type->name) }}</td>
                                     <td>{{ $booking->user->name }}</td>
-                                    <td>{{ $booking->item->brand->name }}</td>
-                                    <td>{{ $booking->item->type->name }}</td>
-                                    <td>{{ $booking->start_date }}</td>
-                                    <td>{{ $booking->end_date }}</td>
+                                    <td>{{ date('d, F Y', strtotime($booking->start_date)) }}</td>
+                                    <td>{{ date('d, F Y', strtotime($booking->end_date)) }}</td>
+                                    <td>{{ $booking->duration }} days</td>
                                     <td>{{ $booking->payment_status }}</td>
-                                    <td>{{ $booking->total_price }}</td>
-                                    
+                                    <td>Rp {{ number_format($booking->total_price, 0, ' ') }}</td>
+
                                     <td>
                                         <div class="buttons">
-                                            <a href="{{ route('bookings.edit', $booking->id) }}" class="btn icon btn-primary"><i
-                                                    class="bi bi-pencil"></i></a>
+                                            <a href="{{ route('bookings.edit', $booking->id) }}"
+                                                class="btn icon btn-primary"><i class="bi bi-pencil"></i></a>
 
                                             <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST"
                                                 style="display:inline;">
