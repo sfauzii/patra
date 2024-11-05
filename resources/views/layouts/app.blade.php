@@ -7,7 +7,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Document</title>
 
+        @livewireStyles
+
         @include('includes.app.style')
+
 
     </head>
 
@@ -29,9 +32,16 @@
             @include('includes.app.footer')
         @endif
 
+        @livewireScripts
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <x-livewire-alert::scripts />
+
+        {{-- <x-livewire-alert::flash /> --}}
 
 
         @include('includes.app.scripts')
+
 
     </body>
 

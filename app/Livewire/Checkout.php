@@ -7,11 +7,13 @@ use App\Models\Booking;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Checkout extends Component
 {
 
     use WithFileUploads;
+    use LivewireAlert;
 
     public $item;
     public $name;
@@ -27,12 +29,14 @@ class Checkout extends Component
     public $grandTotal = 0;
     public $bookingPrice;
     public $paymentService = 10000;
+    public $terms;
 
     protected $listeners = ['calculateTotal'];
 
     public function mount(Item $item)
     {
         $this->item = $item;
+        $this->terms = false;
         $this->bookingPrice = $item->price;
         // $this->uniqueCode = rand(100, 999);
 
@@ -105,8 +109,25 @@ class Checkout extends Component
         ]]);
     }
 
+
     public function processPayment()
     {
+
+        // Cek apakah terms disetujui
+        if (!$this->terms) {
+            // session()->flash('error', 'Please accept the terms and conditions.');
+            $this->alert('error', 'Oppss', [
+                'text' => 'Mohon centang persetujuan Terms and Conditions sebelum melakukan checkout.',
+                'toast' => false,
+                'showConfirmButton' => true,
+                'confirmButtonText' => 'OK',
+                'position' => 'center',
+                'timer' => null
+            ]);
+            return; // Hentikan eksekusi jika terms tidak disetujui
+        }
+
+
         $this->validate([
             'name' => 'required|string',
             'phone' => 'required|string',
@@ -116,12 +137,17 @@ class Checkout extends Component
             'ktpBooking' => 'required|image|max:2048',
             'identityBooking' => 'required|image|max:2048',
             'selfieBooking' => 'required|image|max:2048',
+            'terms' => 'accepted', // Menambahkan validasi untuk terms
         ]);
 
         // Store files
         $ktpPath = $this->ktpBooking->store('uploads', 'public');
         $identityPath = $this->identityBooking ? $this->identityBooking->store('uploads', 'public') : null;
         $selfiePath = $this->selfieBooking ? $this->selfieBooking->store('uploads', 'public') : null;
+
+
+
+
 
         // Generate booking_code with the format PTA + datetime + 3-digit random number
         $dateTime = now()->format('YmdHis'); // Format as YYYYMMDDHHMMSS

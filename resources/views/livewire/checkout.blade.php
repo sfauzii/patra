@@ -11,6 +11,7 @@
             </div>
             <hr class="hr-booking">
 
+
             <h4 class="details-title">Complete the details</h4>
             <form wire:submit.prevent="processPayment" enctype="multipart/form-data">
                 <div class="form-group">
@@ -116,7 +117,7 @@
                 <div class="detail-item">
                     <h3>Duration</h3>
                     <p>{{ $startDate && $endDate ? \Carbon\Carbon::parse($startDate)->diffInDays($endDate) . ' day(s)' : '-' }}
-                        day</p>
+                    </p>
                 </div>
                 <div class="detail-item">
                     <h3>Sub Total</h3>
@@ -143,9 +144,15 @@
 
                 <!-- Add radio button with text -->
                 <div class="detail-item terms-condition">
-                    <input type="radio" name="terms" value="agree">
+                    <input type="radio" name="terms" value="agree" wire:model="terms">
                     <p>Saya setuju dengan <a id="terms-btn" href="#">Terms & Condition</a></p>
                 </div>
+
+                {{-- @if (session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif --}}
             </div>
             <button type="submit" class="btn-book">Proceed to
                 Payment</button>

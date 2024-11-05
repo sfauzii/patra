@@ -3628,3 +3628,179 @@ iframe:hover {
     }
 }
 //* END LOGIN POP UP *//
+
+
+//* START TERMS POP UP *//
+#terms-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.terms-card {
+    width: 1000px important;
+    /* Pastikan ini menggantikan aturan lain */
+    max-width: 100% !important;
+    border-radius: 50px !important;
+    overflow: hidden;
+    border: none;
+    background-color: #fff;
+    display: grid;
+    padding: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 550px !important;
+}
+
+.terms-content {
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 500px;
+    /* Limits the height of the scrollable area */
+    margin-top: 10px;
+    /* Hilangkan scrollbar */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* Hilangkan scrollbar di WebKit (Chrome, Safari) */
+.terms-content::-webkit-scrollbar {
+    display: none;
+}
+
+.terms-content h2 {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.subtitle-primary {
+    font-size: 14px;
+    text-align: center;
+}
+
+.terms-content p {
+    margin-bottom: 1em;
+    line-height: 1.5;
+}
+
+.list-terms {
+    margin-top: 30px !important;
+
+}
+
+.text-left-terms {
+    margin-bottom: 40px !important;
+}
+
+.text-left-terms h2 {
+
+    text-align: left !important;
+}
+
+
+
+/* For tablet devices (screen width less than or equal to 768px) */
+@media (max-width: 768px) {
+    .terms-card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        /* Adjust height for better responsiveness */
+        margin-top: -40px;
+    }
+
+    .terms-image {
+        display: none;
+        /* Hide the image on tablets and smaller devices */
+    }
+
+    .terms-content {
+        padding: 20px;
+        justify-content: flex-start;
+        /* Adjust padding and content alignment for smaller screens */
+    }
+
+    .rounded-input {
+        padding: 15px;
+        /* Adjust input padding for smaller screens */
+    }
+
+    .action-buttons .login-button,
+    .action-buttons .register-button {
+        width: 100%;
+        /* Full width buttons on mobile/tablet */
+        margin: 10px 0;
+        /* Add margin between buttons */
+    }
+
+    .close-button-popup {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .terms-card {
+        width: 800px;
+        border-radius: 35px;
+        overflow: hidden;
+        border: none;
+        margin-top: 100px;
+        height: 550px;
+        background-color: white;
+        display: grid;
+        margin: 60px;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 834px) {
+    .close-button-popup {
+        display: none;
+    }
+}
+
+/* For mobile devices (screen width less than or equal to 576px) */
+@media (max-width: 576px) {
+    .terms-card {
+        width: 90%;
+        /* Make the card narrower for small screens */
+        height: auto;
+        // margin-top: 50px;
+        padding: 20px;
+        /* Adjust margin for mobile */
+    }
+
+    .terms-content {
+        padding: 15px;
+        /* Reduce padding on mobile */
+    }
+
+    .rounded-input {
+        padding: 12px;
+        /* Further reduce input padding for mobile */
+    }
+
+    .btn-login,
+    .btn-register {
+        padding: 10px;
+        font-size: 14px;
+        /* Adjust button font size */
+    }
+
+    .action-buttons .login-button,
+    .action-buttons .register-button {
+        margin: 8px 0;
+        /* Tighter spacing between buttons */
+    }
+}
+
+//* END TERMS POP UP *//
