@@ -26,7 +26,7 @@ use App\Http\Controllers\ItemController as CatalogController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/{slug}', [CatalogController::class, 'show'])->name('item.details');
+Route::get('/c/{slug}', [CatalogController::class, 'show'])->name('item.details');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('checkout/{slug}', [CheckoutController::class, 'index'])->name('checkout');
