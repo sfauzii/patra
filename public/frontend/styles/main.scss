@@ -2587,6 +2587,10 @@ iframe:hover {
     /* Image height */
     margin-right: 15px;
     /* Space between image and title */
+    object-fit: cover;
+    /* Ensures the image covers the entire area without distortion */
+    object-position: center;
+    /* Centers the image within the box */
 }
 
 .title-badge {
@@ -3627,6 +3631,7 @@ iframe:hover {
         /* Tighter spacing between buttons */
     }
 }
+
 //* END LOGIN POP UP *//
 
 

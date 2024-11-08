@@ -2335,6 +2335,12 @@ iframe:hover {
   /* Image height */
   margin-right: 15px;
   /* Space between image and title */
+  -o-object-fit: cover;
+     object-fit: cover;
+  /* Ensures the image covers the entire area without distortion */
+  -o-object-position: center;
+     object-position: center;
+  /* Centers the image within the box */
 }
 
 .title-badge {

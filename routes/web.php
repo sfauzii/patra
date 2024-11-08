@@ -12,6 +12,7 @@ use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\PermissionController;
+use App\Http\Controllers\CheckBookingController;
 use App\Http\Controllers\ItemController as CatalogController;
 
 /*
@@ -26,11 +27,12 @@ use App\Http\Controllers\ItemController as CatalogController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/c/{slug}', [CatalogController::class, 'show'])->name('item.details');
+Route::get('/car/{slug}', [CatalogController::class, 'show'])->name('item.details');
+Route::get('/check-booking', [CheckBookingController::class, 'index'])->name('check-booking')
+    ->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('checkout/{slug}', [CheckoutController::class, 'index'])->name('checkout');
-    
+    Route::get('c/{slug}', [CheckoutController::class, 'index'])->name('checkout');
 });
 
 Route::group(['middleware' => ['auth', 'isAdmin']], function () {
