@@ -88,6 +88,15 @@
                                             </div>
 
                                             <div class="col-md-4">
+                                                <label for="first-name-horizontal">Booking Code</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <input type="text" id="first-name-horizontal" class="form-control"
+                                                    name="features" placeholder="Feature"
+                                                    value="{{ $booking->booking_code }}" readonly>
+                                            </div>
+
+                                            <div class="col-md-4">
                                                 <label for="first-name-horizontal">KTP</label>
                                             </div>
                                             <div class="col-md-8 form-group">

@@ -35,6 +35,7 @@
                     <table class="table" id="table1">
                         <thead>
                             <tr>
+                                <th>Booking Code</th>
                                 <th>Car</th>
                                 <th>Brand</th>
                                 <th>User</th>
@@ -50,8 +51,9 @@
 
                             @foreach ($bookings as $booking)
                                 <tr>
+                                    <td>{{ ucwords($booking->booking_code) }}</td>
                                     <td>{{ ucwords($booking->item->name) }}</td>
-                                    <td>{{ ucwords($booking->item->type->name) }}</td>
+                                    <td>{{ ucwords($booking->item->brand->name) }}</td>
                                     <td>{{ $booking->user->name }}</td>
                                     <td>{{ date('d, F Y', strtotime($booking->start_date)) }}</td>
                                     <td>{{ date('d, F Y', strtotime($booking->end_date)) }}</td>
