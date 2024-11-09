@@ -43,6 +43,7 @@
                                 <th>End</th>
                                 <th>Duration</th>
                                 <th>Payment Status</th>
+                                <th>Document Status</th>
                                 <th>Total</th>
                                 <th>Action</th>
                             </tr>
@@ -59,6 +60,7 @@
                                     <td>{{ date('d, F Y', strtotime($booking->end_date)) }}</td>
                                     <td>{{ $booking->duration }} days</td>
                                     <td>{{ $booking->payment_status }}</td>
+                                    <td>{{ $booking->document_status }}</td>
                                     <td>Rp {{ number_format($booking->total_price, 0, ' ') }}</td>
 
                                     <td>

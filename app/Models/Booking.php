@@ -43,4 +43,14 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function documentValidations()
+    {
+        return $this->hasMany(DocumentValidation::class);
+    }
+
+    public function getDocumentValidationStatus($documentType)
+    {
+        return $this->documentValidations()->where('document_type', $documentType)->first();
+    }
 }

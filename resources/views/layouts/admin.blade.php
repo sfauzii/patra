@@ -6,6 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard - Mazer Admin Dashboard</title>
 
+        @livewireStyles
+
+
         @include('includes.admins.style')
 
     </head>
@@ -27,6 +30,9 @@
                 @include('includes.admins.footer')
             </div>
         </div>
+
+        @livewireScripts
+
 
         @include('includes.admins.scripts')
 

@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::resource('types', TypeController::class);
     Route::resource('items', ItemController::class);
     Route::resource('bookings', BookingController::class);
+    Route::put('/bookings/{booking}/updateDocument', [BookingController::class, 'updateDocument'])->name('bookings.updateDocument');
+    Route::put('/bookings/{booking}/rejectDocument', [BookingController::class, 'rejectDocument'])->name('bookings.rejectDocument');
+    
     Route::resource('roles', RoleController::class);
     Route::get('roles/{roleId}/give-permissions', [RoleController::class, 'addPermissionsToRole'])->name('roles.give-permission');
     Route::put('roles/{roleId}/give-permissions', [RoleController::class, 'givePermissionsToRole'])->name('roles.update-permission');
