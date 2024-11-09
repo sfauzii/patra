@@ -7,6 +7,7 @@ use App\Models\Booking;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
+use App\Models\DocumentValidation;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Checkout extends Component
@@ -175,6 +176,18 @@ class Checkout extends Component
 
         // Clear the unique code session after booking is completed
         session()->forget('unique_code');
+
+        // Step 6: Create document validation records for each document type with a status of 'PENDING'.
+        $documentTypes = ['ktp_booking', 'identity_booking', 'selfie_booking'];
+
+        foreach ($documentTypes as $documentType) {
+            DocumentValidation::create([
+                'booking_id' => $booking->id,
+                'document_type' => $documentType,
+                'status' => 'PENDING',
+                'rejection_reason' => null,
+            ]);
+        }
 
         // Set Midtrans configuration
         \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');
