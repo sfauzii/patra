@@ -36,14 +36,11 @@ class CheckBookingDetails extends Component
     {
         $rules = [];
 
-        if (isset($this->rejectedDocuments['ktp_booking'])) {
-            $rules['ktpBooking'] = 'required|image|max:2048';
-        }
-        if (isset($this->rejectedDocuments['identity_booking'])) {
-            $rules['identityBooking'] = 'required|image|max:2048';
-        }
-        if (isset($this->rejectedDocuments['selfie_booking'])) {
-            $rules['selfieBooking'] = 'required|image|max:2048';
+        // Only add validation rules for rejected documents that need re-upload
+        foreach (self::REQUIRED_DOCUMENTS as $document) {
+            if (isset($this->rejectedDocuments[$document])) {
+                $rules[lcfirst(str_replace('_', '', ucwords($document, '_')))] = 'required|image|max:2048';
+            }
         }
 
         return $rules;
@@ -68,22 +65,41 @@ class CheckBookingDetails extends Component
         }
     }
 
+    private function loadBookingDetails($bookingId)
+    {
+        $this->bookingDetails = Booking::with(['documentValidations', 'item.type'])
+            ->findOrFail($bookingId)
+            ->toArray();
+
+        $this->calculateDuration();
+        $this->loadRejectedDocuments();
+        $this->calculateDocumentStatus();
+    }
+
     public function showBookingDetails($bookingDetails)
     {
         $this->bookingDetails = $bookingDetails;
         $this->calculateDuration();
         $this->loadRejectedDocuments();
-        $this->calculateDocumentStatus(); // Calculate document status when showing details
+        $this->calculateDocumentStatus();
     }
 
     private function calculateDuration()
     {
-        $this->duration = \Carbon\Carbon::parse($this->bookingDetails['start_date'])
-            ->diffInDays(\Carbon\Carbon::parse($this->bookingDetails['end_date'])) + 1;
+        if ($this->bookingDetails) {
+            $this->duration = \Carbon\Carbon::parse($this->bookingDetails['start_date'])
+                ->diffInDays(\Carbon\Carbon::parse($this->bookingDetails['end_date'])) + 1;
+        }
     }
 
     private function loadRejectedDocuments()
     {
+        $this->rejectedDocuments = [];
+
+        if (!$this->bookingDetails) {
+            return;
+        }
+
         $rejected = DocumentValidation::where('booking_id', $this->bookingDetails['id'])
             ->where('status', 'REJECTED')
             ->get();
@@ -93,12 +109,10 @@ class CheckBookingDetails extends Component
         }
     }
 
-    /**
-     * Calculate the overall document validation status
-     */
     public function calculateDocumentStatus()
     {
         if (!$this->bookingDetails) {
+            $this->documentStatus = null;
             return;
         }
 
@@ -106,34 +120,25 @@ class CheckBookingDetails extends Component
             ->whereIn('document_type', self::REQUIRED_DOCUMENTS)
             ->get();
 
-        // Initialize counters
         $totalDocuments = count(self::REQUIRED_DOCUMENTS);
         $approvedCount = 0;
         $rejectedDocuments = [];
-        $waitingDocuments = []; // Changed from pendingDocuments
-        $missingDocuments = [];
+        $waitingDocuments = [];
+        $missingDocuments = self::REQUIRED_DOCUMENTS;
 
-        // Create a map of existing validations
-        $validationMap = $documentValidations->pluck('status', 'document_type')->toArray();
+        foreach ($documentValidations as $validation) {
+            // Remove from missing documents as we found a validation
+            $missingDocuments = array_diff($missingDocuments, [$validation->document_type]);
 
-        // Check each required document
-        foreach (self::REQUIRED_DOCUMENTS as $docType) {
-            if (!isset($validationMap[$docType])) {
-                $missingDocuments[] = $docType;
-                continue;
-            }
-
-            $status = $validationMap[$docType];
-
-            switch ($status) {
+            switch ($validation->status) {
                 case 'APPROVED':
                     $approvedCount++;
                     break;
                 case 'REJECTED':
-                    $rejectedDocuments[] = $docType;
+                    $rejectedDocuments[] = $validation->document_type;
                     break;
-                case 'WAITING': // Changed from PENDING
-                    $waitingDocuments[] = $docType;
+                case 'WAITING':
+                    $waitingDocuments[] = $validation->document_type;
                     break;
             }
         }
@@ -150,43 +155,39 @@ class CheckBookingDetails extends Component
                 'approved_count' => $approvedCount,
                 'total_documents' => $totalDocuments,
                 'rejected_documents' => $rejectedDocuments,
-                'waiting_documents' => $waitingDocuments, // Changed from pending_documents
+                'waiting_documents' => $waitingDocuments,
                 'missing_documents' => $missingDocuments
             ]
         ];
     }
 
-    /**
-     * Determine the overall status based on document validation counts
-     */
-    private function determineOverallStatus($approvedCount, $totalDocuments, $rejectedDocs, $pendingDocs, $missingDocs)
+    private function determineOverallStatus($approvedCount, $totalDocuments, $rejectedDocs, $waitingDocs, $missingDocs)
     {
-        // If any document is rejected, overall status is REJECTED
         if (!empty($rejectedDocs)) {
             return 'REJECTED';
         }
 
-        // If all documents are approved, overall status is APPROVED
         if ($approvedCount === $totalDocuments) {
             return 'APPROVED';
         }
 
-        // If there are missing documents, status is INCOMPLETE
         if (!empty($missingDocs)) {
             return 'INCOMPLETE';
         }
 
-        // If there are waiting documents, status is WAITING
         if (!empty($waitingDocs)) {
-            return 'WAITING'; // Changed from PENDING
+            return 'WAITING';
         }
 
-        // Default status
-        return 'WAITING'; // Changed from PENDING
+        return 'WAITING';
     }
 
     public function uploadDocuments()
     {
+        if (empty($this->rejectedDocuments)) {
+            return;
+        }
+
         $this->isUploading = true;
 
         try {
@@ -196,37 +197,19 @@ class CheckBookingDetails extends Component
 
             $bookingUpdates = [];
 
-            // Process KTP Document
-            if (isset($this->rejectedDocuments['ktp_booking']) && $this->ktpBooking) {
-                $ktpPath = $this->processDocument(
-                    'ktp_booking',
-                    $this->ktpBooking,
-                    'documents/ktp'
-                );
-                $bookingUpdates['ktp_booking'] = $ktpPath;
+            foreach (self::REQUIRED_DOCUMENTS as $docType) {
+                $propertyName = lcfirst(str_replace('_', '', ucwords($docType, '_')));
+
+                if (isset($this->rejectedDocuments[$docType]) && $this->{$propertyName}) {
+                    $filePath = $this->processDocument(
+                        $docType,
+                        $this->{$propertyName},
+                        'documents/' . str_replace('_booking', '', $docType)
+                    );
+                    $bookingUpdates[$docType] = $filePath;
+                }
             }
 
-            // Process Identity Document
-            if (isset($this->rejectedDocuments['identity_booking']) && $this->identityBooking) {
-                $identityPath = $this->processDocument(
-                    'identity_booking',
-                    $this->identityBooking,
-                    'documents/identity'
-                );
-                $bookingUpdates['identity_booking'] = $identityPath;
-            }
-
-            // Process Selfie Document
-            if (isset($this->rejectedDocuments['selfie_booking']) && $this->selfieBooking) {
-                $selfiePath = $this->processDocument(
-                    'selfie_booking',
-                    $this->selfieBooking,
-                    'documents/selfie'
-                );
-                $bookingUpdates['selfie_booking'] = $selfiePath;
-            }
-
-            // Update booking record
             if (!empty($bookingUpdates)) {
                 Booking::where('id', $this->bookingDetails['id'])
                     ->update($bookingUpdates);
@@ -247,21 +230,22 @@ class CheckBookingDetails extends Component
 
     private function processDocument($documentType, $uploadedFile, $storageFolder)
     {
-        // Store new file
         $filePath = $uploadedFile->store($storageFolder, 'public');
 
-        // Delete old file if exists
         if (!empty($this->bookingDetails[$documentType])) {
             Storage::disk('public')->delete($this->bookingDetails[$documentType]);
         }
 
-        // Update document validation status
-        DocumentValidation::where('booking_id', $this->bookingDetails['id'])
-        ->where('document_type', $documentType)
-            ->update([
-                'status' => 'WAITING', // Changed from PENDING
+        DocumentValidation::updateOrCreate(
+            [
+                'booking_id' => $this->bookingDetails['id'],
+                'document_type' => $documentType
+            ],
+            [
+                'status' => 'WAITING',
                 'rejection_reason' => null
-            ]);
+            ]
+        );
 
         return $filePath;
     }
@@ -274,12 +258,7 @@ class CheckBookingDetails extends Component
 
     private function refreshBookingDetails()
     {
-        $this->bookingDetails = Booking::with(['documentValidations', 'item.type'])
-            ->find($this->bookingDetails['id'])
-            ->toArray();
-
-        $this->loadRejectedDocuments();
-        $this->calculateDocumentStatus(); // Recalculate document status after refresh
+        $this->loadBookingDetails($this->bookingDetails['id']);
     }
 
     public function render()
