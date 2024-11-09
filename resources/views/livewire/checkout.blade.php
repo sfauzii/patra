@@ -144,7 +144,7 @@
 
                 <!-- Add radio button with text -->
                 <div class="detail-item terms-condition">
-                    <input type="radio" name="terms" value="agree" wire:model="terms">
+                    <input type="radio" name="terms" value="1" wire:model="terms">
                     <p>Saya setuju dengan <a id="terms-btn" href="#">Terms & Condition</a></p>
                 </div>
 
