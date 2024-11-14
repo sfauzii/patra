@@ -84,7 +84,7 @@
                             <hr class="hr-booking">
 
                             <div class="mt-6">
-                                <h4 class="details-title mb-lg-4">Required Document Re-upload</h4>
+                                <h4 class="details-title mb-lg-4 mb-sm-4 mb-md-3 mb-4">Required Document Re-upload</h4>
 
                                 @foreach ($rejectedDocuments as $docType => $rejectionReason)
                                     <div class="mb-6 document-upload-section">
@@ -98,7 +98,14 @@
                                         <div class="tooltip-wrapper">
                                             <h6 class="block mb-2">{{ ucwords(str_replace('_', ' ', $docType)) }}</h6>
                                             <span class="tooltip-icon mb-2">?</span>
-                                            <div class="tooltip-text">{{ $rejectionReason }}</div>
+                                            <div class="tooltip-text" style="font-weight: 500;">
+
+                                                <h1 class="tooltip-title rejection"
+                                                    style="color: #0ff47e; font-size: 16px; font-weight: bold">Ini Pesan
+                                                    Penolakan!</h1>
+
+                                                {{ $rejectionReason }}
+                                            </div>
                                         </div>
 
                                         <div class="input-container">
@@ -164,26 +171,31 @@
                                 <span class="tooltip-icon">?</span>
                                 <div class="tooltip-text">
                                     <!-- Optional: Display detailed information -->
+
                                     <div class="ml-3 mt-2 text-sm">
-                                        <p>{{ $documentStatus['details']['approved_count'] }} of
+                                        <h1 style="color: #0ff47e; font-size: 16px; font-weight: bold">Detail
+                                            Information
+                                        </h1>
+                                        <p style="font-weight: 500;">
+                                            {{ $documentStatus['details']['approved_count'] }} of
                                             {{ $documentStatus['details']['total_documents'] }} documents approved</p>
 
                                         @if (!empty($documentStatus['details']['rejected_documents']))
-                                            <p class="text-red-500">
+                                            <p class="text-red-500" style="font-weight: 500;">
                                                 Rejected documents:
                                                 {{ implode(', ', array_map(fn($doc) => ucfirst(str_replace('_booking', '', $doc)), $documentStatus['details']['rejected_documents'])) }}
                                             </p>
                                         @endif
 
                                         @if (!empty($documentStatus['details']['waiting_documents']))
-                                            <p class="text-orange-500">
+                                            <p class="text-orange-500" style="font-weight: 500;">
                                                 Waiting documents:
                                                 {{ implode(', ', array_map(fn($doc) => ucfirst(str_replace('_booking', '', $doc)), $documentStatus['details']['waiting_documents'])) }}
                                             </p>
                                         @endif
 
                                         @if (!empty($documentStatus['details']['missing_documents']))
-                                            <p class="text-gray-500">
+                                            <p class="text-gray-500" style="font-weight: 500;">
                                                 Missing documents:
                                                 {{ implode(', ', array_map(fn($doc) => ucfirst(str_replace('_booking', '', $doc)), $documentStatus['details']['missing_documents'])) }}
                                             </p>
