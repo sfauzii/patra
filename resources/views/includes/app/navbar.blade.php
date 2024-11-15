@@ -13,7 +13,7 @@
                     <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="{{ route('cars') }}">Cars</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>

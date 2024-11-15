@@ -12,6 +12,7 @@ use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\PermissionController;
+use App\Http\Controllers\CarsController;
 use App\Http\Controllers\CheckBookingController;
 use App\Http\Controllers\ItemController as CatalogController;
 
@@ -31,6 +32,8 @@ Route::get('/car/{slug}', [CatalogController::class, 'show'])->name('item.detail
 Route::get('/check-booking', [CheckBookingController::class, 'index'])->name('check-booking')
     ->middleware('auth');
 
+Route::get('/cars', [CarsController::class, 'cars'])->name('cars');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('c/{slug}', [CheckoutController::class, 'index'])->name('checkout');
 });
@@ -44,7 +47,7 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::resource('bookings', BookingController::class);
     Route::put('/bookings/{booking}/updateDocument', [BookingController::class, 'updateDocument'])->name('bookings.updateDocument');
     Route::put('/bookings/{booking}/rejectDocument', [BookingController::class, 'rejectDocument'])->name('bookings.rejectDocument');
-    
+
     Route::resource('roles', RoleController::class);
     Route::get('roles/{roleId}/give-permissions', [RoleController::class, 'addPermissionsToRole'])->name('roles.give-permission');
     Route::put('roles/{roleId}/give-permissions', [RoleController::class, 'givePermissionsToRole'])->name('roles.update-permission');

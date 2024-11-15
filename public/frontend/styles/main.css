@@ -3442,4 +3442,40 @@ iframe:hover {
     margin: 8px 0;
     /* Tighter spacing between buttons */
   }
+}
+.card-cars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  margin: auto;
+  padding: 0 55px;
+  /* Ensure cards stay in one row */
+  justify-items: center !important;
+  /* Center-aligns items in each grid cell */
+}
+
+.card.cars {
+  margin: auto;
+  /* Centers each card in its grid cell */
+  margin-top: 20px;
+}
+
+.great-project-section.cars {
+  margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .card-cars {
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+  }
+  .great-project-section.cars {
+    margin-top: 60px !important;
+  }
+}
+@media (min-width: 769px) and (max-width: 991px) {
+  .card-cars {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
 }/*# sourceMappingURL=main.css.map */
