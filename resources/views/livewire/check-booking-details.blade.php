@@ -233,12 +233,25 @@
                         </div>
                         <hr>
                     </div>
-                    <button class="btn-book" onclick="window.location.href='well-dones.html';">Review</button>
+                    @if ($documentStatus && $documentStatus['status'] === 'APPROVED')
+                        @if ($hasReviewed)
+                            <button class="btn-book" disabled style="opacity: 0.6; cursor: not-allowed;">
+                                <i class="fas fa-check-circle me-1"></i> Review Submitted
+                            </button>
+                        @else
+                            <button wire:click="openReview" class="btn-book">
+                                Write a Review
+                            </button>
+                        @endif
+                    @endif
                     <button class="btn-call-customer" onclick="window.location.href='well-dones.html';">Call Customer
                         Service</button>
                 </div>
             </div>
         </div>
     @endif
+
+    <!-- Tambahkan review modal component di sini -->
+    <livewire:item-review />
 
 </div>

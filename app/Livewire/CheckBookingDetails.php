@@ -3,8 +3,9 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
+use App\Models\Review;
 use App\Models\Booking;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\DocumentValidation;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,10 @@ class CheckBookingDetails extends Component
     public $isUploading = false;
     public $documentStatus = null;
 
-    protected $listeners = ['bookingFound' => 'showBookingDetails'];
+    protected $listeners = [
+        'bookingFound' => 'showBookingDetails',
+        'reviewSubmitted' => '$refresh',
+    ];
 
     const REQUIRED_DOCUMENTS = [
         'ktp_booking',
@@ -57,6 +61,24 @@ class CheckBookingDetails extends Component
         'selfieBooking.image' => 'Selfie document must be an image',
         'selfieBooking.max' => 'Selfie document must not exceed 2MB',
     ];
+
+    public function openReview()
+    {
+        $this->dispatch('openReviewModal', $this->bookingDetails);
+    }
+
+    // Tambahkan method untuk mengecek status review
+    public function hasReviewed()
+    {
+        if (!$this->bookingDetails) {
+            return false;
+        }
+
+        return Review::where([
+            'user_id' => auth()->id(),
+            'booking_id' => $this->bookingDetails['id']
+        ])->exists();
+    }
 
     public function mount($bookingId = null)
     {
@@ -263,6 +285,8 @@ class CheckBookingDetails extends Component
 
     public function render()
     {
-        return view('livewire.check-booking-details');
+        return view('livewire.check-booking-details',[
+            'hasReviewed' => $this->hasReviewed()
+        ]);
     }
 }
