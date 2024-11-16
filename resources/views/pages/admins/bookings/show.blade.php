@@ -38,7 +38,16 @@
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="first-name-horizontal">Name</label>
+                                                <label for="first-name-horizontal">Booking Code</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <input type="text" id="first-name-horizontal" class="form-control"
+                                                    name="features" placeholder="Feature"
+                                                    value="{{ $booking->booking_code }}" readonly>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label for="first-name-horizontal">Car</label>
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="first-name-horizontal" class="form-control"
@@ -92,13 +101,24 @@
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="first-name-horizontal">Booking Code</label>
+                                                <label for="first-name-horizontal">Payment Status</label>
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="first-name-horizontal" class="form-control"
                                                     name="features" placeholder="Feature"
-                                                    value="{{ $booking->booking_code }}" readonly>
+                                                    value="{{ $booking->payment_status }}" readonly>
                                             </div>
+
+                                            <div class="col-md-4">
+                                                <label for="first-name-horizontal">Total Price</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <input type="text" id="first-name-horizontal" class="form-control"
+                                                    name="features" placeholder="Feature"
+                                                    value="Rp {{ number_format($booking->total_price, 0 , ' ') }}" readonly>
+                                            </div>
+
+                                            
                                         </div>
                                     </div>
                                 </form>
