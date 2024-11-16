@@ -3,71 +3,7 @@
 @section('content')
 
     <!-- Login Popup (this part is added to the index.html) -->
-    <div id="login-popup" class="login-popup">
-        <button class="close-button-popup" onclick="document.getElementById('login-popup').style.display='none';">
-            &times;
-        </button>
-        <div class="card login-card">
-            <div class="row no-gutters">
-                <!-- Left side with background image -->
-                <div class="col-md-6 login-image"></div>
-
-                <!-- Right side with login form -->
-                <div class="col-md-6">
-                    <div class="card-body login-content">
-                        <!-- <img src="frontend/images/logo.svg" alt="Logo" class="logo-img-login"> -->
-                        <h2 class="title-login">Login</h2>
-                        <!-- <p class="desc-login">Lengkapi form di bawah dengan menggunakan data Anda yang valid</p> -->
-                        <!-- <div class="card-form-login"> -->
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" name="email"
-                                    class="form-control @error('email') is-invalid @enderror rounded-input" id="email"
-                                    placeholder="Enter email" value="{{ old('email') }}" required autocomplete="email"
-                                    autofocus>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password"
-                                    class="form-control @error('password') is-invalid @enderror rounded-input"
-                                    id="password" placeholder="Password" required autocomplete="current-password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            @if (Route::has('password.request'))
-                                <a href="{{ route('password.request') }}" class="forgot-password">Forgot password?</a>
-                            @endif
-                            <div class="action-buttons">
-                                <button type="submit" class="login-button">Login</button>
-                                <button type="button" class="register-button"
-                                    onclick="window.location.href = '{{ route('register') }}';">Register</button>
-                            </div>
-
-                            <hr>
-                            <div class="action-buttons">
-                                <button type="button" class="btn-dark google"
-                                    onclick="window.location.href = 'register.html';">
-                                    <img src="{{ url('frontend/images/icon-google.svg') }}" alt="Google Icon"
-                                        class="google-icon">
-                                    Masuk/Daftar</button>
-                            </div>
-                        </form>
-                        <!-- </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-login-popup />
 
     <section class="details">
         <!-- Section Heading with Background Image -->
@@ -342,56 +278,5 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer-section car_details_footer">
-        <div class="footer-container details__cars">
-            <div class="footer-column">
-                <img src="{{ url('frontend/images/logo-white.svg') }}" alt="Footer Logo" class="footer-logo">
-                <p>Stay connected with us through social media.</p>
-                <div class="footer-social-icons">
-                    <div class="social-circle">
-                        <img src="{{ url('frontend/images/instagram.svg') }}" alt="Icon 1">
-                    </div>
-                    <div class="social-circle">
-                        <img src="{{ url('frontend/images/facebook.svg') }}" alt="Icon 2">
-                    </div>
-                    <div class="social-circle">
-                        <img src="{{ url('frontend/images/whatsapp.svg') }}" alt="Icon 3">
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-column">
-                <h3>Menu</h3>
-                <ul class="footer-menu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <h3>Company</h3>
-                <ul class="footer-company">
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <h3>Location</h3>
-                <p class="location-foot"><iframe class="footer-alternatives"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63305.747583945726!2d109.20915013591537!3d-7.397607689588339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655fa48add3e9b%3A0x6719bc889b9b1458!2sPATRA%20Rental%20Mobil%20%26%20Motor%20Purwokerto!5e0!3m2!1sid!2sid!4v1728910690790!5m2!1sid!2sid"
-                        width="300" height="150" style="border:0; border-radius: 20px;" allowfullscreen=""
-                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-        </div>
-    </footer>
-
+    <x-footer-alternate />
 @endsection

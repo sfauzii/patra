@@ -5,6 +5,8 @@
 @endphp
 
 @section('content')
+    <x-login-popup />
+
     <!-- Great Project -->
     <section class="great-project-section cars">
         <div class="project-info">
@@ -28,7 +30,8 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
                             </div>
-                            <button class="view-details" onclick="window.location.href='{{ route('item.details', $item->slug) }}';">View
+                            <button class="view-details"
+                                onclick="window.location.href='{{ route('item.details', $item->slug) }}';">View
                                 Details</button>
                         </div>
                     </div>
