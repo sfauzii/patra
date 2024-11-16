@@ -114,12 +114,29 @@
                         <h2>{{ ucwords($item->name) }}</h2>
                         <span class="badge-category">{{ ucwords($item->type->name) }}</span>
                         <div class="card-rating car-details">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span class="review-count">{{ $item->review }} Reviews</span><!-- Example of a half-star -->
+                            @php
+                                $avgRating = number_format($avgRating ?? 0, 1); // Format ke 1 desimal
+                                $fullStars = floor($avgRating); // Jumlah bintang penuh
+                                $hasHalfStar = $avgRating - $fullStars >= 0.5; // Cek apakah ada setengah bintang
+                                $emptyStars = 5 - ($fullStars + ($hasHalfStar ? 1 : 0)); // Hitung sisa bintang kosong
+                            @endphp
+
+                            {{-- Bintang Penuh --}}
+                            @for ($i = 1; $i <= $fullStars; $i++)
+                                <i class="fas fa-star text-warning"></i>
+                            @endfor
+
+                            {{-- Setengah Bintang --}}
+                            @if ($hasHalfStar)
+                                <i class="fas fa-star-half-alt text-warning"></i>
+                            @endif
+
+                            {{-- Bintang Kosong --}}
+                            @for ($i = 1; $i <= $emptyStars; $i++)
+                                <i class="far fa-star text-secondary"></i>
+                            @endfor
+                            <!-- Tampilkan Jumlah Ulasan -->
+                            <span class="review-count">{{ $reviewCount }} Reviews</span>
                         </div>
                         <h4>Description</h4>
                         <p class="description">
@@ -159,26 +176,31 @@
                             </div>
 
                             <div class="tab-content" id="reviews" style="display:none;">
-                                <div class="review-card">
-                                    <div class="review-content">
-                                        <img class="profile-photo" src="{{ url('frontend/images/card-tick.svg') }}"
-                                            alt="Profile Photo">
-                                        <div class="review-details">
-                                            <p class="reviewer-name">John Doe</p>
-                                            <div class="card-rating-navtabs">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                                @foreach ($reviews as $review)
+                                    <div class="review-card">
+                                        <div class="review-content">
+                                            <img class="profile-photo"
+                                                src="{{ $review->user->profile_photo_url ?? 'https://api.dicebear.com/6.x/initials/svg?seed=' . urlencode($review->user->name) }}"
+                                                alt="Profile Photo">
+                                            <div class="review-details">
+                                                <p class="reviewer-name">{{ ucwords($review->user->name) }}</p>
+                                                <div class="card-rating-navtabs">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($review->rating >= $i)
+                                                            <i class="fas fa-star text-warning"></i>
+                                                        @elseif ($review->rating == $i - 0.5)
+                                                            <i class="fas fa-star-half-alt text-warning"></i>
+                                                        @else
+                                                            <i class="far fa-star text-secondary"></i>
+                                                        @endif
+                                                    @endfor
+                                                </div>
                                             </div>
                                         </div>
+                                        <h3 class="title__car">{{ ucwords($review->item->name) }}</h3>
+                                        <p class="message__review">"{{ $review->message }}"</p>
                                     </div>
-                                    <h3 class="title__car">Car Model</h3>
-                                    <p class="message__review">"This is a great car, I really enjoyed driving it.
-                                        The
-                                        performance was excellent and it was very comfortable!</p>
-                                </div>
+                                @endforeach
 
                             </div>
                         </div>
@@ -240,11 +262,30 @@
                             <h1 class="card-title">{{ ucwords($similiarItem->name) }} </h1>
                             <p class="card-description">Rp 450.000/day</p>
                             <div class="card-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                                @php
+                                    $avgRating = number_format($similiarItem->avg_rating, 1);
+                                    $fullStars = floor($avgRating);
+                                    $hasHalfStar = $avgRating - $fullStars >= 0.5;
+                                    $emptyStars = 5 - ($fullStars + ($hasHalfStar ? 1 : 0));
+                                @endphp
+
+                                {{-- Bintang Penuh --}}
+                                @for ($i = 1; $i <= $fullStars; $i++)
+                                    <i class="fas fa-star text-warning"></i>
+                                @endfor
+
+                                {{-- Setengah Bintang --}}
+                                @if ($hasHalfStar)
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                @endif
+
+                                {{-- Bintang Kosong --}}
+                                @for ($i = 1; $i <= $emptyStars; $i++)
+                                    <i class="far fa-star text-secondary"></i>
+                                @endfor
+
+                                <!-- Jumlah Ulasan -->
+                                <span class="review-count">({{ $similiarItem->review_count }} Reviews)</span>
                             </div>
                             <button class="view-details"
                                 onclick="window.location.href='{{ route('item.details', $similiarItem->slug) }}';">View
@@ -266,11 +307,30 @@
                             <h1 class="card-title">{{ ucwords($similiarItem->name) }} </h1>
                             <p class="card-description">Rp 450.000/day</p>
                             <div class="card-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                                @php
+                                    $avgRating = number_format($similiarItem->avg_rating, 1);
+                                    $fullStars = floor($avgRating);
+                                    $hasHalfStar = $avgRating - $fullStars >= 0.5;
+                                    $emptyStars = 5 - ($fullStars + ($hasHalfStar ? 1 : 0));
+                                @endphp
+
+                                {{-- Bintang Penuh --}}
+                                @for ($i = 1; $i <= $fullStars; $i++)
+                                    <i class="fas fa-star text-warning"></i>
+                                @endfor
+
+                                {{-- Setengah Bintang --}}
+                                @if ($hasHalfStar)
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                @endif
+
+                                {{-- Bintang Kosong --}}
+                                @for ($i = 1; $i <= $emptyStars; $i++)
+                                    <i class="far fa-star text-secondary"></i>
+                                @endfor
+
+                                <!-- Jumlah Ulasan -->
+                                <span class="review-count">({{ $similiarItem->review_count }} Reviews)</span>
                             </div>
                             <button class="view-details"
                                 onclick="window.location.href='{{ route('item.details', $similiarItem->slug) }}';">View

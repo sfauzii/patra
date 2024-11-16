@@ -405,6 +405,10 @@ body {
   /* Gold color for stars */
 }
 
+.card-rating span {
+  color: #999;
+}
+
 .card-rating i {
   margin-right: 5px;
   /* Space between each star */

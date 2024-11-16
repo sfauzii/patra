@@ -48,7 +48,8 @@
                             @endif
                             <div class="action-buttons">
                                 <button type="submit" class="login-button">Login</button>
-                                <button type="button" class="register-button" onclick="window.location.href = '{{ route('register') }}';">Register</button>
+                                <button type="button" class="register-button"
+                                    onclick="window.location.href = '{{ route('register') }}';">Register</button>
                             </div>
 
                             <hr>
@@ -142,11 +143,31 @@
                             <h1 class="card-title">{{ ucwords($item->name) }} </h1>
                             <p class="card-description">Rp {{ number_format($item->price, 0, '') }}/day</p>
                             <div class="card-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                                @php
+                                    $avgRating = number_format($item->avg_rating, 1);
+                                    $fullStars = floor($avgRating);
+                                    $hasHalfStar = $avgRating - $fullStars >= 0.5;
+                                    $emptyStars = 5 - ($fullStars + ($hasHalfStar ? 1 : 0));
+                                @endphp
+
+                                {{-- Bintang Penuh --}}
+                                @for ($i = 1; $i <= $fullStars; $i++)
+                                    <i class="fas fa-star text-warning"></i>
+                                @endfor
+
+                                {{-- Setengah Bintang --}}
+                                @if ($hasHalfStar)
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                @endif
+
+                                {{-- Bintang Kosong --}}
+                                @for ($i = 1; $i <= $emptyStars; $i++)
+                                    <i class="far fa-star text-secondary"></i>
+                                @endfor
+
+                                <!-- Jumlah Ulasan -->
+                                <span class="review-count">({{ $item->review_count }} Reviews)</span>
+                                <!-- Example of a half-star -->
                             </div>
                             <button class="view-details"
                                 onclick="window.location.href='{{ route('item.details', $item->slug) }}';">View
@@ -168,11 +189,30 @@
                             <h1 class="card-title">{{ ucwords($item->name) }} </h1>
                             <p class="card-description">Rp {{ number_format($item->price, 0, '') }}/day</p>
                             <div class="card-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                                @php
+                                    $avgRating = number_format($item->avg_rating, 1);
+                                    $fullStars = floor($avgRating);
+                                    $hasHalfStar = $avgRating - $fullStars >= 0.5;
+                                    $emptyStars = 5 - ($fullStars + ($hasHalfStar ? 1 : 0));
+                                @endphp
+
+                                {{-- Bintang Penuh --}}
+                                @for ($i = 1; $i <= $fullStars; $i++)
+                                    <i class="fas fa-star text-warning"></i>
+                                @endfor
+
+                                {{-- Setengah Bintang --}}
+                                @if ($hasHalfStar)
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                @endif
+
+                                {{-- Bintang Kosong --}}
+                                @for ($i = 1; $i <= $emptyStars; $i++)
+                                    <i class="far fa-star text-secondary"></i>
+                                @endfor
+
+                                <!-- Jumlah Ulasan -->
+                                <span class="review-count">({{ $item->review_count }} Reviews)</span>
                             </div>
                             <button class="view-details"
                                 onclick="window.location.href='{{ route('item.details', $item->slug) }}';">View
@@ -241,78 +281,29 @@
             <!-- car-reviews people-say (Scrollable Cards) -->
             <div class="car-reviews-wrapper">
                 <!-- Single car-review Card -->
-                <div class="car-review-card">
-                    <div class="car-review-footer">
-                        <img class="author-photo" src="{{ url('frontend/images/hero.svg') }}" alt="Author Photo">
-                        <div class="car-review-info">
-                            <p class="author-name">Author Name</p>
-                            <div class="card-rating-review">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                @foreach ($randomReviews as $review)
+                    <div class="car-review-card">
+                        <div class="car-review-footer">
+                            <img class="author-photo"
+                                src="{{ $review->user->profile_photo_url ?? 'https://api.dicebear.com/6.x/initials/svg?seed=' . urlencode($review->user->name) }}"
+                                alt="{{ ucwords($review->user->name) }}">
+                            <div class="car-review-info">
+                                <p class="author-name">{{ $review->user->name }}</p>
+                                <div class="card-rating-review">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                                </div>
                             </div>
                         </div>
+                        <h2 class="car-review-title">{{ ucwords($review->item->name) }} </h2>
+                        <p class="car-review-description">"{{ ucfirst($review->message) }}"</p>
                     </div>
-                    <h2 class="car-review-title">car-review Title </h2>
-                    <p class="car-review-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Pariatur alias assumenda in quaerat vero magnam con</p>
-                </div>
-                <div class="car-review-card">
-                    <div class="car-review-footer">
-                        <img class="author-photo" src="{{ url('frontend/images/hero.svg') }}" alt="Author Photo">
-                        <div class="car-review-info">
-                            <p class="author-name">Author Name</p>
-                            <div class="card-rating-review">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                            </div>
-                        </div>
-                    </div>
-                    <h2 class="car-review-title">Title Review</h2>
-                    <p class="car-review-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Pariatur alias assumenda in quaerat vero magnam con</p>
-                </div>
-                <div class="car-review-card">
-                    <div class="car-review-footer">
-                        <img class="author-photo" src="{{ url('frontend/images/hero.svg') }}" alt="Author Photo">
-                        <div class="car-review-info">
-                            <p class="author-name">Author Name</p>
-                            <div class="card-rating-review">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                            </div>
-                        </div>
-                    </div>
-                    <h2 class="car-review-title">car-review Title </h2>
-                    <p class="car-review-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Pariatur alias assumenda in quaerat vero magnam con</p>
-                </div>
-                <div class="car-review-card">
-                    <div class="car-review-footer">
-                        <img class="author-photo" src="{{ url('frontend/images/hero.svg') }}" alt="Author Photo">
-                        <div class="car-review-info">
-                            <p class="author-name">Author Name</p>
-                            <div class="card-rating-review">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
-                            </div>
-                        </div>
-                    </div>
-                    <h2 class="car-review-title">car-review Title </h2>
-                    <p class="car-review-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Pariatur alias assumenda in quaerat vero magnam con</p>
-                </div>
+                @endforeach
+
+
 
             </div>
         </div>
