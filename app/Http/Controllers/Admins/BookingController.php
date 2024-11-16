@@ -136,15 +136,21 @@ class BookingController extends Controller
         if ($action === 'approve') {
             $documentValidation->update([
                 'status' => 'APPROVED',
-                'rejection_reason' => null
+                'rejection_reason' => null,
             ]);
+
+            // Tambahkan ke history
+            $documentValidation->addHistory('APPROVED');
 
             Alert::success('Success', 'Document has been approved');
         } elseif ($action === 'reject') {
             $documentValidation->update([
                 'status' => 'REJECTED',
-                'rejection_reason' => $request->input('rejection_reason')
+                'rejection_reason' => $request->input('rejection_reason'),
             ]);
+
+            // Tambahkan ke history
+            $documentValidation->addHistory('REJECTED', $request->input('rejection_reason'));
 
             Alert::warning('Rejected', 'Document has been rejected');
         }
@@ -162,6 +168,9 @@ class BookingController extends Controller
             ['document_type' => $documentType],
             ['status' => 'REJECTED', 'rejection_reason' => $reason]
         );
+
+        // Tambahkan ke history
+        $documentValidation->addHistory('REJECTED', $reason);
 
         Alert::success('success', 'Status updated');
 

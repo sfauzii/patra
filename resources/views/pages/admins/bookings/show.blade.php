@@ -115,10 +115,10 @@
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="first-name-horizontal" class="form-control"
                                                     name="features" placeholder="Feature"
-                                                    value="Rp {{ number_format($booking->total_price, 0 , ' ') }}" readonly>
+                                                    value="Rp {{ number_format($booking->total_price, 0, ' ') }}" readonly>
                                             </div>
 
-                                            
+
                                         </div>
                                     </div>
                                 </form>
@@ -141,7 +141,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 col-12">
+                <div class="col-md-8 col-12">
                     <div class="card">
                         <div class="card-content">
                             <div class="card-header">
@@ -494,45 +494,50 @@
                     </div>
                 </div>
 
-                {{--<div class="col-md-4 col-12">
+                <div class="col-12 col-md-4">
                     <div class="card">
                         <div class="card-header">
-
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="information-header mb-8">
-                                        <h5 class="mb-4">Validation Information</h5>
+                            <h4>Validation History</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                @foreach ($booking->documentValidations as $index => $documentValidation)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-heading{{ $index }}">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#flush-collapse{{ $index }}" aria-expanded="false"
+                                                aria-controls="flush-collapse{{ $index }}">
+                                                {{ ucwords(str_replace('_', ' ', $documentValidation->document_type)) }}
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapse{{ $index }}" class="accordion-collapse collapse"
+                                            aria-labelledby="flush-heading{{ $index }}"
+                                            data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body">
+                                                @if (!empty($documentValidation->history))
+                                                    <ul>
+                                                        @foreach ($documentValidation->history as $log)
+                                                            <li>
+                                                                <strong>Status:</strong> {{ $log['status'] }} <br>
+                                                                <strong>Reason:</strong>
+                                                                {{ $log['rejection_reason'] ?? 'N/A' }} <br>
+                                                                <strong>Timestamp:</strong> {{ $log['timestamp'] }}
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    <p>No history available</p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- KTP Booking Information -->
-                                    <p><strong>KTP Booking Created At:</strong>
-                                        {{ $booking->documentValidations->where('document_type', 'ktp_booking')->first()->created_at->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                    </p>
-                                    <p><strong>KTP Booking Updated At:</strong>
-                                        {{ $booking->documentValidations->where('document_type', 'ktp_booking')->first()->updated_at->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                    </p>
-
-                                    <!-- Identity Booking Information -->
-                                    <p><strong>Identity Booking Created At:</strong>
-                                        {{ $booking->documentValidations->where('document_type', 'identity_booking')->first()->created_at->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                    </p>
-                                    <p><strong>Identity Booking Updated At:</strong>
-                                        {{ $booking->documentValidations->where('document_type', 'identity_booking')->first()->updated_at->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                    </p>
-
-                                    <!-- Selfie Booking Information -->
-                                    <p><strong>Selfie Booking Created At:</strong>
-                                        {{ $booking->documentValidations->where('document_type', 'selfie_booking')->first()->created_at->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                    </p>
-                                    <p><strong>Selfie Booking Updated At:</strong>
-                                        {{ $booking->documentValidations->where('document_type', 'selfie_booking')->first()->updated_at->format('d-m-Y H:i:s') ?? 'N/A' }}
-                                    </p>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
-                </div>--}}
+                </div>
+
 
         </section>
     @endsection
-
-   

@@ -11,7 +11,7 @@
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto molestias aspernatur, delectus
                 suscipit autem ut.</p>
 
-            {{--<div class="card-search">
+            {{-- <div class="card-search">
                 <form>
                     <input type="text" placeholder="Search...">
                     <select>
@@ -26,7 +26,7 @@
                     </select>
                     <button class="btn-primary" type="submit">Search</button>
                 </form>
-            </div>--}}
+            </div> --}}
 
             <!-- Tambahkan gambar di sini -->
             <div class="extra-image">
@@ -225,7 +225,7 @@
                                 src="{{ $review->user->profile_photo_url ?? 'https://api.dicebear.com/6.x/initials/svg?seed=' . urlencode($review->user->name) }}"
                                 alt="{{ ucwords($review->user->name) }}">
                             <div class="car-review-info">
-                                <p class="author-name">{{ $review->user->name }}</p>
+                                <p class="author-name">{{ ucwords($review->user->name) }}</p>
                                 <div class="card-rating-review">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>

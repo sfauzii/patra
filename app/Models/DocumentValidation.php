@@ -15,8 +15,26 @@ class DocumentValidation extends Model
         'booking_id',
         'document_type',
         'status',
-        'rejection_reason'
+        'rejection_reason',
+        'history'
     ];
+
+    protected $casts = [
+        'history' => 'array',
+    ];
+
+    // Helper to add a new entry to history
+    public function addHistory($status, $rejectionReason = null)
+    {
+        $currentHistory = $this->history ?? [];
+        $currentHistory[] = [
+            'status' => $status,
+            'rejection_reason' => $rejectionReason,
+            'timestamp' => now()->format('d-m-Y H:i:s'),
+        ];
+        $this->update(['history' => $currentHistory]);
+    }
+
 
     public function booking()
     {
