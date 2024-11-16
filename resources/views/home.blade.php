@@ -11,7 +11,7 @@
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto molestias aspernatur, delectus
                 suscipit autem ut.</p>
 
-            <div class="card-search">
+            {{--<div class="card-search">
                 <form>
                     <input type="text" placeholder="Search...">
                     <select>
@@ -26,7 +26,7 @@
                     </select>
                     <button class="btn-primary" type="submit">Search</button>
                 </form>
-            </div>
+            </div>--}}
 
             <!-- Tambahkan gambar di sini -->
             <div class="extra-image">

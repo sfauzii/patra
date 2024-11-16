@@ -24,6 +24,9 @@
             </ul>
             <div class="btn-container">
                 <div class="btn-container">
+                    <div class="search-icon-container" onclick="Livewire.dispatch('search-modal')">
+                        <i class="fas fa-search"></i>
+                    </div>
                     @if (Auth::check())
                         <!-- Tampilkan tombol Logout jika pengguna sudah login -->
                         <form action="{{ route('logout') }}" method="POST">

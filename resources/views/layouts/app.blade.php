@@ -21,6 +21,9 @@
             @include('includes.app.navbar')
         @endif
 
+        <!-- Add this line RIGHT AFTER navbar include -->
+        <livewire:search-modal />
+
         <!-- Content Section -->
 
 

@@ -43,6 +43,14 @@ class Item extends Model
         return 'https::via.placeholders.com/800x600';
     }
 
+    public function scopeSearch($query, $term)
+    {
+        return $query->where(function ($query) use ($term) {
+            $query->where('name', 'like', '%' . $term . '%')
+                ->orWhere('description', 'like', '%' . $term . '%');
+        });
+    }
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);
