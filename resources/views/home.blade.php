@@ -113,11 +113,13 @@
 
         <div class="cars-container">
             @foreach ($brands as $brand)
-                <div class="car-card">
+                <div class="car-card" onclick="window.location.href = '{{ route('view.brands', $brand->name) }}';"
+                    style="cursor: pointer;">
                     <img src="{{ asset('storage/' . $brand->icon_images) }}" alt="Car 1" class="car-image">
                     <div class="car-info">
                         <h1 class="car-title">{{ ucwords($brand->name) }}</h1>
-                        <p class="car-description">Semua dengan brand {{ ucwords($brand->name) }} bisa kamu liat disini</p>
+                        <p class="car-description">Semua dengan brand {{ ucwords($brand->name) }} bisa kamu liat disini
+                        </p>
                     </div>
                 </div>
             @endforeach

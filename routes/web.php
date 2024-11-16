@@ -34,6 +34,8 @@ Route::get('/check-booking', [CheckBookingController::class, 'index'])->name('ch
 
 Route::get('/cars', [CarsController::class, 'cars'])->name('cars');
 
+Route::get('/view-brands/{brand:name}', [HomeController::class, 'view'])->name('view.brands');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('c/{slug}', [CheckoutController::class, 'index'])->name('checkout');
 });

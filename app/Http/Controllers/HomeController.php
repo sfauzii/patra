@@ -52,4 +52,21 @@ class HomeController extends Controller
             'randomReviews' => $randomReviews, // Ulasan acak
         ]);
     }
+
+    public function view(Brand $brand)
+    {
+        // Ambil semua item berdasarkan brand
+        $items = $brand->items()->with(['type', 'reviews'])
+            ->get()
+            ->map(function ($item) {
+                $item->avg_rating = $item->reviews->avg('rating') ?? 0; // Default 0 jika tidak ada ulasan
+                $item->review_count = $item->reviews->count();
+                return $item;
+            });
+
+        return view('brand-cars', [
+            'brand' => $brand,
+            'items' => $items,
+        ]);
+    }
 }
