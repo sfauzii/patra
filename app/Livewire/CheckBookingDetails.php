@@ -80,6 +80,18 @@ class CheckBookingDetails extends Component
         ])->exists();
     }
 
+    public function getExistingReview()
+    {
+        if (!$this->bookingDetails) {
+            return null;
+        }
+
+        return Review::where([
+            'user_id' => auth()->id(),
+            'booking_id' => $this->bookingDetails['id']
+        ])->first();
+    }
+
     public function mount($bookingId = null)
     {
         if ($bookingId) {
@@ -110,7 +122,7 @@ class CheckBookingDetails extends Component
     {
         if ($this->bookingDetails) {
             $this->duration = \Carbon\Carbon::parse($this->bookingDetails['start_date'])
-                ->diffInDays(\Carbon\Carbon::parse($this->bookingDetails['end_date'])) + 1;
+                ->diffInDays(\Carbon\Carbon::parse($this->bookingDetails['end_date']));
         }
     }
 
@@ -285,7 +297,7 @@ class CheckBookingDetails extends Component
 
     public function render()
     {
-        return view('livewire.check-booking-details',[
+        return view('livewire.check-booking-details', [
             'hasReviewed' => $this->hasReviewed()
         ]);
     }

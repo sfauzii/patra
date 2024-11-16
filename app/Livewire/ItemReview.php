@@ -17,6 +17,8 @@ class ItemReview extends Component
     public $rating = 5.0;
     public $itemName;
     public $itemImage;
+    public $isEditing = false;
+    public $existingReview = null;
 
     protected $listeners = ['openReviewModal'];
 
@@ -50,6 +52,24 @@ class ItemReview extends Component
         $this->itemImage = isset($bookingDetails['item']['photos'])
             ? json_decode($bookingDetails['item']['photos'])[0]
             : 'frontend/images/default.jpg';
+
+        // Check for existing review
+        $existingReview = Review::where([
+            'user_id' => auth()->id(),
+            'booking_id' => $bookingDetails['id']
+        ])->first();
+
+        if ($existingReview) {
+            $this->isEditing = true;
+            $this->existingReview = $existingReview;
+            $this->message = $existingReview->message;
+            $this->rating = $existingReview->rating;
+        } else {
+            $this->isEditing = false;
+            $this->existingReview = null;
+            $this->reset(['message', 'rating']);
+        }
+
         $this->show = true;
     }
 
@@ -71,15 +91,26 @@ class ItemReview extends Component
         $this->validate();
 
         try {
-            Review::create([
-                'user_id' => auth()->id(),
-                'item_id' => $this->booking['item']['id'],
-                'booking_id' => $this->booking['id'],
-                'message' => $this->message,
-                'rating' => (float) $this->rating,
-            ]);
+            if ($this->isEditing) {
+                // Update existing review
+                $this->existingReview->update([
+                    'message' => $this->message,
+                    'rating' => (float) $this->rating,
+                ]);
+                $successMessage = 'Review updated successfully!';
+            } else {
+                // Create new review
+                Review::create([
+                    'user_id' => auth()->id(),
+                    'item_id' => $this->booking['item']['id'],
+                    'booking_id' => $this->booking['id'],
+                    'message' => $this->message,
+                    'rating' => (float) $this->rating,
+                ]);
+                $successMessage = 'Thank you for your review!';
+            }
 
-            $this->alert('success', 'Thank you for your review!');
+            $this->alert('success', $successMessage);
             $this->closeModal();
             $this->dispatch('reviewSubmitted');
         } catch (\Exception $e) {
@@ -107,7 +138,7 @@ class ItemReview extends Component
     public function closeModal()
     {
         $this->show = false;
-        $this->reset(['message', 'rating']);
+        $this->reset(['message', 'rating', 'isEditing', 'existingReview']);
     }
 
 

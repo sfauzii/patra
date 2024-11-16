@@ -34,6 +34,7 @@ class CheckBookingForm extends Component
         // Emit event to pass booking details to the BookingDetails component
         if ($this->bookingDetails) {
             $this->dispatch('bookingFound', $this->bookingDetails);
+            $this->alert('success', 'Booking founded successfully');
         } else {
             $this->alert('error', 'Oppss', [
                 'text' => 'Booking not found. Please check your booking code and phone number.',

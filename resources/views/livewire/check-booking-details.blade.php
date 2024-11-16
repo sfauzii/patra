@@ -21,31 +21,36 @@
                         <div class="input-container">
                             <img src="frontend/images/icon-profile-circle.svg" alt="Icon" class="input-icon">
                             <input type="text" id="input-field" class="form-input"
-                                value="{{ $bookingDetails['name'] }}" readonly>
+                                value="{{ $bookingDetails['name'] }}" readonly disabled
+                                style="opacity: 0.6; cursor: not-allowed;">
                         </div>
                         <label for="input-field">WhatsApp Number</label>
                         <div class="input-container">
                             <img src="frontend/images/icon-whatsapp.svg" alt="Icon" class="input-icon">
                             <input type="text" id="input-field" class="form-input"
-                                value="{{ $bookingDetails['phone'] }}" readonly>
+                                value="{{ $bookingDetails['phone'] }}" readonly disabled
+                                style="opacity: 0.6; cursor: not-allowed;">
                         </div>
                         <label for="input-field">Address</label>
                         <div class="input-container">
                             <img src="frontend/images/icon-location.svg" alt="Icon" class="input-icon">
                             <input type="text" id="input-field" class="form-input"
-                                value="{{ $bookingDetails['address'] }}" readonly>
+                                value="{{ $bookingDetails['address'] }}" readonly disabled
+                                style="opacity: 0.6; cursor: not-allowed;">
                         </div>
                         <label for="start-date">Start Date</label>
                         <div class="input-container">
                             <img src="frontend/images/icon-calendar-2.svg" alt="Icon" class="input-icon">
                             <input type="date" id="start-date" class="form-input"
-                                value="{{ $bookingDetails['start_date'] }}" readonly>
+                                value="{{ $bookingDetails['start_date'] }}" readonly disabled
+                                style="opacity: 0.6; cursor: not-allowed;">
                         </div>
                         <label for="until-date">Until Date</label>
                         <div class="input-container">
                             <img src="frontend/images/icon-calendar-2.svg" alt="Icon" class="input-icon">
                             <input type="date" id="until-date" class="form-input"
-                                value="{{ $bookingDetails['end_date'] }}" readonly>
+                                value="{{ $bookingDetails['end_date'] }}" readonly disabled
+                                style="opacity: 0.6; cursor: not-allowed;">
                         </div>
                         <div class="icon-information">
                             <img src="frontend/images/icon-shield-tick.svg" alt="Info Icon" class="info-icon">
@@ -234,18 +239,22 @@
                         <hr>
                     </div>
                     @if ($documentStatus && $documentStatus['status'] === 'APPROVED')
+                        {{-- Update the review button section --}}
                         @if ($hasReviewed)
-                            <button class="btn-book" disabled style="opacity: 0.6; cursor: not-allowed;">
-                                <i class="fas fa-check-circle me-1"></i> Review Submitted
+                            <button wire:click="openReview" class="btn-book">
+                                <i class="fas fa-edit me-1"></i> Edit Review
                             </button>
                         @else
                             <button wire:click="openReview" class="btn-book">
-                                Write a Review
+                                <i class="fas fa-star me-1"></i> Write a Review
                             </button>
                         @endif
                     @endif
-                    <button class="btn-call-customer" onclick="window.location.href='well-dones.html';">Call Customer
-                        Service</button>
+                    <button class="btn-call-customer"
+                        onclick="window.location.href='https://api.whatsapp.com/send?phone=088229877220&text=Hello%20Customer%20Service,%20saya%20butuh%20bantuan.';">
+                        Call Customer Service
+                    </button>
+
                 </div>
             </div>
         </div>

@@ -43,8 +43,8 @@
                 <!-- Payment Status Buttons -->
                 @if ($booking->payment_status === 'success')
                     <!-- Button for successful payment -->
-                    <button class="btn-full-width" onclick="window.location.href='check-booking.html';">Lihat
-                        Pesananku</button>
+                    <button class="btn-full-width" onclick="window.location.href='{{ route('check-booking') }}';">Check
+                        Booking</button>
                 @elseif ($booking->payment_status === 'pending')
                     <!-- Button for pending payment -->
                     <button class="btn-full-width" onclick="window.location.href='{{ $booking->payment_url }}';">Pay

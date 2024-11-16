@@ -5,7 +5,9 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h5 class="modal-title">Write a Review</h5>
+                        <h5 class="modal-title">
+                            {{ $isEditing ? 'Edit Your Review' : 'Write a Review' }}
+                        </h5>
                         <button type="button" class="close" wire:click="closeReviewModal">
                             <span>&times;</span>
                         </button>
@@ -32,12 +34,12 @@
                                         <div class="star-wrapper position-relative"
                                             style="cursor: pointer; width: 24px; height: 24px;" x-data
                                             x-on:click="
-                    const rect = $el.getBoundingClientRect();
-                    const clickX = event.clientX - rect.left;
-                    const half = rect.width / 2;
-                    const value = clickX < half ? {{ $i - 0.5 }} : {{ $i }};
-                    $wire.setRating(value)
-                 ">
+                                                const rect = $el.getBoundingClientRect();
+                                                const clickX = event.clientX - rect.left;
+                                                const half = rect.width / 2;
+                                                const value = clickX < half ? {{ $i - 0.5 }} : {{ $i }};
+                                                $wire.setRating(value)
+                                            ">
                                             <!-- Empty star (background) -->
                                             <i class="fas fa-star position-absolute text-secondary"></i>
 
@@ -57,21 +59,18 @@
                             </div>
                         </div>
 
-
                         <!-- Modal Footer -->
                         <div class="modal-footer">
-                            <button wire:click="closeModal" type="button" class="btn btn-secondary"
-                                wire:click="closeModal">Close
+                            <button type="button" class="btn btn-secondary" wire:click="closeModal">
+                                Close
                             </button>
-
-                            <button wire:click="submitReview" type="button" class="btn btn-primary">Submit
-                                Review
+                            <button type="submit" class="btn btn-primary">
+                                {{ $isEditing ? 'Update Review' : 'Submit Review' }}
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
     @endif
 </div>
