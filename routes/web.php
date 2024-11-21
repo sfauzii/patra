@@ -1,19 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admins\ItemController;
 use App\Http\Controllers\Admins\RoleController;
 use App\Http\Controllers\Admins\TypeController;
 use App\Http\Controllers\Admins\UserController;
+use App\Http\Controllers\Auth\AdminsController;
 use App\Http\Controllers\Admins\BrandController;
 use App\Http\Controllers\API\MidtransController;
+use App\Http\Controllers\CheckBookingController;
 use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\PermissionController;
-use App\Http\Controllers\CarsController;
-use App\Http\Controllers\CheckBookingController;
 use App\Http\Controllers\ItemController as CatalogController;
 
 /*
@@ -39,6 +40,11 @@ Route::get('/view-brands/{brand:name}', [HomeController::class, 'view'])->name('
 Route::group(['middleware' => 'auth'], function () {
     Route::get('c/{slug}', [CheckoutController::class, 'index'])->name('checkout');
 });
+
+
+Route::get('/dashboard/login', [AdminsController::class, 'loginForm'])->name('admins-form');
+Route::post('/dashboard/login', [AdminsController::class, 'login'])->name('admins-login');
+Route::post('/admin-logout', [AdminsController::class, 'logoutAdmins'])->name('admin-logout');
 
 Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

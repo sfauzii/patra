@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -42,18 +43,20 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        // Check if user has 'ADMIN' role
-        $user = Auth::user();
 
-        if ($user) {
-            if ($user->hasRole('super-admin')) {
-                return redirect('/dashboard');
-            } elseif ($user->hasRole('admin')) {
-                return redirect('/dashboard');
-            }
+
+        if ($user->hasRole('user')) {
+            // If the user has the 'user' role, allow login and redirect to the user dashboard
+            return redirect('/'); // Update with your user dashboard route
         }
 
-        // For other roles, redirect to default home page
-        return redirect('/');
+        // Log out the user if they don't have the 'user' role
+        Auth::logout();
+
+        // Set a SweetAlert message for unauthorized access
+        Alert::error('Access Denied', 'Access restricted to regular users only.');
+
+        // Redirect back to login with an error message
+        return redirect()->back();
     }
 }

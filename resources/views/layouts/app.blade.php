@@ -30,6 +30,8 @@
 
         @yield('content')
 
+        @include('sweetalert::alert')
+
         <!-- Footer -->
         @if (!isset($showFooter) || $showFooter)
             @include('includes.app.footer')
