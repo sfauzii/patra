@@ -15,7 +15,7 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::all()->map(function ($booking) {
+        $bookings = Booking::orderBy('created_at', 'desc')->get()->map(function ($booking) {
             $start = Carbon::parse($booking->start_date);
             $end = Carbon::parse($booking->end_date);
             $booking->duration = $start->diffInDays($end);

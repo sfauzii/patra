@@ -20,7 +20,7 @@ class ItemController extends Controller
 
 
     {
-        $items = Item::all();
+        $items = Item::orderBy('created_at', 'desc')->get();
         return view('pages.admins.items.index', compact('items'));
     }
 

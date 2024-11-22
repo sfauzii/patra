@@ -12,10 +12,13 @@
 
 
 
-<script src="{{ url('backend/assets/extensions/jquery/jquery.min.js') }}"></script>
+{{-- <script src="{{ url('backend/assets/extensions/jquery/jquery.min.js') }}"></script>
 <script src="{{ url('backend/assets/extensions/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('backend/assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-<script src="{{ url('backend/assets/static/js/pages/datatables.js') }}"></script>
+<script src="{{ url('backend/assets/static/js/pages/datatables.js') }}"></script> --}}
+
+<script src="{{ url('backend/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+<script src="{{ url('backend/assets/static/js/pages/simple-datatables.js') }}"></script>
 
 
 {{-- filepond --}}

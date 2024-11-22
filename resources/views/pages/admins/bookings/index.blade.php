@@ -21,73 +21,73 @@
         </div>
     </div>
 
+
+
     <section class="section">
-        {{-- <a href="{{ route('brands.create') }}" class="btn btn-primary" style="margin-bottom: 20px; margin-left: 890px;">New
-            Brand</a> --}}
         <div class="card">
             <div class="card-header">
                 {{-- <h5 class="card-title">
-                        {{~~ jQuery Datatable ~~}}
-                    </h5> --}}
+                    Simple Datatable
+                </h5> --}}
             </div>
+
+
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table" id="table1">
-                        <thead>
+                <table class="table table-striped" id="table1">
+                    <thead>
+                        <tr>
+                            <th>Booking Code</th>
+                            <th>Car</th>
+                            <th>Brand</th>
+                            <th>User</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Duration</th>
+                            <th>Payment Status</th>
+                            <th>Document Status</th>
+                            <th>Total</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($bookings as $booking)
                             <tr>
-                                <th>Booking Code</th>
-                                <th>Car</th>
-                                <th>Brand</th>
-                                <th>User</th>
-                                <th>Start</th>
-                                <th>End</th>
-                                <th>Duration</th>
-                                <th>Payment Status</th>
-                                <th>Document Status</th>
-                                <th>Total</th>
-                                <th>Action</th>
+                                <td>{{ $booking->booking_code }}</td>
+                                <td>{{ ucwords($booking->item->name) }}</td>
+                                <td>{{ ucwords($booking->item->brand->name) }}</td>
+                                <td>{{ $booking->user->name }}</td>
+                                <td>{{ date('d, F Y', strtotime($booking->start_date)) }}</td>
+                                <td>{{ date('d, F Y', strtotime($booking->end_date)) }}</td>
+                                <td>{{ $booking->duration }} days</td>
+                                <td>{{ $booking->payment_status }}</td>
+                                <td>{{ $booking->document_status }}</td>
+                                <td>Rp {{ number_format($booking->total_price, 0, ' ') }}</td>
+
+                                <td>
+                                    <div class="buttons">
+                                        <a href="{{ route('bookings.show', $booking->id) }}"
+                                            class="btn icon btn-success"><i class="bi bi-eye"></i></a>
+                                        <a href="{{ route('bookings.edit', $booking->id) }}"
+                                            class="btn icon btn-primary"><i class="bi bi-pencil"></i></a>
+
+                                        <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn icon btn-danger"
+                                                onclick="return confirm('Are you sure you want to delete this brand?')">
+                                                <i class="bi bi-x"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+
                             </tr>
-                        </thead>
-                        <tbody>
+                        @endforeach
 
-                            @foreach ($bookings as $booking)
-                                <tr>
-                                    <td>{{ ucwords($booking->booking_code) }}</td>
-                                    <td>{{ ucwords($booking->item->name) }}</td>
-                                    <td>{{ ucwords($booking->item->brand->name) }}</td>
-                                    <td>{{ $booking->user->name }}</td>
-                                    <td>{{ date('d, F Y', strtotime($booking->start_date)) }}</td>
-                                    <td>{{ date('d, F Y', strtotime($booking->end_date)) }}</td>
-                                    <td>{{ $booking->duration }} days</td>
-                                    <td>{{ $booking->payment_status }}</td>
-                                    <td>{{ $booking->document_status }}</td>
-                                    <td>Rp {{ number_format($booking->total_price, 0, ' ') }}</td>
-
-                                    <td>
-                                        <div class="buttons">
-                                            <a href="{{ route('bookings.show', $booking->id) }}"
-                                                class="btn icon btn-success"><i class="bi bi-eye"></i></a>
-                                            <a href="{{ route('bookings.edit', $booking->id) }}"
-                                                class="btn icon btn-primary"><i class="bi bi-pencil"></i></a>
-
-                                            <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn icon btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete this brand?')">
-                                                    <i class="bi bi-x"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-
-                                </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
 
