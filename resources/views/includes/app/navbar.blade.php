@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('cars') }}">Cars</a>
@@ -29,10 +29,14 @@
                     </div>
                     @if (Auth::check())
                         <!-- Tampilkan tombol Logout jika pengguna sudah login -->
-                        <form action="{{ route('logout') }}" method="POST">
+                        <form action="{{ route('logout') }}" method="POST" class="mr-2">
                             @csrf
-                            <button type="submit" class="btn btn-primary">Logout</button>
+                            <button type="submit" class="btn btn-secondary">Logout</button>
                         </form>
+
+                        <button onclick="window.location.href='{{ route('check-booking') }}';"
+                            class="btn btn-primary">My
+                            Booking</button>
                     @else
                         <!-- Tampilkan tombol Login jika pengguna belum login -->
                         <button id="login-btn" href="{{ route('login') }}" class="btn btn-primary">Login</button>

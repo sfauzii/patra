@@ -128,8 +128,23 @@ body {
     cursor: pointer;
 }
 
+.navbar .btn-secondary {
+    background-color: #E5E9F2;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .btn-primary:hover {
     box-shadow: 0 0 0 .25rem #0d6efd40 !important;
+    transition: all .4s;
+}
+
+.btn-secondary:hover {
+    box-shadow: 0 0 0 .25rem #e5e9f25f !important;
     transition: all .4s;
 }
 

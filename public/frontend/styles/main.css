@@ -127,8 +127,23 @@ body {
   cursor: pointer;
 }
 
+.navbar .btn-secondary {
+  background-color: #E5E9F2;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .btn-primary:hover {
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.2509803922) !important;
+  transition: all 0.4s;
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 0 0 0.25rem rgba(229, 233, 242, 0.3725490196) !important;
   transition: all 0.4s;
 }
 
