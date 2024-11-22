@@ -154,10 +154,12 @@
                     </div>
                 @endif --}}
             </div>
-            <button type="submit" class="btn-book">Proceed to
-                Payment</button>
-        </div>
-        </form>
+            <button type="submit" class="btn-book" wire:click="processPayment" wire:loading.attr="disabled"
+                wire:loading.class="loading">
+                <span wire:loading.remove>Proceed to Payment</span>
+                <span wire:loading>Loading...</span>
+            </button>
+            </form>
 
+        </div>
     </div>
-</div>
