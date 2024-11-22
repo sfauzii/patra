@@ -174,6 +174,8 @@ class Checkout extends Component
             'payment_url' => ''
         ]);
 
+        $this->item->update(['is_available' => false]);
+
         // Clear the unique code session after booking is completed
         session()->forget('unique_code');
 

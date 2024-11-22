@@ -31,6 +31,7 @@ class HomeController extends Controller
 
         // Eager load `reviews` untuk menghitung rata-rata rating dan jumlah ulasan
         $items = Item::with(['type', 'brand', 'reviews']) // Eager load 'reviews.user' untuk data pengulas
+            ->available() // Add this scope
             ->inRandomOrder()
             ->get()
             ->map(function ($item) {
@@ -57,6 +58,7 @@ class HomeController extends Controller
     {
         // Ambil semua item berdasarkan brand
         $items = $brand->items()->with(['type', 'reviews'])
+            ->available()
             ->get()
             ->map(function ($item) {
                 $item->avg_rating = $item->reviews->avg('rating') ?? 0; // Default 0 jika tidak ada ulasan

@@ -23,6 +23,7 @@ class Item extends Model
         'star',
         'review',
         'description',
+        'is_available',
     ];
 
     protected $hidden = [];
@@ -70,5 +71,13 @@ class Item extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    // In app/Models/Item.php
+    public function scopeAvailable($query)
+    {
+        return $query->whereDoesntHave('bookings', function ($q) {
+            $q->where('end_date', '>=', now());
+        });
     }
 }

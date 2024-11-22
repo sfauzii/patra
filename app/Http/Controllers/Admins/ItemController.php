@@ -134,4 +134,20 @@ class ItemController extends Controller
 
         return redirect()->route('items.index');
     }
+
+    public function toggleAvailability(Item $item)
+    {
+        // Toggle the is_available status
+        $item->is_available = !$item->is_available;
+        $item->save();
+
+        // Provide feedback based on the new status
+        $message = $item->is_available
+            ? 'Item has been activated successfully!'
+            : 'Item has been deactivated successfully!';
+
+        toast($message, 'success');
+
+        return redirect()->route('items.index');
+    }
 }

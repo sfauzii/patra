@@ -38,6 +38,7 @@
                                     <th>Type</th>
                                     <th>Price</th>
                                     <th>Photos</th>
+                                    <th>Is Available</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -64,6 +65,18 @@
                                             @else
                                                 <p class="text-gray-500">No photos available</p>
                                             @endif
+                                        </td>
+
+                                        <td>
+                                            <form action="{{ route('items.toggle-availability', $item) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                    class="btn {{ $item->is_available ? 'btn-warning' : 'btn-success' }}">
+                                                    {{ $item->is_available ? 'Deactivate' : 'Activate' }}
+                                                </button>
+                                            </form>
                                         </td>
 
                                         <td>

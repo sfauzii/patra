@@ -10,7 +10,10 @@ class CarsController extends Controller
     public function cars()
     {
 
-        $items =  Item::with(['type', 'brand'])->get();
+        $items =  Item::with(['type', 'brand'])
+            ->available()
+            ->where('is_available', true)
+            ->get();
 
         return view('cars', [
             'items' => $items,

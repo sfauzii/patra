@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::resource('brands', BrandController::class);
     Route::resource('types', TypeController::class);
     Route::resource('items', ItemController::class);
+    Route::put('/items/{item}/toggle-availability', [ItemController::class, 'toggleAvailability'])
+        ->name('items.toggle-availability');
+
     Route::resource('bookings', BookingController::class);
     Route::put('/bookings/{booking}/updateDocument', [BookingController::class, 'updateDocument'])->name('bookings.updateDocument');
     Route::put('/bookings/{booking}/rejectDocument', [BookingController::class, 'rejectDocument'])->name('bookings.rejectDocument');
