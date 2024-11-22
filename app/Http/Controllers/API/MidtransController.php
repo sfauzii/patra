@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Models\Booking;
-use Illuminate\Http\Request;
 use Midtrans\Config;
+use App\Models\Booking;
 use Midtrans\Notification;
+use App\Mail\BookingSuccess;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Mail\BookingNotification;
+use Illuminate\Support\Facades\Mail;
 
 class MidtransController extends Controller
 {
@@ -51,6 +54,9 @@ class MidtransController extends Controller
             $booking->payment_status = 'cancelled';
         }
 
+        // Kirim notifikasi email
+        Mail::to($booking->user->email)->send(new BookingNotification($booking, $booking->payment_status));
+
         // Simpan transaksi
         $booking->save();
 
@@ -70,7 +76,7 @@ class MidtransController extends Controller
         $transactionStatus = $request->input('transaction_status');
 
         // Ambil transaksi berdasarkan ID order
-         $booking = Booking::where('id', $orderId)->first();
+        $booking = Booking::where('id', $orderId)->first();
         //  $transaction = Transaction::where('id', $orderId)->first();
 
         // Jika pembayaran berhasil (status "settlement"), arahkan pengguna ke halaman success
