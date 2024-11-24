@@ -213,11 +213,13 @@
                     <div class="card-body py-4 px-4">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xl">
-                                <img src="./assets/compiled/jpg/1.jpg" alt="Face 1">
+                                <img src="{{ $user->profile_photo_url ?? 'https://api.dicebear.com/6.x/initials/svg?seed=' . urlencode($user->name) }}"
+                                    alt="{{ ucwords($user->name) }}">
+
                             </div>
                             <div class="ms-3 name">
-                                <h5 class="font-bold">John Duck</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
+                                <h5 class="font-bold">{{ ucwords($user->name) }}</h5>
+                                <h6 class="text-muted mb-0">{{ ucwords($user->roles->first()->name) }}</h6>
                             </div>
                         </div>
                     </div>
