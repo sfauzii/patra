@@ -75,7 +75,7 @@
         <div class="project-carousel">
             <!-- Card Row 1 (Scrolling Animation) -->
             <div class="card-container">
-                @foreach ($items as $item)
+                @foreach ($firstItems as $item)
                     <div class="card">
                         <img src="{{ asset('storage/' . json_decode($item->photos)[0]) }}" alt="{{ $item->name }}">
                         <div class="card-content">
@@ -121,7 +121,7 @@
         <!-- Card Row 2 (Different Animation) -->
         <div class="project-carousel reverse">
             <div class="card-container">
-                @foreach ($items as $item)
+                @foreach ($secondItems as $item)
                     <div class="card">
                         <img src="{{ asset('storage/' . json_decode($item->photos)[0]) }}" alt="{{ $item->name }}">
                         <div class="card-content">

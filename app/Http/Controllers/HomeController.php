@@ -30,12 +30,34 @@ class HomeController extends Controller
         $brands = Brand::all();
 
         // Eager load `reviews` untuk menghitung rata-rata rating dan jumlah ulasan
-        $items = Item::with(['type', 'brand', 'reviews']) // Eager load 'reviews.user' untuk data pengulas
-            ->available() // Add this scope
+        // $items = Item::with(['type', 'brand', 'reviews']) // Eager load 'reviews.user' untuk data pengulas
+        //     ->available() // Add this scope
+        //     ->inRandomOrder()
+        //     ->get()
+        //     ->map(function ($item) {
+        //         $item->avg_rating = $item->reviews->avg('rating') ?? 0; // Default 0 jika tidak ada ulasan
+        //         $item->review_count = $item->reviews->count();
+        //         return $item;
+        //     });
+
+        // First set of random items
+        $firstRandomItems = Item::with(['type', 'brand', 'reviews'])
+            ->available()
             ->inRandomOrder()
             ->get()
             ->map(function ($item) {
-                $item->avg_rating = $item->reviews->avg('rating') ?? 0; // Default 0 jika tidak ada ulasan
+                $item->avg_rating = $item->reviews->avg('rating') ?? 0;
+                $item->review_count = $item->reviews->count();
+                return $item;
+            });
+
+        // Second set of random items (different random order)
+        $secondRandomItems = Item::with(['type', 'brand', 'reviews'])
+            ->available()
+            ->inRandomOrder() // This will generate a different random order
+            ->get()
+            ->map(function ($item) {
+                $item->avg_rating = $item->reviews->avg('rating') ?? 0;
                 $item->review_count = $item->reviews->count();
                 return $item;
             });
@@ -49,7 +71,9 @@ class HomeController extends Controller
 
         return view('home', [
             'brands' => $brands,
-            'items' => $items,
+            // 'items' => $items,
+            'firstItems' => $firstRandomItems,
+            'secondItems' => $secondRandomItems,
             'randomReviews' => $randomReviews, // Ulasan acak
         ]);
     }
