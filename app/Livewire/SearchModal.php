@@ -43,6 +43,7 @@ class SearchModal extends Component
             // Fetch search results
             $this->items = Item::where('name', 'like', '%' . $this->search . '%')
                 ->orWhere('description', 'like', '%' . $this->search . '%')
+                ->orWhere('price', 'like', '%' . $this->search . '%')
                 ->take(10)
                 ->get();
 
