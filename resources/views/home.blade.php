@@ -8,8 +8,8 @@
     <section class="header-content">
         <div class="left-content">
             <h1>Fast and Easy Way To Rent A Car</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto molestias aspernatur, delectus
-                suscipit autem ut.</p>
+            <p>Discover the fastest and most convenient way to rent a car, ensuring a smooth and stress-free experience
+                every time.</p>
 
             {{-- <div class="card-search">
                 <form>
@@ -44,7 +44,7 @@
 
         <div class="explore-header-category">
             <h1>Explore By Category</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga.</p>
+            <p>Browse various categories to find the perfect car for your needs.</p>
         </div>
 
 
@@ -55,7 +55,9 @@
                     <img src="{{ asset('storage/' . $brand->icon_images) }}" alt="Car 1" class="car-image">
                     <div class="car-info">
                         <h1 class="car-title">{{ ucwords($brand->name) }}</h1>
-                        <p class="car-description">Semua dengan brand {{ ucwords($brand->name) }} bisa kamu liat disini
+                        <p class="car-description">Explore all cars from the brand
+                            <strong>{{ ucwords($brand->name) }}</strong> available
+                            here.
                         </p>
                     </div>
                 </div>
@@ -224,7 +226,7 @@
         <div class="container">
             <!-- Title -->
             <h1 class="people-say-title">What People Say</h1>
-            <p class="people-say-desc">Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+            <p class="people-say-desc">Read reviews and feedback from our satisfied customers.</p>
 
             <!-- car-reviews people-say (Scrollable Cards) -->
             <div class="car-reviews-wrapper">
@@ -267,50 +269,49 @@
 
             <div class="faq-card" onclick="toggleFaq(this)">
                 <div class="faq-question">
-                    <span>What is your return policy?</span>
+                    <span>How can I modify my booking?</span>
                     <i class="faq-icon">+</i>
                 </div>
                 <div class="faq-answer">
                     <p>
-                        We accept returns within 30 days of purchase. Please ensure the
-                        items are in their original condition.
+                        Once an order is placed, modifications can only be made within 24 hours. Please contact our customer
+                        service immediately for assistance.
                     </p>
                 </div>
             </div>
 
             <div class="faq-card" onclick="toggleFaq(this)">
                 <div class="faq-question">
-                    <span>How can I track my order?</span>
+                    <span>How can I track my booking?</span>
                     <i class="faq-icon">+</i>
                 </div>
                 <div class="faq-answer">
                     <p>
-                        You can track your order using the tracking link provided in
-                        your shipping confirmation email.
+                        You can track your order using the booking code sent to your email.
                     </p>
                 </div>
             </div>
             <div class="faq-card" onclick="toggleFaq(this)">
                 <div class="faq-question">
-                    <span>How can I track my order?</span>
+                    <span>What documents are required for validation?</span>
                     <i class="faq-icon">+</i>
                 </div>
                 <div class="faq-answer">
                     <p>
-                        You can track your order using the tracking link provided in
-                        your shipping confirmation email.
+                        You will need to provide your KTP, KK or BPJS, and any additional documents specified during payment
+                        for validation.
                     </p>
                 </div>
             </div>
             <div class="faq-card" onclick="toggleFaq(this)">
                 <div class="faq-question">
-                    <span>How can I track my order?</span>
+                    <span>What payment methods do you accept?</span>
                     <i class="faq-icon">+</i>
                 </div>
                 <div class="faq-answer">
                     <p>
-                        You can track your order using the tracking link provided in
-                        your shipping confirmation email.
+                        We use Midtrans as our payment gateway, supporting various methods including e-wallet and bank
+                        transfers.
                     </p>
                 </div>
             </div>
@@ -324,9 +325,11 @@
         <div class="growing-container">
             <div class="main-card">
                 <div class="main-content">
-                    <h1>Start Growing Today</h1>
-                    <p>Discover the benefits of our services and how they can help you grow your business.</p>
-                    <button class="explore-button">Explore More</button>
+                    <h1>Start Your Journey Today</h1>
+                    <p>Discover the convenience and flexibility of our car rental services, designed to make your travels
+                        easier and more enjoyable.</p>
+                    <button class="explore-button" onclick="window.location.href='{{ route('cars') }}';">Explore
+                        More</button>
                 </div>
                 <div class="icon-cards-growing">
                     <div class="icon-card-growing">
