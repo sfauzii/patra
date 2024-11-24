@@ -181,7 +181,7 @@
                     </div>
                     <div class="how-it-works-text">
                         <h2 class="how-it-works-title">Choose Car</h2>
-                        <p class="how-it-works-desc">This is the first step description.</p>
+                        <p class="how-it-works-desc">Select your preferred rental car.</p>
                     </div>
                 </div>
 
@@ -191,7 +191,18 @@
                     </div>
                     <div class="how-it-works-text">
                         <h2 class="how-it-works-title">Pickup Date</h2>
-                        <p class="how-it-works-desc">This is the second step description.</p>
+                        <p class="how-it-works-desc">Schedule your vehicle pickup date.</p>
+                    </div>
+                </div>
+
+                <div class="icon-section">
+                    <div class="icon-card">
+                        <img src="{{ url('frontend/images/icon-document-text.svg') }}" alt="Icon 3"
+                            class="how-it-works-icon">
+                    </div>
+                    <div class="how-it-works-text">
+                        <h2 class="how-it-works-title">Document Validation</h2>
+                        <p class="how-it-works-desc">Verify required documents for booking.</p>
                     </div>
                 </div>
 
@@ -201,7 +212,7 @@
                     </div>
                     <div class="how-it-works-text">
                         <h2 class="how-it-works-title">Payment</h2>
-                        <p class="how-it-works-desc">This is the third step description.</p>
+                        <p class="how-it-works-desc">Complete payment to confirm booking.</p>
                     </div>
                 </div>
             </div>
