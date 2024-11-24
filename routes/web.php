@@ -15,6 +15,7 @@ use App\Http\Controllers\CheckBookingController;
 use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\PermissionController;
+use App\Http\Controllers\Admins\ReportController;
 use App\Http\Controllers\ItemController as CatalogController;
 
 /*
@@ -64,6 +65,12 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::put('roles/{roleId}/give-permissions', [RoleController::class, 'givePermissionsToRole'])->name('roles.update-permission');
     Route::resource('permissions', PermissionController::class);
     Route::resource('user', UserController::class);
+
+    Route::get('reports/order-booking', [ReportController::class, 'showFormOrderBooking'])->name('reports.order-booking');
+    Route::get('reports/order-booking/download', [ReportController::class, 'generateOrderPdf'])->name('reports.order-booking.download');
+
+    Route::get('reports/item-cars', [ReportController::class, 'showFormItem'])->name('reports.item-cars');
+    Route::get('reports/item-cars/download', [ReportController::class, 'generateItemPdf'])->name('reports.item-cars.download');
 });
 
 // Auth::routes();

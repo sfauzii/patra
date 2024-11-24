@@ -72,8 +72,6 @@
                         </li>
 
                     </ul>
-
-
                 </li>
 
                 <li class="sidebar-title">Transactions</li>
@@ -114,6 +112,25 @@
                         <i class="bi bi-basket-fill"></i>
                         <span>User</span>
                     </a>
+                </li>
+
+                <li class="sidebar-title">Reports</li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Reports</span>
+                    </a>
+
+                    <ul class="submenu ">
+
+                        <li class="submenu-item  ">
+                            <a href="{{ route('reports.order-booking') }}" class="submenu-link">Order Booking</a>
+                        </li>
+                        <li class="submenu-item  ">
+                            <a href="{{ route('reports.item-cars') }}" class="submenu-link">Item Car</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
