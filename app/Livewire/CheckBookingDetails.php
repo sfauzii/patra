@@ -9,6 +9,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\DocumentValidation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -295,10 +296,41 @@ class CheckBookingDetails extends Component
         $this->loadBookingDetails($this->bookingDetails['id']);
     }
 
+    public function downloadBookingPDF()
+    {
+        if (!$this->bookingDetails || $this->bookingDetails['payment_status'] !== 'success') {
+            $this->alert('error', 'Cannot generate PDF. Payment status must be successful.');
+            return;
+        }
+
+        try {
+            // Load the booking with all necessary relationships
+            $booking = Booking::with(['user', 'item.type'])
+                ->findOrFail($this->bookingDetails['id'])
+                ->toArray();
+
+            $data = [
+                'booking' => $booking,
+                'duration' => $this->duration,
+                'generated_at' => now()->format('d F Y H:i:s')
+            ];
+
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('pages.reports.booking-receipt', $data);
+
+            return response()->streamDownload(function () use ($pdf) {
+                echo $pdf->output();
+            }, 'booking-receipt-' . $this->bookingDetails['booking_code'] . '.pdf');
+        } catch (\Exception $e) {
+            $this->alert('error', 'Failed to generate PDF: ' . $e->getMessage());
+        }
+    }
+
     public function render()
     {
         return view('livewire.check-booking-details', [
-            'hasReviewed' => $this->hasReviewed()
+            'hasReviewed' => $this->hasReviewed(),
+            'canDownloadPDF' => $this->bookingDetails && $this->bookingDetails['payment_status'] === 'success'
         ]);
     }
 }

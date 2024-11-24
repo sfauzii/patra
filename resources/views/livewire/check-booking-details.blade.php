@@ -239,21 +239,32 @@
                         <hr>
                     </div>
                     @if ($documentStatus && $documentStatus['status'] === 'APPROVED')
+
+                        {{-- PDF Download button - only shown when payment is successful --}}
+                        @if ($canDownloadPDF)
+                            <button wire:click="downloadBookingPDF" class="btn-book">
+                                <i class="fas fa-file-pdf me-1"></i> Download Receipt
+                            </button>
+                        @endif
+
+
                         {{-- Update the review button section --}}
                         @if ($hasReviewed)
-                            <button wire:click="openReview" class="btn-book">
+                            <button wire:click="openReview" class="btn-call-customer">
                                 <i class="fas fa-edit me-1"></i> Edit Review
                             </button>
                         @else
-                            <button wire:click="openReview" class="btn-book">
+                            <button wire:click="openReview" class="btn-call-customer">
                                 <i class="fas fa-star me-1"></i> Write a Review
                             </button>
                         @endif
+                    @else
+                        {{-- Show Call Customer Service button only when document is not approved --}}
+                        <button class="btn-call-customer"
+                            onclick="window.location.href='https://api.whatsapp.com/send?phone=088229877220&text=Hello%20Customer%20Service,%20saya%20butuh%20bantuan.';">
+                            Call Customer Service
+                        </button>
                     @endif
-                    <button class="btn-call-customer"
-                        onclick="window.location.href='https://api.whatsapp.com/send?phone=088229877220&text=Hello%20Customer%20Service,%20saya%20butuh%20bantuan.';">
-                        Call Customer Service
-                    </button>
 
                 </div>
             </div>
