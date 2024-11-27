@@ -258,6 +258,17 @@
                                 <i class="fas fa-star me-1"></i> Write a Review
                             </button>
                         @endif
+                    @elseif ($bookingDetails && $bookingDetails['payment_status'] === 'pending')
+                        {{-- Pay Now button for PENDING payment status --}}
+                        <button onclick="window.open('{{ $bookingDetails['payment_url'] ?? '#' }}', '_blank')"
+                            class="btn-book">
+                            <i class="fas fa-credit-card me-1"></i> Pay Now
+                        </button>
+                        {{-- Show Call Customer Service button only when document is not approved --}}
+                        <button class="btn-call-customer"
+                            onclick="window.location.href='https://api.whatsapp.com/send?phone=088229877220&text=Hello%20Customer%20Service,%20saya%20butuh%20bantuan.';">
+                            Call Customer Service
+                        </button>
                     @else
                         {{-- Show Call Customer Service button only when document is not approved --}}
                         <button class="btn-call-customer"
