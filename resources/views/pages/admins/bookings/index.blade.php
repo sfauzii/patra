@@ -60,8 +60,24 @@
                                 <td>{{ date('d, F Y', strtotime($booking->start_date)) }}</td>
                                 <td>{{ date('d, F Y', strtotime($booking->end_date)) }}</td>
                                 <td>{{ $booking->duration }} days</td>
-                                <td>{{ $booking->payment_status }}</td>
-                                <td>{{ $booking->document_status }}</td>
+                                <td>
+                                    @if ($booking->payment_status == 'success')
+                                        <span class="badge bg-success">{{ $booking->payment_status }}</span>
+                                    @elseif($booking->payment_status == 'pending')
+                                        <span class="badge bg-warning">{{ $booking->payment_status }}</span>
+                                    @elseif($booking->payment_status == 'failed' || $booking->payment_status == 'expired')
+                                        <span class="badge bg-danger">{{ $booking->payment_status }}</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($booking->document_status == 'Pending' || $booking->document_status == 'WAITING')
+                                        <span class="badge bg-warning">{{ $booking->document_status }}</span>
+                                    @elseif($booking->document_status == 'Approved')
+                                        <span class="badge bg-success">{{ $booking->document_status }}</span>
+                                    @elseif($booking->document_status == 'Rejected')
+                                        <span class="badge bg-danger">{{ $booking->document_status }}</span>
+                                    @endif
+                                </td>
                                 <td>Rp {{ number_format($booking->total_price, 0, ' ') }}</td>
 
                                 <td>

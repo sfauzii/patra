@@ -61,12 +61,18 @@
 
                     <ul class="submenu ">
 
-                        <li class="submenu-item  ">
-                            <a href="{{ route('brands.index') }}" class="submenu-link">Brands</a>
-                        </li>
-                        <li class="submenu-item  ">
-                            <a href="{{ route('types.index') }}" class="submenu-link">Types</a>
-                        </li>
+                        @can('view-brand')
+                            <li class="submenu-item  ">
+                                <a href="{{ route('brands.index') }}" class="submenu-link">Brands</a>
+                            </li>
+                        @endcan
+
+                        @can('view-type')
+                            <li class="submenu-item  ">
+                                <a href="{{ route('types.index') }}" class="submenu-link">Types</a>
+                            </li>
+                        @endcan
+
                         <li class="submenu-item  ">
                             <a href="{{ route('items.index') }}" class="submenu-link">Items</a>
                         </li>

@@ -14,6 +14,16 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        // Apply permission middleware dynamically to resource actions
+        $this->middleware('check.permission:create-brand')->only(['create', 'store']);
+        $this->middleware('check.permission:view-brand')->only('index');
+        $this->middleware('check.permission:edit-brand')->only(['edit', 'update']);
+        $this->middleware('check.permission:delete-brand')->only(['destroy']);
+    }
+
     public function index()
     {
         $brands = Brand::all();

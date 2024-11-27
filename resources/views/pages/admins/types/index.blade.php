@@ -21,8 +21,10 @@
 
         <section class="section">
 
-            <a href="{{ route('types.create') }}" class="btn btn-primary"
-                style="margin-bottom: 20px; margin-left: 890px;">New Type</a>
+            @can('create-type')
+                <a href="{{ route('types.create') }}" class="btn btn-primary"
+                    style="margin-bottom: 20px; margin-left: 890px;">New Type</a>
+            @endcan
             <div class="card">
                 <div class="card-header">
                     {{-- <h5 class="card-title">
@@ -52,18 +54,22 @@
 
                                     <td>
                                         <div class="buttons">
-                                            <a href="{{ route('types.edit', $type->id) }}" class="btn icon btn-primary"><i
-                                                    class="bi bi-pencil"></i></a>
+                                            @can('edit-type')
+                                                <a href="{{ route('types.edit', $type->id) }}" class="btn icon btn-primary"><i
+                                                        class="bi bi-pencil"></i></a>
+                                            @endcan
 
-                                            <form action="{{ route('types.destroy', $type->id) }}" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn icon btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete this type?')">
-                                                    <i class="bi bi-x"></i>
-                                                </button>
-                                            </form>
+                                            @can('delete-type')
+                                                <form action="{{ route('types.destroy', $type->id) }}" method="POST"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn icon btn-danger"
+                                                        onclick="return confirm('Are you sure you want to delete this type?')">
+                                                        <i class="bi bi-x"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </div>
                                     </td>
 

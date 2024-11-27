@@ -23,8 +23,11 @@
 
     <section class="section">
 
-        <a href="{{ route('brands.create') }}" class="btn btn-primary" style="margin-bottom: 20px; margin-left: 890px;">New
-            Brand</a>
+        @can('create-brand')
+            <a href="{{ route('brands.create') }}" class="btn btn-primary" style="margin-bottom: 20px; margin-left: 890px;">New
+                Brand</a>
+        @endcan
+
         <div class="card">
             <div class="card-header">
                 {{-- <h5 class="card-title">
@@ -51,18 +54,22 @@
                                         style="width: 100px;"></td>
                                 <td>
                                     <div class="buttons">
-                                        <a href="{{ route('brands.edit', $brand->id) }}" class="btn icon btn-primary"><i
-                                                class="bi bi-pencil"></i></a>
+                                        @can('edit-brand')
+                                            <a href="{{ route('brands.edit', $brand->id) }}" class="btn icon btn-primary"><i
+                                                    class="bi bi-pencil"></i></a>
+                                        @endcan
 
-                                        <form action="{{ route('brands.destroy', $brand->id) }}" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn icon btn-danger"
-                                                onclick="return confirm('Are you sure you want to delete this brand?')">
-                                                <i class="bi bi-x"></i>
-                                            </button>
-                                        </form>
+                                        @can('delete-brand')
+                                            <form action="{{ route('brands.destroy', $brand->id) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn icon btn-danger"
+                                                    onclick="return confirm('Are you sure you want to delete this brand?')">
+                                                    <i class="bi bi-x"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
 
