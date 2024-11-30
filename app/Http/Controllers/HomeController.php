@@ -95,4 +95,10 @@ class HomeController extends Controller
             'items' => $items,
         ]);
     }
+
+    public function about()
+    {
+
+        return view('about');
+    }
 }

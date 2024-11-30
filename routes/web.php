@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('c/{slug}', [CheckoutController::class, 'index'])->name('checkout');
 });
 
+Route::get('about', [HomeController::class, 'about'])->name('about');
+
 
 Route::get('/dashboard/login', [AdminsController::class, 'loginForm'])->name('admins-form');
 Route::post('/dashboard/login', [AdminsController::class, 'login'])->name('admins-login');
