@@ -8,7 +8,7 @@
 <section class="best-about">
     <!-- Badge Section -->
     <div class="badge-container">
-        <img src="frontend/images/icon-global.svg" alt="">
+        <img src="{{ url('frontend/images/icon-global.svg') }}" alt="">
         <p class="badge-text">The best ever car rent in Purwokerto</p>
     </div>
 

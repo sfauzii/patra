@@ -49,7 +49,7 @@
                         <hr>
                         <div class="action-buttons">
                             <button type="button" class="btn-dark google"
-                                onclick="window.location.href = 'register.html';">
+                                onclick="window.location.href = '{{ route('socialite.redirect', 'google') }}';">
                                 <img src="{{ url('frontend/images/icon-google.svg') }}" alt="Google Icon"
                                     class="google-icon">
                                 Masuk/Daftar</button>

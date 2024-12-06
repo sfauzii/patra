@@ -325,7 +325,7 @@
         <div class="growing-container">
             <div class="main-card">
                 <div class="main-content">
-                    <h1>Start Your Journey Today</h1>
+                    <h1>Start Rent Now</h1>
                     <p>Discover the convenience and flexibility of our car rental services, designed to make your travels
                         easier and more enjoyable.</p>
                     <button class="explore-button" onclick="window.location.href='{{ route('cars') }}';">Explore

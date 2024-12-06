@@ -12,10 +12,11 @@ use App\Http\Controllers\Auth\AdminsController;
 use App\Http\Controllers\Admins\BrandController;
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\CheckBookingController;
+use App\Http\Controllers\Admins\ReportController;
 use App\Http\Controllers\Admins\BookingController;
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\PermissionController;
-use App\Http\Controllers\Admins\ReportController;
 use App\Http\Controllers\ItemController as CatalogController;
 
 /*
@@ -49,6 +50,7 @@ Route::get('/dashboard/login', [AdminsController::class, 'loginForm'])->name('ad
 Route::post('/dashboard/login', [AdminsController::class, 'login'])->name('admins-login');
 Route::post('/admin-logout', [AdminsController::class, 'logoutAdmins'])->name('admin-logout');
 
+
 Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -75,10 +77,13 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::get('reports/item-cars/download', [ReportController::class, 'generateItemPdf'])->name('reports.item-cars.download');
 });
 
+Route::get('/auth/{provider}/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
+Route::get('/auth/{provider}/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
+
 // Auth::routes();
 Route::auth(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
