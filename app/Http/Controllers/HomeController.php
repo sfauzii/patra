@@ -43,6 +43,7 @@ class HomeController extends Controller
         // First set of random items
         $firstRandomItems = Item::with(['type', 'brand', 'reviews'])
             ->available()
+            ->where('is_available', true)
             ->inRandomOrder()
             ->get()
             ->map(function ($item) {
@@ -54,6 +55,7 @@ class HomeController extends Controller
         // Second set of random items (different random order)
         $secondRandomItems = Item::with(['type', 'brand', 'reviews'])
             ->available()
+            ->where('is_available', true)
             ->inRandomOrder() // This will generate a different random order
             ->get()
             ->map(function ($item) {

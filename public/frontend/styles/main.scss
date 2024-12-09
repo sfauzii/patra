@@ -562,6 +562,19 @@ body {
     /* Make title bold */
     margin: 0;
     /* Remove default margin */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+    /* Adjust based on your card width */
+}
+
+.card:hover .card-title {
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    white-space: normal;
 }
 
 .card-description {
@@ -3882,6 +3895,29 @@ iframe:hover {
     margin-top: 20px;
 }
 
+.card-title.cars {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+
+    /* Force two-line display with ellipsis */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2em;
+    /* Approximately two lines */
+    width: 100%;
+    /* Ensure full width of card content */
+}
+
+.card.cars:hover .card-title.cars {
+    overflow: visible;
+    white-space: normal;
+    -webkit-line-clamp: unset;
+}
+
 .great-project-section.cars {
     margin-top: 30px;
 }
@@ -4636,7 +4672,7 @@ iframe:hover {
     }
 
     .buttons-about {
-       
+
         gap: 10px;
     }
 
@@ -4647,7 +4683,7 @@ iframe:hover {
     }
 
     .right-content-about {
-        
+
         gap: 10px;
     }
 

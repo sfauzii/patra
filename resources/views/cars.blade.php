@@ -21,7 +21,7 @@
                     <div class="card cars">
                         <img src="{{ asset('storage/' . json_decode($item->photos)[0]) }}" alt="Project 1">
                         <div class="card-content">
-                            <h1 class="card-title">{{ ucwords($item->name) }} </h1>
+                            <h1 class="card-title cars">{{ ucwords($item->name) }} </h1>
                             <p class="card-description">Rp {{ number_format($item->price, 0, ' ') }}/day</p>
                             <div class="card-rating">
                                 @php
