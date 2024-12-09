@@ -48,6 +48,7 @@ class SearchModal extends Component
                     $query->where('name', 'like', '%' . $this->search . '%');
                 })
                 ->available()
+                ->where('is_available', true)
                 ->take(10)
                 ->get();
 
