@@ -24,6 +24,7 @@ class ItemController extends Controller
             // ->where('type_id', $item->type_id)
             ->where('id', '!=', $item->id)
             ->available()
+            ->where('is_available', true)
             ->inRandomOrder()
             ->get()
             ->map(function ($item) {
