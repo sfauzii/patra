@@ -129,7 +129,7 @@
                                                     value="{{ old('price') ?? $item->price }}">
                                             </div>
 
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
                                                 <label for="first-name-horizontal">Star</label>
                                             </div>
                                             <div class="col-md-8 form-group">
@@ -146,7 +146,7 @@
                                                 <input type="number" id="first-name-horizontal" class="form-control"
                                                     name="review" placeholder="Review"
                                                     value="{{ old('review') ?? $item->review }}" min="0">
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col-12 col-md-12">
                                                 <div class="card">

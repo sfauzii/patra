@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('photos')->nullable();
             $table->text('features')->nullable();
             $table->integer('price')->nullable();
-            $table->double('star')->nullable();
-            $table->integer('review')->nullable();
+            // $table->double('star')->nullable();
+            // $table->integer('review')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

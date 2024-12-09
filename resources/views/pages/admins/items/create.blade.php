@@ -118,26 +118,26 @@
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="number" id="first-name-horizontal" class="form-control"
-                                                    name="price" placeholder="Price" value="{{ old('price') }}">
+                                                    name="price" placeholder="Price" va{{----}}lue="{{ old('price') }}">
                                             </div>
 
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
                                                 <label for="first-name-horizontal">Star</label>
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="number" id="first-name-horizontal" class="form-control"
                                                     name="star" placeholder="Rating" value="{{ old('star') }}"
                                                     min="1" max="5" step=".01">
-                                            </div>
+                                            </div> --}}
 
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
                                                 <label for="first-name-horizontal">Review</label>
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="number" id="first-name-horizontal" class="form-control"
                                                     name="review" placeholder="Review" value="{{ old('review') }}"
                                                     min="0">
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col-12 col-md-12">
                                                 <div class="card">
