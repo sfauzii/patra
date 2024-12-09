@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="first-name-horizontal" class="form-control"
-                                                    name="name" placeholder="Name" value="{{ old('name') }}">
+                                                    name="name" placeholder="Name" value="{{ old('name') }}" required>
                                             </div>
 
                                             <div class="col-md-4">
@@ -67,7 +67,8 @@
                                             <div class="col-md-8 form-group">
                                                 <div class="input-group mb-3">
                                                     {{-- <label class="input-group-text" for="inputGroupSelect01">Options</label> --}}
-                                                    <select name="brand_id" class="form-select" id="inputGroupSelect01">
+                                                    <select name="brand_id" class="form-select" id="inputGroupSelect01"
+                                                        required>
                                                         <option selected>Choose Brand</option>
                                                         @foreach ($brands as $brand)
                                                             <option value="{{ $brand->id }}"
@@ -85,7 +86,8 @@
                                             <div class="col-md-8 form-group">
                                                 <div class="input-group mb-3">
                                                     {{-- <label class="input-group-text" for="inputGroupSelect01">Options</label> --}}
-                                                    <select name="type_id" class="form-select" id="inputGroupSelect01">
+                                                    <select name="type_id" class="form-select" id="inputGroupSelect01"
+                                                        required>
                                                         <option selected>Choose Type</option>
                                                         @foreach ($types as $type)
                                                             <option value="{{ $type->id }}"
@@ -110,7 +112,8 @@
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="first-name-horizontal" class="form-control"
-                                                    name="features" placeholder="Feature" value="{{ old('featrues') }}">
+                                                    name="features" placeholder="Feature" value="{{ old('featrues') }}"
+                                                    required>
                                             </div>
 
                                             <div class="col-md-4">
@@ -118,7 +121,8 @@
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="number" id="first-name-horizontal" class="form-control"
-                                                    name="price" placeholder="Price" va{{----}}lue="{{ old('price') }}">
+                                                    name="price" placeholder="Price" value="{{ old('price') }}"
+                                                    required>
                                             </div>
 
                                             {{-- <div class="col-md-4">
@@ -158,8 +162,8 @@
                                                             <!-- File uploader with multiple files upload -->
                                                             <input type="file" name="photos[]"
                                                                 class="image-preview-filepond"
-                                                                accept="image/png,image/jpeg,image/jpg,image/webp"
-                                                                multiple>
+                                                                accept="image/png,image/jpeg,image/jpg,image/webp" multiple
+                                                                required>
                                                             @error('photos')
                                                                 <div class="text-danger">{{ $message }}</div>
                                                             @enderror
