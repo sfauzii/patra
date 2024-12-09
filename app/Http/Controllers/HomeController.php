@@ -85,6 +85,7 @@ class HomeController extends Controller
         // Ambil semua item berdasarkan brand
         $items = $brand->items()->with(['type', 'reviews'])
             ->available()
+            ->where('is_available', true)
             ->get()
             ->map(function ($item) {
                 $item->avg_rating = $item->reviews->avg('rating') ?? 0; // Default 0 jika tidak ada ulasan
