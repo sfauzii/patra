@@ -53,7 +53,7 @@
                                 @else
                                     <div class="row g-4 justify-content-center">
                                         @foreach ($items as $item)
-                                            <div class="col-12 col-sm-8 col-md-6 d-flex justify-content-center">
+                                            <div class="col-12 col-sm-8 col-md-6 d-flex justify-content-center mb-5">
                                                 <div class="card"
                                                     style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
                                                     <img src="{{ asset('storage/' . json_decode($item->photos)[0]) }}"

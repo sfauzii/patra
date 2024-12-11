@@ -20,7 +20,7 @@
                         <img src="{{ url('frontend/images/icon-profile-circle.svg') }}" alt="Icon"
                             class="input-icon">
                         <input type="text" wire:model="name" id="input-field" placeholder="Placeholder Text"
-                            class="form-input" readonly>
+                            class="form-input" readonly disabled style="opacity: 0.6; cursor: not-allowed;">
                         @error('name')
                             <span class="error">{{ $message }}</span>
                         @enderror
@@ -29,7 +29,7 @@
                     <div class="input-container">
                         <img src="{{ url('frontend/images/icon-whatsapp.svg') }}" alt="Icon" class="input-icon">
                         <input type="number" wire:model="phone" id="input-field" placeholder="Placeholder Text"
-                            class="form-input">
+                            class="form-input" min="0">
                         @error('phone')
                             <span class="error">{{ $message }}</span>
                         @enderror
