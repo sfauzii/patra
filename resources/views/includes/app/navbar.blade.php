@@ -10,16 +10,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about') }}">About</a>
+                    <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}"
+                        href="{{ route('about') }}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cars') }}">Cars</a>
+                    <a class="nav-link {{ request()->routeIs('cars') ? 'active' : '' }}"
+                        href="{{ route('cars') }}">Cars</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="#">Contact</a>
                 </li>
             </ul>
             <div class="btn-container">
