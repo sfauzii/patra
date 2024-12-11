@@ -43,77 +43,68 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item active ">
-                    <a href="index.html" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
-
-
                 </li>
 
-
-                <li class="sidebar-item  has-sub">
+                <li
+                    class="sidebar-item has-sub {{ request()->routeIs('brands.index') || request()->routeIs('types.index') || request()->routeIs('items.index') ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Menu</span>
                     </a>
-
-                    <ul class="submenu ">
-
+                    <ul class="submenu">
                         @can('view-brand')
-                            <li class="submenu-item  ">
+                            <li class="submenu-item {{ request()->routeIs('brands.index') ? 'active' : '' }}">
                                 <a href="{{ route('brands.index') }}" class="submenu-link">Brands</a>
                             </li>
                         @endcan
 
                         @can('view-type')
-                            <li class="submenu-item  ">
+                            <li class="submenu-item {{ request()->routeIs('types.index') ? 'active' : '' }}">
                                 <a href="{{ route('types.index') }}" class="submenu-link">Types</a>
                             </li>
                         @endcan
 
-                        <li class="submenu-item  ">
+                        <li class="submenu-item {{ request()->routeIs('items.index') ? 'active' : '' }}">
                             <a href="{{ route('items.index') }}" class="submenu-link">Items</a>
                         </li>
-
                     </ul>
                 </li>
 
                 <li class="sidebar-title">Transactions</li>
 
-                <li class="sidebar-item  ">
+                <li class="sidebar-item {{ request()->routeIs('bookings.index') ? 'active' : '' }}">
                     <a href="{{ route('bookings.index') }}" class='sidebar-link'>
                         <i class="bi bi-basket-fill"></i>
                         <span>Order</span>
                     </a>
                 </li>
 
-
                 <li class="sidebar-title">Role-Permission</li>
 
-                <li class="sidebar-item  has-sub">
+                <li
+                    class="sidebar-item has-sub {{ request()->routeIs('roles.index') || request()->routeIs('permissions.index') ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Role-Permission</span>
                     </a>
-
-                    <ul class="submenu ">
-
-                        <li class="submenu-item  ">
+                    <ul class="submenu">
+                        <li class="submenu-item {{ request()->routeIs('roles.index') ? 'active' : '' }}">
                             <a href="{{ route('roles.index') }}" class="submenu-link">Role</a>
                         </li>
-                        <li class="submenu-item  ">
+                        <li class="submenu-item {{ request()->routeIs('permissions.index') ? 'active' : '' }}">
                             <a href="{{ route('permissions.index') }}" class="submenu-link">Permission</a>
                         </li>
-
-
                     </ul>
                 </li>
 
                 <li class="sidebar-title">Users</li>
 
-                <li class="sidebar-item  ">
+                <li class="sidebar-item {{ request()->routeIs('user.index') ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}" class='sidebar-link'>
                         <i class="bi bi-basket-fill"></i>
                         <span>User</span>
@@ -122,18 +113,17 @@
 
                 <li class="sidebar-title">Reports</li>
 
-                <li class="sidebar-item  has-sub">
+                <li
+                    class="sidebar-item has-sub {{ request()->routeIs('reports.order-booking') || request()->routeIs('reports.item-cars') ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Reports</span>
                     </a>
-
-                    <ul class="submenu ">
-
-                        <li class="submenu-item  ">
+                    <ul class="submenu">
+                        <li class="submenu-item {{ request()->routeIs('reports.order-booking') ? 'active' : '' }}">
                             <a href="{{ route('reports.order-booking') }}" class="submenu-link">Order Booking</a>
                         </li>
-                        <li class="submenu-item  ">
+                        <li class="submenu-item {{ request()->routeIs('reports.item-cars') ? 'active' : '' }}">
                             <a href="{{ route('reports.item-cars') }}" class="submenu-link">Item Car</a>
                         </li>
                     </ul>
