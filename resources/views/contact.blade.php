@@ -34,7 +34,7 @@
                 <h3>Chat with Us</h3>
                 <p>We are here to help!
                 </p>
-                <a href="#" class="button-contact">patra@rental.com</a>
+                <a href="https://gmail.com" target="_blank" class="button-contact">patra@rental.com</a>
             </div>
         </div>
         <div class="card contact">
@@ -56,7 +56,7 @@
                 <h3>Call us</h3>
                 <p>Open 24/7</p>
                 <a href="https://wa.me/6282133337837?text=Halo%20kak%2C%20saya%20boleh%20minta%20daftar%20price%20listnya%3F"
-                    class="button-contact">+62 8213 3337 837</a>
+                    class="button-contact" target="_blank">+62 8213 3337 837</a>
             </div>
         </div>
     </section>
