@@ -4712,3 +4712,295 @@ iframe:hover {
 
 
 }
+
+// START CONTACT PAGE
+
+
+.contact-us {
+    text-align: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 150px auto;
+}
+
+.title-container.contact .sub-title {
+    color: #2447F9 !important;
+    font-weight: bold;
+}
+
+.title-container.contact {
+    margin-bottom: 50px;
+}
+
+.description.contact {
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.map-container {
+    width: 100%;
+    height: 400px;
+    /* Adjust height as needed */
+    border-radius: 20px;
+    /* Rounded corners */
+    overflow: hidden;
+    padding: 0 50px;
+    /* Ensure the rounded corners are applied */
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 30px;
+    /* Ensure iframe has rounded corners */
+}
+
+/* New Section: contact-us-content */
+.contact-us-content {
+    margin-top: -50px !important;
+    margin-bottom: 50px !important;
+    padding: 0px 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    /* Menengahkan grid secara horizontal */
+    align-items: center;
+    /* Menengahkan grid secara vertikal */
+    gap: 10px;
+    /* Menambahkan jarak antar card */
+    max-width: 1200px;
+    /* Membatasi lebar maksimal */
+    margin: 0 auto;
+    /* Membuat grid berada di tengah layar */
+}
+
+.card.contact {
+    background-color: white;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.icon-wrapper.contact {
+    margin: 13px;
+    border: 1px solid #D9D9D9;
+    border-radius: 30px;
+    display: inline-block;
+    padding: 15px;
+    width: fit-content;
+    /* Menyesuaikan lebar border dengan konten */
+    height: fit-content;
+    /* Menyesuaikan tinggi border dengan konten */
+    /* Optional padding for the icon */
+}
+
+.icon-wrapper.contact img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    /* Memastikan img berada di tengah */
+}
+
+.content.contact {
+    margin-top: 70px;
+}
+
+.content.contact h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #222;
+}
+
+.content.contact p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.button-contact {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: 1px solid #D9D9D9;
+    border-radius: 50px;
+    font-weight: 600;
+    /* Full rounded */
+    color: #2447F9;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-contact:hover {
+    background-color: #2447F9;
+    box-shadow: 0 0 0 .25rem #0d6efd40 !important;
+    transition: all .4s;
+    color: white;
+    text-decoration: none;
+    /* Change text color on hover */
+}
+
+/* Tablet Responsive (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    .contact-us-content {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0px 20px;
+        gap: 15px;
+    }
+}
+
+/* Mobile Responsive (sampai 767px) */
+@media screen and (max-width: 767px) {
+
+    .map-container {
+        padding: 0 10px;
+    }
+
+    .contact-us-content {
+        grid-template-columns: 1fr;
+        /* Satu kolom untuk mobile */
+        padding: 0px 30px;
+        gap: 10px;
+    }
+
+    .card.contact {
+        width: 100%;
+        /* Pastikan card full width */
+        max-width: 350px;
+        /* Batasi lebar maksimal */
+        margin: 5px auto;
+        /* Tengahkan card */
+    }
+
+    .content.contact {
+        margin-top: 40px;
+        /* Kurangi margin di mobile */
+        text-align: center;
+        /* Pusatkan teks */
+    }
+
+    .icon-wrapper.contact {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px auto;
+        /* Pusatkan icon */
+    }
+
+    .button-contact {
+        display: inline-block;
+        width: auto;
+        text-align: center;
+    }
+}
+
+/* Penyesuaian ukuran font untuk responsivitas */
+@media screen and (max-width: 480px) {
+    .content.contact h3 {
+        font-size: 1.2rem;
+    }
+
+    .content.contact p {
+        font-size: 0.9rem;
+    }
+}
+
+.contact-us-bg {
+    text-align: center;
+    padding: 120px;
+    // max-width: 1200px;
+    background: url('../images/bg-contact.svg');
+    background-size: cover;
+    /* Pastikan background menutupi seluruh area */
+    margin: 150px auto;
+}
+
+.title-container.contus .title-contus {
+    color: white;
+}
+
+.title-container.contus .description.contus {
+    color: white
+}
+
+.button__contact {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.button__contact.btn-get-started {
+    background: transparent !important;
+    border: 2px solid white !important;
+    color: white !important;
+}
+
+.button__contact.btn-get-started:hover {
+
+    background: white !important;
+    color: #2447F9 !important;
+}
+
+.button__contact.btn-create {
+
+    color: #2447F9 !important;
+}
+
+.button__contact.btn-create:hover {
+    box-shadow: 0 0 0 .25rem #ffffff5f !important;
+    transition: all .4s;
+}
+
+/* Mobile Responsive (hasta 767px) */
+@media screen and (max-width: 767px) {
+    .contact-us-bg {
+        padding: 60px 30px;
+        margin: 80px auto;
+    }
+
+    .footer-logo {
+        max-width: 150px;
+        margin-bottom: 20px;
+    }
+
+    .title-container.contus .title-contus {
+        font-size: 1.8rem;
+    }
+
+    .title-container.contus .description.contus {
+        font-size: 0.9rem;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button__contact {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 0px;
+        padding: 12px 24px;
+        font-size: 1em;
+    }
+}
+
+/* Mobile Kecil (hasta 480px) */
+@media screen and (max-width: 480px) {
+    .contact-us-bg {
+        padding: 40px 25px;
+        margin: 60px auto;
+    }
+
+    .title-container.contus .title-contus {
+        font-size: 1.5rem;
+    }
+
+    .title-container.contus .description.contus {
+        font-size: 0.8rem;
+    }
+}
+// END PAGE CONTACT

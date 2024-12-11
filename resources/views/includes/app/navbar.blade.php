@@ -21,7 +21,8 @@
                         href="{{ route('cars') }}">Cars</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="#">Contact</a>
+                    <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}"
+                        href="{{ route('contact') }}">Contact</a>
                 </li>
             </ul>
             <div class="btn-container">

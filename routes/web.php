@@ -17,6 +17,7 @@ use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\PermissionController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ItemController as CatalogController;
 
 /*
@@ -36,6 +37,7 @@ Route::get('/check-booking', [CheckBookingController::class, 'index'])->name('ch
     ->middleware('auth');
 
 Route::get('/cars', [CarsController::class, 'cars'])->name('cars');
+Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 
 Route::get('/view-brands/{brand:name}', [HomeController::class, 'view'])->name('view.brands');
 
