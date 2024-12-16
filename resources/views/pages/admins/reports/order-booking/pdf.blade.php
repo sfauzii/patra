@@ -198,7 +198,7 @@
                     {{-- @php $totalTransaction += $transaction->grand_total; @endphp --}}
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td class="text-center">{{ $order->order_id }}</td>
+                        <td class="text-center">{{ $order->booking_code }}</td>
                         {{-- <td>ORD-001</td> --}}
                         <td>{{ $order->created_at->format('d-m-Y H:i:s') }}</td>
                         <td>{{ $order->user->name }}</td>
