@@ -10,14 +10,23 @@ class CarsController extends Controller
     public function cars()
     {
 
-        $items =  Item::with(['type', 'brand', 'reviews'])
-            ->available()
+        $items = Item::with(['type', 'brand', 'reviews'])
             ->where('is_available', true)
+
             ->get()
             ->map(function ($item) {
-                $item->avg_rating = $item->reviews->avg('rating') ?? 0;
-                $item->review_count = $item->reviews->count();
-                return $item;
+                return (object) [
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'slug' => $item->slug,
+                    'photos' => $item->photos,
+                    'type' => $item->type,
+                    'price' => $item->price,
+                    'brand' => $item->brand,
+                    'reviews' => $item->reviews,
+                    'avg_rating' => $item->reviews->avg('rating') ?? 0,
+                    'review_count' => $item->reviews->count(),
+                ];
             });
 
         return view('cars', [

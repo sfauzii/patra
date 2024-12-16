@@ -74,10 +74,10 @@ class Item extends Model
     }
 
     // In app/Models/Item.php
-    public function scopeAvailable($query)
-    {
-        return $query->whereDoesntHave('bookings', function ($q) {
-            $q->where('end_date', '>=', now());
-        });
-    }
+    // public function scopeAvailable($query)
+    // {
+    //     return $query->whereDoesntHave('bookings', function ($q) {
+    //         $q->where('end_date', '>=', now());
+    //     });
+    // }
 }

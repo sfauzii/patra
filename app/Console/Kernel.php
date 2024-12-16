@@ -15,11 +15,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->call(function () {
-            // Find and mark items as available after their booking end date
-            Booking::where('end_date', '<', now())
-                ->update(['is_available' => true]);
-        })->daily(); // Run daily at midnight
+        // $schedule->call(function () {
+        //     // Find and mark items as available after their booking end date
+        //     Booking::where('end_date', '<', now())
+        //         ->update(['is_available' => true]);
+        // })->daily(); // Run daily at midnight
     }
 
     /**

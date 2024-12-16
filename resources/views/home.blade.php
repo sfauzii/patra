@@ -240,11 +240,28 @@
                             <div class="car-review-info">
                                 <p class="author-name">{{ ucwords($review->user->name) }}</p>
                                 <div class="card-rating-review">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i> <!-- Example of a half-star -->
+                                    @php
+                                        $avgRating = number_format($review->avg_rating ?? 0, 1); // Default ke 0 jika null
+                                        $fullStars = floor($avgRating);
+                                        $hasHalfStar = $avgRating - $fullStars >= 0.5;
+                                        $emptyStars = 5 - ($fullStars + ($hasHalfStar ? 1 : 0));
+                                    @endphp
+
+                                    {{-- Bintang Penuh --}}
+                                    @for ($i = 1; $i <= $fullStars; $i++)
+                                        <i class="fas fa-star text-warning"></i>
+                                    @endfor
+
+                                    {{-- Setengah Bintang --}}
+                                    @if ($hasHalfStar)
+                                        <i class="fas fa-star-half-alt text-warning"></i>
+                                    @endif
+
+                                    {{-- Bintang Kosong --}}
+                                    @for ($i = 1; $i <= $emptyStars; $i++)
+                                        <i class="far fa-star text-secondary"></i>
+                                    @endfor
+
                                 </div>
                             </div>
                         </div>

@@ -23,7 +23,7 @@ class ItemController extends Controller
         $similiarItems = Item::with(['type', 'brand'])
             // ->where('type_id', $item->type_id)
             ->where('id', '!=', $item->id)
-            ->available()
+            // ->available()
             ->where('is_available', true)
             ->inRandomOrder()
             ->get()

@@ -42,7 +42,7 @@ class HomeController extends Controller
 
         // First set of random items
         $firstRandomItems = Item::with(['type', 'brand', 'reviews'])
-            ->available()
+            // ->available()
             ->where('is_available', true)
             ->inRandomOrder()
             ->get()
@@ -54,7 +54,7 @@ class HomeController extends Controller
 
         // Second set of random items (different random order)
         $secondRandomItems = Item::with(['type', 'brand', 'reviews'])
-            ->available()
+            // ->available()
             ->where('is_available', true)
             ->inRandomOrder() // This will generate a different random order
             ->get()
@@ -68,7 +68,13 @@ class HomeController extends Controller
         $randomReviews = Review::with(['user', 'item']) // Load user dan item terkait ulasan
             ->inRandomOrder()
             ->take(4)
-            ->get();
+            ->get()
+            ->map(function ($review) {
+                $review->avg_rating = $review->item->reviews->avg('rating') ?? 0; // Hitung rata-rata dari item terkait
+                $review->review_count = $review->item->reviews->count(); // Hitung jumlah ulasan untuk item terkait
+                return $review;
+            });
+
 
 
         return view('home', [
@@ -84,7 +90,7 @@ class HomeController extends Controller
     {
         // Ambil semua item berdasarkan brand
         $items = $brand->items()->with(['type', 'reviews'])
-            ->available()
+            // ->available()
             ->where('is_available', true)
             ->get()
             ->map(function ($item) {

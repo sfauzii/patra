@@ -47,7 +47,6 @@ class SearchModal extends Component
                 ->orWhereHas('brand', function ($query) {
                     $query->where('name', 'like', '%' . $this->search . '%');
                 })
-                ->available()
                 ->where('is_available', true)
                 ->take(10)
                 ->get();
