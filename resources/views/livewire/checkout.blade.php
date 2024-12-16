@@ -116,7 +116,12 @@
                 </div>
                 <div class="detail-item">
                     <h3>Duration</h3>
-                    <p>{{ $startDate && $endDate ? \Carbon\Carbon::parse($startDate)->diffInDays($endDate) . ' day(s)' : '-' }}
+                    <p>
+                        @if ($startDate && $endDate)
+                            {{ \Carbon\Carbon::parse($startDate)->diffInDays($endDate) + 1 }} day(s)
+                        @else
+                            -
+                        @endif
                     </p>
                 </div>
                 <div class="detail-item">

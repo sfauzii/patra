@@ -3,6 +3,7 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Review;
 use App\Models\Booking;
 use Livewire\Component;
@@ -123,7 +124,7 @@ class CheckBookingDetails extends Component
     {
         if ($this->bookingDetails) {
             $this->duration = \Carbon\Carbon::parse($this->bookingDetails['start_date'])
-                ->diffInDays(\Carbon\Carbon::parse($this->bookingDetails['end_date']));
+                ->diffInDays(\Carbon\Carbon::parse($this->bookingDetails['end_date'])) + 1; // Tambahkan +1 agar inklusif
         }
     }
 
@@ -309,9 +310,14 @@ class CheckBookingDetails extends Component
                 ->findOrFail($this->bookingDetails['id'])
                 ->toArray();
 
+            // Perhitungan durasi
+            $start = Carbon::parse($booking['start_date']);
+            $end = Carbon::parse($booking['end_date']);
+            $duration = $start->diffInDays($end) + 1; // Tambahkan +1 agar hari pertama selalu terhitung
+
             $data = [
                 'booking' => $booking,
-                'duration' => $this->duration,
+                'duration' => $duration, // Kirim durasi yang sudah diperhitungkan
                 'generated_at' => now()->format('d F Y H:i:s')
             ];
 

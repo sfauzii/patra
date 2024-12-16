@@ -78,19 +78,18 @@ class Checkout extends Component
         if ($this->startDate && $this->endDate) {
             $start = Carbon::parse($this->startDate);
             $end = Carbon::parse($this->endDate);
-            $days = $start->diffInDays($end);
 
-            // Calculate subtotal
-            if ($start->isSameDay($end)) {
-                // Same day discount applied
-                $this->subTotal = $this->bookingPrice - 100; // Discounted price for same day
-            } else {
-                $days = $start->diffInDays($end);
-                $this->subTotal = $this->bookingPrice * $days;
-            }
+            // Hitung jumlah hari
+            // Tambahkan 1 untuk menghitung hari yang sama sebagai 2 hari
+            $days = $start->diffInDays($end) + 1;
 
-            // Calculate grand total
-            $this->grandTotal = $this->subTotal - $this->uniqueCode + $this->paymentService;
+            // Hitung subtotal
+            $this->subTotal = $this->bookingPrice * $days;
+
+
+
+            // Hitung grand total
+            $this->grandTotal = $this->subTotal + $this->paymentService - $this->uniqueCode;
         }
     }
 

@@ -18,7 +18,9 @@ class BookingController extends Controller
         $bookings = Booking::orderBy('created_at', 'desc')->get()->map(function ($booking) {
             $start = Carbon::parse($booking->start_date);
             $end = Carbon::parse($booking->end_date);
-            $booking->duration = $start->diffInDays($end);
+
+            // Tambahkan +1 agar hari pertama selalu terhitung
+            $booking->duration = $start->diffInDays($end) + 1;
 
             // Calculate overall document status
             $documentStatuses = $booking->documentValidations->pluck('status');
