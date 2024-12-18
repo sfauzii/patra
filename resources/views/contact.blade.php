@@ -5,6 +5,9 @@
 @endphp
 
 @section('content')
+    <x-login-popup />
+
+
     <section class="contact-us">
 
         <!-- Title and Description -->
