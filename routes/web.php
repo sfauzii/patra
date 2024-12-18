@@ -41,9 +41,10 @@ Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 
 Route::get('/view-brands/{brand:name}', [HomeController::class, 'view'])->name('view.brands');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('c/{slug}', [CheckoutController::class, 'index'])->name('checkout');
-});
+
+Route::get('c/{slug}', [CheckoutController::class, 'index'])
+    ->name('checkout')
+    ->middleware(['auth', 'verified']);
 
 Route::get('about', [HomeController::class, 'about'])->name('about');
 
