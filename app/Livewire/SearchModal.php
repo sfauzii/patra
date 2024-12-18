@@ -41,13 +41,19 @@ class SearchModal extends Component
             $this->isLoading = true;
 
             // Fetch search results
-            $this->items = Item::where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('description', 'like', '%' . $this->search . '%')
-                ->orWhere('price', 'like', '%' . $this->search . '%')
-                ->orWhereHas('brand', function ($query) {
-                    $query->where('name', 'like', '%' . $this->search . '%');
+            $this->items = Item::where('is_available', 1) // Tambahkan kondisi ini
+                ->where(function ($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhere('description', 'like', '%' . $this->search . '%')
+                        ->orWhere('price', 'like', '%' . $this->search . '%')
+                        ->orWhereHas('brand', function ($query) {
+                            $query->where(
+                                'name',
+                                'like',
+                                '%' . $this->search . '%'
+                            );
+                        });
                 })
-                ->where('is_available', true)
                 ->take(10)
                 ->get();
 
