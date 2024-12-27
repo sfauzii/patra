@@ -66,7 +66,7 @@
                                                     alt="Motorcycle Service" class="service-icon">
                                             </div>
                                             <div class="mega-menu-text">
-                                                <a href="">
+                                                <a href="{{ route('motorcycle') }}">
                                                     <h3 class="mb-1">Motorcycle Services</h3>
                                                 </a>
                                                 <p class="text-muted">Discover our innovative motorcycle

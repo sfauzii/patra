@@ -20,8 +20,7 @@ class Item extends Model
         'photos',
         'features',
         'price',
-        // 'star',
-        // 'review',
+        'vehicle',
         'description',
         'is_available',
     ];

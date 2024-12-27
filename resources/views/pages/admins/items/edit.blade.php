@@ -103,6 +103,24 @@
                                             </div>
 
                                             <div class="col-md-4">
+                                                <label for="vehicle">Vehicle</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <div class="input-group mb-3">
+                                                    <select name="vehicle" class="form-select" id="vehicle">
+                                                        <option value="{{ $item->vehicle }}">Tidak Diubah
+                                                            ({{ ucfirst($item->vehicle) }})</option>
+                                                        <option value="car"
+                                                            {{ old('vehicle') == 'car' ? 'selected' : '' }}>Car</option>
+                                                        <option value="motorcycle"
+                                                            {{ old('vehicle') == 'motorcycle' ? 'selected' : '' }}>
+                                                            Motorcycle</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-4">
                                                 <label for="first-name-horizontal">Features</label>
                                             </div>
                                             <div class="col-md-8 form-group">

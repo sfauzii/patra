@@ -30,8 +30,7 @@ class ItemRequest extends FormRequest
             'photos.*' => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
             'features' => 'nullable|string',
             'price' => 'required|numeric',
-            // 'star' => 'nullable|numeric',
-            // 'review' => 'nullable|numeric',
+            'vehicle' => 'required|in:car,motorcycle', 
         ];
     }
 }

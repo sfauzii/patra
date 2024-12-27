@@ -19,6 +19,7 @@ use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\PermissionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ItemController as CatalogController;
+use App\Http\Controllers\VehicleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,8 @@ Route::get('/car/{slug}', [CatalogController::class, 'show'])->name('item.detail
 Route::get('/check-booking', [CheckBookingController::class, 'index'])->name('check-booking')
     ->middleware('auth');
 
-Route::get('/cars', [CarsController::class, 'cars'])->name('cars');
+Route::get('/cars', [VehicleController::class, 'cars'])->name('cars');
+Route::get('/motorcycle', [VehicleController::class, 'motorcycle'])->name('motorcycle');
 Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 
 Route::get('/view-brands/{brand:name}', [HomeController::class, 'view'])->name('view.brands');

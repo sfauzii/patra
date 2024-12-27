@@ -100,6 +100,23 @@
                                             </div>
 
                                             <div class="col-md-4">
+                                                <label for="vehicle">Vehicle</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <div class="input-group mb-3">
+                                                    <select name="vehicle" class="form-select" id="vehicle" required>
+                                                        <option selected>Choose Vehicle</option>
+                                                        <option value="car"
+                                                            {{ old('vehicle') == 'car' ? 'selected' : '' }}>Car</option>
+                                                        <option value="motorcycle"
+                                                            {{ old('vehicle') == 'motorcycle' ? 'selected' : '' }}>
+                                                            Motorcycle</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-4">
                                                 <label for="first-name-horizontal">Description</label>
                                             </div>
                                             <div class="col-md-8 form-group">
