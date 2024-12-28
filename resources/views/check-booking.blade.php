@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title', 'Check Booking')
+
+
 @php
     $showFooter = false;
 @endphp

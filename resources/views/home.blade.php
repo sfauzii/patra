@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Home')
+
 @section('content')
     <!-- Login Popup (this part is added to the index.html) -->
     <x-login-popup />

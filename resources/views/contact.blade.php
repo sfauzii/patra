@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title', 'Contact Us')
+
+
 @php
     $showFooter = false;
 @endphp
