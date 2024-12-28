@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admins\ItemController;
 use App\Http\Controllers\Admins\RoleController;
@@ -17,9 +20,7 @@ use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\PermissionController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ItemController as CatalogController;
-use App\Http\Controllers\VehicleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,12 @@ use App\Http\Controllers\VehicleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Symlink storage link
+Route::get('storage-link', function () {
+    Artisan::call('storage:link');
+    return 'success';
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/car/{slug}', [CatalogController::class, 'show'])->name('item.details');
