@@ -34,11 +34,21 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <label for="input-field">Address</label>
+                    <div class="detail-item payment-service">
+                        <div class="tooltip-wrapper">
+                            <h3 style="font-size: 16px; color: #333;">Address</h3>
+                            <span class="tooltip-icon">i</span>
+                            <div class="tooltip-text">Pastikan alamat yang Anda masukkan sesuai dengan identitas Anda!
+                            </div>
+                        </div>
+                    </div>
                     <div class="input-container">
+
                         <img src="{{ url('frontend/images/icon-location.svg') }}" alt="Icon" class="input-icon">
                         <input type="text" wire:model="address" id="input-field" placeholder="Placeholder Text"
                             class="form-input">
+
+
                         @error('address')
                             <span class="error">{{ $message }}</span>
                         @enderror
