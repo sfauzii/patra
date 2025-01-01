@@ -130,7 +130,7 @@ class Checkout extends Component
 
         $this->validate([
             'name' => 'required|string',
-            'phone' => 'required|string',
+            'phone' => 'required|string|min:10|regex:/^\d{10,}$/',
             'address' => 'required|string',
             'startDate' => 'required|date',
             'endDate' => 'required|date|after_or_equal:startDate',
