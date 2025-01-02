@@ -12,8 +12,12 @@
         <!-- Content Section -->
         <div class="details-content">
             <div class="heading-content">
-                <h1>Car Detail</h1>
-                <h3>Home > Car Details</h3>
+                @php
+                    $vehicleType = $item->vehicle;
+                @endphp
+
+                <h1>{{ ucwords($vehicleType) }} Detail</h1>
+                <h3>Home > {{ ucwords($vehicleType) }} Details</h3>
             </div>
 
             <!-- Thumbnail Section -->
@@ -193,7 +197,7 @@
 
     <section class="great-project-section details__car">
         <div class="project-info heading__car__details">
-            <h2 class="project-title">Other Cars</h2>
+            <h2 class="project-title">Other Car & Motorcycle</h2>
             <p class="project-description">This is a people-say of our awesome cars</p>
         </div>
 

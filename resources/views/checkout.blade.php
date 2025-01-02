@@ -19,8 +19,14 @@
         <!-- Content Section -->
         <div class="details-content">
             <div class="heading-content">
-                <h1>Start Booking Your Car</h1>
-                <h3>Home > Car Details > Start Booking</h3>
+
+                @php
+                    $vehicleType = $item->vehicle;
+                @endphp
+
+                <h1>Start Booking Your {{ ucwords($vehicleType) }}</h1>
+
+                <h3>Home > {{ ucwords($vehicleType) }} Details > Start Booking</h3>
             </div>
 
             @livewire('checkout', ['item' => $item])
