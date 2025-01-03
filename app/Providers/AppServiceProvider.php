@@ -6,6 +6,7 @@ use Livewire\Livewire;
 use App\Livewire\ItemReview;
 use App\Livewire\SearchModal;
 use Illuminate\Support\ServiceProvider;
+use App\Livewire\Admin\ReturnValidation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Livewire::component('item-review', ItemReview::class);
         Livewire::component('search-modal', SearchModal::class);
+        Livewire::component('admin.return-validation', ReturnValidation::class);
     }
 }

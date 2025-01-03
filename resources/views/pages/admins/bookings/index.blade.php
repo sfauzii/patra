@@ -45,6 +45,7 @@
                             <th>Duration</th>
                             <th>Payment Status</th>
                             <th>Document Status</th>
+                            <th>Return Status</th>
                             <th>Total</th>
                             <th>Action</th>
 
@@ -77,6 +78,9 @@
                                     @elseif($booking->document_status == 'Rejected')
                                         <span class="badge bg-danger">{{ $booking->document_status }}</span>
                                     @endif
+                                </td>
+                                <td>
+                                    {{ $booking->return_status }}
                                 </td>
                                 <td>Rp {{ number_format($booking->total_price, 0, ' ') }}</td>
 

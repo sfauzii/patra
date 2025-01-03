@@ -25,3 +25,6 @@
 <link rel="stylesheet"
     href="{{ url('frontend/libraries/filepond-plugin-image-preview/filepond-plugin-image-preview.css') }}">
 <link rel="stylesheet" href="{{ url('frontend/libraries/toastify-js/src/toastify.css') }}">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">

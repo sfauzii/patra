@@ -27,11 +27,14 @@ class Booking extends Model
         'identity_booking',
         'selfie_booking',
         'phone',
+        'return_status',
+        'actual_return_date'
     ];
 
     protected $dates = [
         'start_date',
         'end_date',
+        'actual_return_date' => 'datetime',
     ];
 
     public function item()
@@ -52,5 +55,15 @@ class Booking extends Model
     public function getDocumentValidationStatus($documentType)
     {
         return $this->documentValidations()->where('document_type', $documentType)->first();
+    }
+
+    public function returnValidation()
+    {
+        return $this->hasOne(ReturnValidation::class);
+    }
+
+    public function isReturned()
+    {
+        return $this->return_status === 'returned';
     }
 }

@@ -36,3 +36,5 @@
 <script src="{{ url('frontend/scripts/filepond/filepond.js') }}"></script>
 <script src="{{ url('frontend/scripts/toastify-js/src/toastify.js') }}"></script>
 <script src="{{ url('frontend/scripts/filepond.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

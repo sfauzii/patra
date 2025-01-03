@@ -538,6 +538,20 @@
                     </div>
                 </div>
 
+                <div class="col-md-8 col-12">
+
+                    @livewire('admin.return-validation', ['booking' => $booking])
+                    {{-- <div class="card">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <h4>Validasi pengembalian</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>Click the accordions below to expand/collapse the accordion content.</p>
+                            </div>
+                        </div>
+                    </div> --}}
+                </div>
 
         </section>
     @endsection

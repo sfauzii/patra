@@ -34,6 +34,8 @@ class Checkout extends Component
 
     protected $listeners = ['calculateTotal'];
 
+    public $bookedDates = [];
+
     public function mount(Item $item)
     {
         $this->item = $item;
@@ -65,13 +67,98 @@ class Checkout extends Component
         } else {
             $this->name = ''; // No user logged in
         }
+
+        // Load booked dates when component is mounted
+        $this->loadBookedDates();
     }
+
+    private function loadBookedDates()
+    {
+        $bookings = Booking::where('item_id', $this->item->id)
+            ->where('payment_status', 'success')
+            ->get();
+
+        $bookedDates = [];
+
+        foreach ($bookings as $booking) {
+            // Skip jika item sudah dikembalikan sebelum end_date
+            if ($booking->return_status === 'returned') {
+                continue;
+            }
+
+            $start = Carbon::parse($booking->start_date);
+            $end = Carbon::parse($booking->end_date);
+
+            while ($start->lte($end)) {
+                $bookedDates[] = $start->format('Y-m-d');
+                $start->addDay();
+            }
+        }
+
+        $this->bookedDates = array_unique($bookedDates);
+    }
+
+    public function getBookedDatesProperty()
+    {
+        return json_encode($this->bookedDates);
+    }
+
 
     public function updated($propertyName)
     {
+
+        if ($propertyName === 'startDate' || $propertyName === 'endDate') {
+            // Validasi tanggal yang sudah dibooking
+            $this->validateBookingDates();
+        }
+
         $this->calculateTotal();
         $this->storeInSession();
     }
+
+    private function validateBookingDates()
+    {
+        if (!$this->startDate || !$this->endDate) {
+            return false;
+        }
+
+        $requestedStart = Carbon::parse($this->startDate);
+        $requestedEnd = Carbon::parse($this->endDate);
+
+        // Cek konflik dengan booking yang aktif atau belum dikembalikan
+        $conflictingBooking = Booking::where('item_id', $this->item->id)
+            ->where('payment_status', 'success')
+            ->where(function ($query) {
+                $query->whereNull('return_status')
+                    ->orWhere('return_status', '!=', 'returned');
+            })
+            ->where(function ($query) use ($requestedStart, $requestedEnd) {
+                $query->whereBetween('start_date', [$requestedStart, $requestedEnd])
+                    ->orWhereBetween('end_date', [$requestedStart, $requestedEnd])
+                    ->orWhere(function ($q) use ($requestedStart, $requestedEnd) {
+                        $q->where('start_date', '<=', $requestedStart)
+                            ->where('end_date', '>=', $requestedEnd);
+                    });
+            })
+            ->exists();
+
+        if ($conflictingBooking) {
+            $this->startDate = null;
+            $this->endDate = null;
+            $this->alert('error', 'Tanggal Tidak Tersedia', [
+                'text' => 'Maaf, terdapat tanggal yang sudah dibooking pada rentang yang dipilih.',
+                'toast' => false,
+                'showConfirmButton' => true,
+                'confirmButtonText' => 'OK',
+                'position' => 'center',
+                'timer' => null
+            ]);
+            return false;
+        }
+
+        return true;
+    }
+
 
     public function calculateTotal()
     {
@@ -112,6 +199,20 @@ class Checkout extends Component
 
     public function processPayment()
     {
+        // Validasi ulang tanggal sebelum proses pembayaran
+        $this->validateBookingDates();
+
+        if (!$this->startDate || !$this->endDate) {
+            $this->alert('error', 'Tanggal Invalid', [
+                'text' => 'Silakan pilih tanggal yang tersedia.',
+                'toast' => false,
+                'showConfirmButton' => true,
+                'confirmButtonText' => 'OK',
+                'position' => 'center',
+                'timer' => null
+            ]);
+            return;
+        }
 
         // Cek apakah terms disetujui
         if (!$this->terms) {

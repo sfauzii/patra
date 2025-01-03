@@ -61,8 +61,8 @@
                         @error('startDate')
                             <span class="error">{{ $message }}</span>
                         @enderror
-
                     </div>
+
                     <label for="until-date">Until Date</label>
                     <div class="input-container">
                         <img src="{{ url('frontend/images/icon-calendar-2.svg') }}" alt="Icon" class="input-icon">
@@ -71,7 +71,6 @@
                         @error('endDate')
                             <span class="error">{{ $message }}</span>
                         @enderror
-
                     </div>
                     <div class="icon-information">
                         <img src="{{ url('frontend/images/icon-shield-tick.svg') }}" alt="Info Icon" class="info-icon">
