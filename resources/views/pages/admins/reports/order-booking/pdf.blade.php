@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Laporan Penjualan</title>
+        <title>Laporan Penyewaan</title>
         <style>
             @page {
                 size: A4;
@@ -213,7 +213,7 @@
         </table>
 
         <div class="summary-section">
-            <h3 class="summary-title">Ringkasan Penjualan</h3>
+            <h3 class="summary-title">Ringkasan Penyewaan</h3>
             <table class="summary-table">
                 <tr>
                     <td width="25%">
@@ -233,11 +233,11 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="summary-label">Penjualan Tertinggi:</div>
+                        <div class="summary-label">Penyewaan Tertinggi:</div>
                         <div class="summary-value">Rp {{ number_format($highestOrder, 0, ',') }}</div>
                     </td>
                     <td>
-                        <div class="summary-label">Penjualan Terendah:</div>
+                        <div class="summary-label">Penyewaan Terendah:</div>
                         <div class="summary-value">Rp {{ number_format($lowestOrder, 0, ',') }}</div>
                     </td>
                     <td></td>
